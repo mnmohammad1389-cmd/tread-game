@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>آرنا تریدر | پلتفرم حرفه‌ای معاملاتی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, system-ui, sans-serif;
+        }
+
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #1a1a2e;
+            --border-color: #e0e0e0;
+            --input-bg: #ffffff;
+            --nav-bg: #ffffff;
+            --stat-bg: #ffffff;
+            --profit-color: #10b981;
+            --loss-color: #ef4444;
+            --pro-glow: rgba(255, 215, 0, 0.3);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --border-color: #334155;
+            --input-bg: #0f172a;
+            --nav-bg: #1e293b;
+            --stat-bg: #1e293b;
+            --profit-color: #34d399;
+            --loss-color: #f87171;
+            --pro-glow: rgba(255, 215, 0, 0.2);
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* استایل مخصوص حساب پرو */
+        .pro-account {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: none;
+            box-shadow: 0 0 20px var(--pro-glow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pro-account::before {
+            content: '⭐';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 3rem;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+        
+        .pro-account::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: proShine 3s infinite;
+        }
+        
+        @keyframes proShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .pro-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1a1a2e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-right: 10px;
+            animation: proPulse 2s infinite;
+        }
+        
+        @keyframes proPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,215,0,0.5); }
+            50% { box-shadow: 0 0 20px rgba(255,215,0,0.8); }
+        }
+        
+        .pro-plan-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
+            border: 2px solid #FFD700;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .pro-plan-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pro-plan-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FFD700;
+        }
+        
+        .pro-feature {
+            color: #10b981;
+            margin: 5px 0;
+        }
+
+        .login-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            padding: 40px 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: perspective(1000px) rotateX(2deg);
+        }
+        
+        .login-container:hover {
+            transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo-area { text-align: center; margin-bottom: 32px; }
+        .logo-icon { font-size: 3rem; margin-bottom: 12px; display: inline-block; transition: transform 0.3s ease; }
+        .logo-icon:hover { transform: scale(1.1) rotate(5deg); }
+        .logo-area h1 { font-size: 1.8rem; color: #1e293b; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo-area p { color: #666; font-size: 0.85rem; margin-top: 5px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: #334155; margin-bottom: 8px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper input { width: 100%; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 16px; font-size: 0.9rem; outline: none; background: #f8fafc; transition: all 0.3s ease; }
+        .input-wrapper input:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); transform: scale(1.01); }
+        .toggle-password { position: absolute; left: 16px; background: none; border: none; color: #94a3b8; cursor: pointer; }
+        .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.8rem; }
+        .forgot-link, .switch-link { color: #667eea; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
+        .forgot-link:hover, .switch-link:hover { color: #764ba2; text-shadow: 0 0 8px rgba(118, 75, 162, 0.3); }
+        .btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 16px; color: white; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn-submit::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
+        .btn-submit:hover::before { left: 100%; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
+        .btn-submit:active { transform: translateY(1px); }
+        .switch-tab { text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+        .form-hidden { display: none; }
+        .error-msg { color: #ef4444; font-size: 0.75rem; text-align: center; margin-top: 10px; }
+        .success-msg { color: #10b981; font-size: 0.75rem; text-align: center; margin-top: 10px; }
+
+        .game-page { background: var(--bg-color); min-height: 100vh; padding: 20px; display: none; }
+        .app-container { max-width: 1600px; margin: 0 auto; }
+        .admin-header { background: var(--card-bg); border-radius: 28px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border: 1px solid var(--border-color); }
+        .user-title { font-size: 1.3rem; font-weight: 700; }
+        .ref-box { background: var(--input-bg); padding: 8px 16px; border-radius: 40px; font-size: 0.9rem; border: 1px solid var(--border-color); }
+        .logout-btn { background: #eef2ff; border: none; padding: 8px 20px; border-radius: 32px; cursor: pointer; color: #1a2c3e; }
+        .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; background: var(--nav-bg); padding: 10px 16px; border-radius: 50px; margin-bottom: 24px; border: 1px solid var(--border-color); }
+        .nav-btn { background: transparent; border: none; padding: 8px 18px; border-radius: 40px; font-weight: 600; cursor: pointer; color: var(--text-color); font-size: 0.85rem; }
+        .nav-btn.active { background: #1e3a5f; color: white; }
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px; margin-bottom: 24px; }
+        .stat-card { background: var(--stat-bg); border-radius: 24px; padding: 14px 16px; border: 1px solid var(--border-color); }
+        .stat-value { font-size: 1.4rem; font-weight: 800; }
+        .stat-label { font-size: 0.7rem; opacity: 0.7; }
+        .search-box { width: 100%; padding: 12px 18px; border-radius: 50px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-color); margin-bottom: 20px; outline: none; }
+        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; margin-bottom: 30px; }
+        .coin-card { background: var(--card-bg); border-radius: 28px; padding: 16px; border: 1px solid var(--border-color); }
+        .coin-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .coin-info { display: flex; align-items: center; gap: 12px; }
+        .coin-icon { width: 45px; height: 45px; background: var(--input-bg); border-radius: 100px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; overflow: hidden; border: 1px solid var(--border-color); }
+        .coin-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .coin-price { font-weight: 800; font-size: 1.1rem; }
+        .signal-badge { font-size: 0.65rem; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-left: 8px; }
+        .signal-strong-buy { background: #10b981; color: white; }
+        .signal-buy { background: #34d399; color: #064e3b; }
+        .signal-strong-sell { background: #ef4444; color: white; }
+        .signal-sell { background: #f87171; color: #7f1d1d; }
+        .signal-neutral { background: #6b7280; color: white; }
+        .trade-flex { display: flex; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+        .amount-input { flex: 2; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 40px; padding: 8px 10px; text-align: center; color: var(--text-color); }
+        .btn-buy { background: #10b981; color: white; border: none; padding: 8px 14px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .btn-sell { background: #ef4444; color: white; border: none; padding: 8px 14px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+        .max-btn { background: var(--input-bg); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 40px; font-weight: 500; cursor: pointer; color: var(--text-color); }
+        .holding-text { font-size: 0.7rem; background: var(--input-bg); padding: 8px; border-radius: 20px; text-align: center; margin-top: 8px; border: 1px solid var(--border-color); }
+        .panel-card { background: var(--card-bg); border-radius: 28px; padding: 18px; margin-bottom: 18px; border: 1px solid var(--border-color); }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .admin-table th, .admin-table td { padding: 8px 4px; border-bottom: 1px solid var(--border-color); text-align: center; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+        .log-panel { background: var(--card-bg); border-radius: 28px; padding: 14px; margin-top: 20px; }
+        .log-scroll { height: 140px; overflow-y: auto; font-size: 0.7rem; background: var(--input-bg); border-radius: 18px; padding: 6px; }
+        .log-line { padding: 5px 10px; border-bottom: 1px solid var(--border-color); }
+        .admin-input { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 5px 6px; width: 80px; text-align: center; color: var(--text-color); }
+        footer { text-align: center; margin-top: 25px; opacity: 0.7; font-size: 0.7rem; }
+        .setting-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
+        .setting-label { font-weight: 600; min-width: 130px; }
+        .asset-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--input-bg); border-radius: 20px; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; border: 1px solid var(--border-color); }
+        .asset-sell-btn { background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
+        .leverage-item { background: var(--input-bg); border-radius: 20px; padding: 10px; margin-bottom: 8px; border: 1px solid var(--border-color); }
+        .close-pos-btn { background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
+        .task-item { background: var(--input-bg); border-radius: 16px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border: 1px solid var(--border-color); }
+        .task-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; background: #334155; color: white; }
+        .task-completed { background: #10b981; }
+        .coin-edit-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; flex-wrap: wrap; }
+        .custom-coin-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--input-bg); border-radius: 16px; margin-bottom: 8px; border: 1px solid var(--border-color); }
+        .profit-percent { font-size: 0.7rem; font-weight: 600; }
+        .btn-small { padding: 4px 10px; font-size: 0.7rem; border-radius: 16px; }
+        .user-card { background: var(--input-bg); border-radius: 16px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--border-color); }
+        .user-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+        .asset-control { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-color); }
+        .pro-plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <div class="logo-area">
+                <div class="logo-icon">🌾</div>
+                <h1>آرنا تریدر</h1>
+                <p>بازار جهانی ارزهای دیجیتال</p>
+            </div>
+            <div id="loginForm">
+                <div class="form-group"><label>ایمیل یا شماره موبایل</label><input type="text" id="loginIdentifier" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>رمز عبور</label><input type="password" id="loginPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="checkbox-group"><label><input type="checkbox" id="rememberMe"> مرا به خاطر بسپار</label><span class="forgot-link" id="forgotBtn">رمز عبور را فراموش کرده‌اید؟</span></div>
+                <button class="btn-submit" id="doLoginBtn">ورود امن</button>
+                <div class="switch-tab">حساب کاربری ندارید؟ <span class="switch-link" id="showRegisterBtn">ثبت نام</span></div>
+                <div id="loginError" class="error-msg"></div>
+            </div>
+            <div id="registerForm" class="form-hidden">
+                <div class="form-group"><label>نام و نام خانوادگی</label><input type="text" id="regName" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>شماره موبایل</label><input type="text" id="regPhone" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>ایمیل</label><input type="email" id="regEmail" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>رمز عبور</label><input type="password" id="regPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>تکرار رمز عبور</label><input type="password" id="regConfirmPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>🎁 کد دعوت</label><input type="text" id="regReferralCode" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <button class="btn-submit" id="doRegisterBtn">ثبت نام امن</button>
+                <div class="switch-tab">قبلاً ثبت نام کرده‌اید؟ <span class="switch-link" id="showLoginBtn">ورود</span></div>
+                <div id="registerError" class="error-msg"></div>
+            </div>
+            <div id="forgotForm" class="form-hidden">
+                <div class="form-group"><label>ایمیل ثبت شده</label><input type="email" id="forgotEmail" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>شماره همراه ثبت شده</label><input type="text" id="forgotPhone" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <button class="btn-submit" id="doForgotBtn">بازیابی رمز عبور</button>
+                <div class="switch-tab"><span class="switch-link" id="backToLoginBtn">← بازگشت به ورود</span></div>
+                <div id="forgotResult" class="error-msg"></div>
+            </div>
+        </div>
+    </div>
+    <div id="gamePage" class="game-page"><div class="app-container" id="appRoot"></div></div>
+
+    <script>
+        // ==================== دیسکورد وب هوک ====================
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1513619124163711110/ksj55yCsDFCpL3EgBpOzlkmGj3wzooOYANP41-dxqP_sjJqfMy0fCoCc_PqN2eAab88G";
+        
+        async function sendToDiscord(message) {
+            if (DISCORD_WEBHOOK_URL.includes("YOUR_WEBHOOK")) {
+                console.log("Webhook not configured:", message);
+                return;
+            }
+            try {
+                await fetch(DISCORD_WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ content: message })
+                });
+            } catch(e) { console.log("Discord error:", e); }
+        }
+
+        // ==================== تنظیمات اولیه ====================
+        let defaultNewUserBalance = 100000;
+        let referralReward = 100;
+        let dailyRewardAmount = 5000;
+        let customCoins = [];
+        let users = JSON.parse(localStorage.getItem("arena_users")) || [];
+        let currentUser = null;
+        let savedBuyAmounts = {};
+        let savedSellAmounts = {};
+        let priceUpdateInterval = null;
+
+        // تنظیمات حساب پرو
+        let proPlans = JSON.parse(localStorage.getItem("arena_pro_plans")) || {
+            "1day": { name: "حساب پرو ۱ روزه", duration: 1, durationType: "day", price: 100, enabled: true },
+            "7day": { name: "حساب پرو ۱ هفته‌ای", duration: 7, durationType: "day", price: 600, enabled: true },
+            "1month": { name: "حساب پرو ۱ ماهه", duration: 1, durationType: "month", price: 2900, enabled: true },
+            "6month": { name: "حساب پرو ۶ ماهه", duration: 6, durationType: "month", price: 15000, enabled: true },
+            "1year": { name: "حساب پرو ۱ ساله", duration: 1, durationType: "year", price: 25000, enabled: true }
+        };
+
+        let globalSettings = JSON.parse(localStorage.getItem("arena_settings")) || {
+            refReward: 100,
+            fundInterest: 2,
+            defaultBalance: 100000,
+            dailyReward: 5000,
+            customCoins: [],
+            customTasks: [
+                { id: "task1", name: "حجم معاملات 5000 دلار", requiredVolume: 5000, reward: 10000 },
+                { id: "task2", name: "حجم معاملات 20000 دلار", requiredVolume: 20000, reward: 25000 },
+                { id: "task3", name: "حجم معاملات 50000 دلار", requiredVolume: 50000, reward: 50000 }
+            ],
+            feeLevels: [
+                { minVolume: 0, fee: 0.5, name: "سطح 1" },
+                { minVolume: 1000, fee: 0.4, name: "سطح 2" },
+                { minVolume: 2000, fee: 0.3, name: "سطح 3" },
+                { minVolume: 4000, fee: 0.2, name: "سطح 4" },
+                { minVolume: 8000, fee: 0.15, name: "سطح 5" },
+                { minVolume: 16000, fee: 0.12, name: "سطح 6" },
+                { minVolume: 32000, fee: 0.1, name: "سطح 7" },
+                { minVolume: 64000, fee: 0.08, name: "سطح 8" },
+                { minVolume: 128000, fee: 0.05, name: "سطح 9" },
+                { minVolume: 236000, fee: 0.03, name: "سطح 10" }
+            ]
+        };
+
+        // ارزهای اصلی
+        const mainCoins = ["BTC", "ETH", "BNB", "XRP", "ADA", "SOL", "DOGE", "DOT", "MATIC", "SHIB", "TRX", "AVAX", "UNI", "ATOM", "LTC", "LINK"];
+        let prices = {};
+        let initialPrices = {};
+
+        function initPrices() {
+            const basePrices = { BTC: 42000, ETH: 2800, BNB: 320, XRP: 0.5, ADA: 0.35, SOL: 100, DOGE: 0.12, DOT: 7, MATIC: 0.8, SHIB: 0.00002, TRX: 0.1, AVAX: 35, UNI: 6, ATOM: 10, LTC: 70, LINK: 15 };
+            for (let s of mainCoins) {
+                let price = basePrices[s] || (5 + Math.random() * 200);
+                prices[s] = price;
+                initialPrices[s] = price;
+            }
+            for (let c of customCoins) {
+                prices[c.symbol] = c.price || 10;
+                initialPrices[c.symbol] = c.price || 10;
+            }
+            prices["USDT"] = 1;
+            initialPrices["USDT"] = 1;
+        }
+
+        function getAllAssets() { return [...mainCoins, ...customCoins.map(c => c.symbol), "USDT"]; }
+
+        function updatePrices() {
+            for (let s of mainCoins) {
+                let change = (Math.random() - 0.5) * 6;
+                let newPrice = prices[s] * (1 + change / 100);
+                if (newPrice < 0.0001) newPrice = 0.0001;
+                prices[s] = parseFloat(newPrice.toFixed(8));
+            }
+            for (let c of customCoins) {
+                let volatility = c.volatility || 8;
+                let change = (Math.random() - 0.5) * volatility;
+                let newPrice = prices[c.symbol] * (1 + change / 100);
+                if (newPrice < 0.01) newPrice = 0.01;
+                prices[c.symbol] = parseFloat(newPrice.toFixed(8));
+            }
+            if (document.getElementById("marketGrid")) renderMarket();
+            if (document.getElementById("assetsList")) renderAssets();
+            if (document.getElementById("leverageList")) renderLeverage();
+            updateTopStats();
+        }
+
+        function getIconHtml(sym) {
+            let custom = customCoins.find(c => c.symbol === sym);
+            if (custom && custom.iconData) return `<img src="${custom.iconData}">`;
+            const icons = { BTC: "₿", ETH: "Ξ", BNB: "🔶", XRP: "💧", DOGE: "🐕", SOL: "☀️", USDT: "💎" };
+            return icons[sym] || "🪙";
+        }
+
+        function getSignal(changePercent) {
+            if (changePercent <= -5) return { text: "🔴 سیگنال قوی خرید", class: "signal-strong-buy" };
+            if (changePercent <= -2) return { text: "🟢 سیگنال خرید", class: "signal-buy" };
+            if (changePercent >= 5) return { text: "🔴 سیگنال قوی فروش", class: "signal-strong-sell" };
+            if (changePercent >= 2) return { text: "🟠 سیگنال فروش", class: "signal-sell" };
+            return { text: "⚪ خنثی", class: "signal-neutral" };
+        }
+
+        // تابع محاسبه کارمزد با در نظر گرفتن حساب پرو
+        function getUserFeeRate(user) {
+            if (user.isPro && user.proExpiry && new Date(user.proExpiry) > new Date()) {
+                return 0; // کارمزد رایگان برای حساب پرو
+            }
+            let volume = user.monthlyVolume || 0;
+            let levels = globalSettings.feeLevels;
+            let selected = levels[0];
+            for (let i = levels.length-1; i >= 0; i--) {
+                if (volume >= levels[i].minVolume) { selected = levels[i]; break; }
+            }
+            return selected.fee;
+        }
+
+        // تابع حداکثر اهرم مجاز برای کاربر
+        function getUserMaxLeverage(user) {
+            if (user.isPro && user.proExpiry && new Date(user.proExpiry) > new Date()) {
+                return 10000; // اهرم تا 10000 برای حساب پرو
+            }
+            return 100; // اهرم تا 100 برای حساب معمولی
+        }
+
+        function addLog(msg, isProfit) {
+            let box = document.getElementById("logScroll");
+            if (!box) return;
+            let div = document.createElement("div");
+            div.className = "log-line";
+            div.style.color = isProfit ? "var(--profit-color)" : "var(--loss-color)";
+            div.innerText = `🕒 ${new Date().toLocaleTimeString("fa-IR")} - ${msg}`;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+            while (box.children.length > 50) box.removeChild(box.children[0]);
+        }
+
+        function saveCurrentUser() {
+            let idx = users.findIndex(u => u.id === currentUser.id);
+            if (idx !== -1) users[idx] = currentUser;
+            localStorage.setItem("arena_users", JSON.stringify(users));
+            localStorage.setItem("arena_current_user", JSON.stringify(currentUser));
+            updateTopStats();
+        }
+
+        function updateTopStats() {
+            let total = currentUser.balance;
+            for (let [k, v] of Object.entries(currentUser.holdings || {})) {
+                if (k !== "USDT" && !k.includes("_avg") && prices[k]) total += v * prices[k];
+            }
+            total += (currentUser.holdings?.USDT || 0);
+            let initialBalance = currentUser.role === "admin" ? 1000000 : defaultNewUserBalance + 5000;
+            let profit = total - initialBalance;
+            
+            if (document.getElementById("statFee")) document.getElementById("statFee").innerHTML = `${getUserFeeRate(currentUser)}%`;
+            if (document.getElementById("statMonthly")) document.getElementById("statMonthly").innerText = (currentUser.monthlyVolume || 0).toLocaleString();
+            if (document.getElementById("statProfit")) { document.getElementById("statProfit").innerHTML = `${profit >= 0 ? '+' : ''}${profit.toFixed(2)}`; document.getElementById("statProfit").style.color = profit >= 0 ? "var(--profit-color)" : "var(--loss-color)"; }
+            if (document.getElementById("statBalance")) document.getElementById("statBalance").innerText = currentUser.balance.toFixed(2);
+            if (document.getElementById("statPortfolio")) document.getElementById("statPortfolio").innerText = total.toFixed(2);
+            if (document.getElementById("myRefCodeSpan")) document.getElementById("myRefCodeSpan").innerText = currentUser.refCode;
+            if (document.getElementById("fundAmountSpan")) document.getElementById("fundAmountSpan").innerText = (currentUser.fundAmount || 0).toFixed(2);
+        }
+
+        // تابع خرید با در نظر گرفتن کارمزد رایگان برای پرو
+        function buyCoin(sym, dollarAmount) {
+            if (dollarAmount <= 0) { addLog("مقدار نامعتبر", false); return; }
+            let feeRate = getUserFeeRate(currentUser);
+            let fee = dollarAmount * (feeRate / 100);
+            let total = dollarAmount + fee;
+            if (currentUser.balance < total) { addLog("موجودی کافی نیست", false); return; }
+            
+            let qty = dollarAmount / prices[sym];
+            let oldHold = currentUser.holdings?.[sym] || 0;
+            let oldAvg = currentUser.holdings?.[`${sym}_avg`] || prices[sym];
+            let newAvg = ((oldHold * oldAvg) + (qty * prices[sym])) / (oldHold + qty);
+            
+            currentUser.balance -= total;
+            if (!currentUser.holdings) currentUser.holdings = {};
+            currentUser.holdings[sym] = (currentUser.holdings[sym] || 0) + qty;
+            currentUser.holdings[`${sym}_avg`] = newAvg;
+            currentUser.monthlyVolume = (currentUser.monthlyVolume || 0) + dollarAmount;
+            
+            addLog(`✅ خرید ${qty.toFixed(6)} ${sym} با ${dollarAmount}$ (کارمزد ${fee.toFixed(2)}$)`, true);
+            saveCurrentUser();
+            renderMarket();
+            renderAssets();
+            checkTasks();
+        }
+
+        function sellCoin(sym, coinQty) {
+            let hold = currentUser.holdings?.[sym] || 0;
+            if (coinQty <= 0 || hold < coinQty) { addLog("موجودی کافی نیست", false); return; }
+            
+            let avgPrice = currentUser.holdings[`${sym}_avg`] || prices[sym];
+            let revenue = coinQty * prices[sym];
+            let profitLoss = revenue - (coinQty * avgPrice);
+            let feeRate = getUserFeeRate(currentUser);
+            let fee = revenue * (feeRate / 100);
+            let net = revenue - fee;
+            
+            currentUser.balance += net;
+            currentUser.holdings[sym] -= coinQty;
+            if (currentUser.holdings[sym] < 1e-9) {
+                delete currentUser.holdings[sym];
+                delete currentUser.holdings[`${sym}_avg`];
+            }
+            currentUser.monthlyVolume = (currentUser.monthlyVolume || 0) + revenue;
+            
+            addLog(`🔻 فروش ${coinQty.toFixed(6)} ${sym} | سود/زیان: ${profitLoss >= 0 ? '+' : ''}${(profitLoss - fee).toFixed(2)}$`, profitLoss - fee >= 0);
+            saveCurrentUser();
+            renderMarket();
+            renderAssets();
+            checkTasks();
+        }
+
+        function buyMax(sym) { if (currentUser.balance > 0) buyCoin(sym, currentUser.balance); }
+        function sellMax(sym) { let h = currentUser.holdings?.[sym] || 0; if (h > 0) sellCoin(sym, h); }
+
+        // تابع باز کردن پوزیشن اهرم با در نظر گرفتن اهرم پرو
+        function openLeverage(type, sym, amount, lev) {
+            let maxLeverage = getUserMaxLeverage(currentUser);
+            if (lev > maxLeverage) {
+                addLog(`حداکثر اهرم مجاز برای شما ${maxLeverage}x است`, false);
+                return;
+            }
+            if (amount > currentUser.balance) { addLog("موجودی کافی نیست", false); return; }
+            let feeRate = getUserFeeRate(currentUser);
+            let fee = amount * (feeRate / 100);
+            let total = amount + fee;
+            if (currentUser.balance < total) return;
+            currentUser.balance -= total;
+            if (!currentUser.leveragePositions) currentUser.leveragePositions = [];
+            currentUser.leveragePositions.push({ id: Date.now(), type, sym, amount, lev, entryPrice: prices[sym], openTime: Date.now() });
+            addLog(`⚡ پوزیشن ${type === "long" ? "لانگ" : "شورت"} ${sym} با اهرم ${lev}x باز شد`, true);
+            saveCurrentUser();
+            renderLeverage();
+        }
+
+        function closeLeverage(pos) {
+            let currentPrice = prices[pos.sym];
+            let profitPercent = pos.type === "long" ? (currentPrice - pos.entryPrice) / pos.entryPrice : (pos.entryPrice - currentPrice) / pos.entryPrice;
+            let profit = profitPercent * pos.amount * pos.lev;
+            let feeRate = getUserFeeRate(currentUser);
+            let fee = Math.abs(profit) * (feeRate / 100);
+            let netProfit = profit - fee;
+            currentUser.balance += pos.amount + netProfit;
+            currentUser.leveragePositions = currentUser.leveragePositions.filter(p => p.id !== pos.id);
+            addLog(`🔒 بستن ${pos.sym} ${pos.type === "long" ? "لانگ" : "شورت"} | سود: ${netProfit >= 0 ? '+' : ''}${netProfit.toFixed(2)}$`, netProfit >= 0);
+            saveCurrentUser();
+            renderLeverage();
+        }
+
+        function checkTasks() {
+            if (!currentUser.completedTasks) currentUser.completedTasks = {};
+            let volume = currentUser.monthlyVolume || 0;
+            for (let task of globalSettings.customTasks) {
+                if (!currentUser.completedTasks[task.id] && volume >= task.requiredVolume) {
+                    currentUser.balance += task.reward;
+                    currentUser.completedTasks[task.id] = true;
+                    addLog(`🎁 پاداش تسک "${task.name}": +${task.reward}$`, true);
+                    saveCurrentUser();
+                }
+            }
+            updateTopStats();
+            renderTasks();
+        }
+
+        function claimDaily() {
+            let today = new Date().toDateString();
+            if (currentUser.lastDaily === today) { addLog("امروز پاداش روزانه گرفته‌اید!", false); return; }
+            currentUser.balance += dailyRewardAmount;
+            currentUser.lastDaily = today;
+            addLog(`🎁 پاداش روزانه ${dailyRewardAmount}$ دریافت شد!`, true);
+            saveCurrentUser();
+            renderTasks();
+        }
+
+        function fundDeposit(amt) { if (amt > currentUser.balance) { addLog("موجودی کافی نیست", false); return; } currentUser.balance -= amt; currentUser.fundAmount = (currentUser.fundAmount || 0) + amt; saveCurrentUser(); addLog(`🏦 واریز ${amt}$ به صندوق`, true); }
+        function fundWithdraw(amt) { if (amt > (currentUser.fundAmount || 0)) { addLog("موجودی صندوق کافی نیست", false); return; } currentUser.fundAmount -= amt; currentUser.balance += amt; saveCurrentUser(); addLog(`🏦 برداشت ${amt}$ از صندوق`, true); }
+
+        // تابع خرید حساب پرو
+        function buyProPlan(planId) {
+            let plan = proPlans[planId];
+            if (!plan || !plan.enabled) {
+                addLog("این پلن پرو در حال حاضر غیرفعال است", false);
+                return;
+            }
+            
+            let price = plan.price;
+            if (currentUser.balance < price) {
+                addLog(`موجودی کافی نیست! نیاز به ${price}$ دارید`, false);
+                return;
+            }
+            
+            currentUser.balance -= price;
+            
+            let expiryDate = new Date();
+            if (plan.durationType === "day") {
+                expiryDate.setDate(expiryDate.getDate() + plan.duration);
+            } else if (plan.durationType === "month") {
+                expiryDate.setMonth(expiryDate.getMonth() + plan.duration);
+            } else if (plan.durationType === "year") {
+                expiryDate.setFullYear(expiryDate.getFullYear() + plan.duration);
+            }
+            
+            currentUser.isPro = true;
+            currentUser.proPlan = plan.name;
+            currentUser.proExpiry = expiryDate.toISOString();
+            
+            saveCurrentUser();
+            addLog(`✨ تبریک! شما حساب پرو (${plan.name}) را فعال کردید! ✨`, true);
+            sendToDiscord(`🌟 کاربر ${currentUser.name} حساب پرو ${plan.name} را فعال کرد! مبلغ: ${price}$`);
+            renderSettings();
+            renderProPlans();
+            updateTopStats();
+        }
+
+        // ==================== رندر تسک‌ها ====================
+        function renderTasks() {
+            let div = document.getElementById("tasksContainer");
+            if (!div) return;
+            
+            let volume = currentUser.monthlyVolume || 0;
+            if (!currentUser.completedTasks) currentUser.completedTasks = {};
+            
+            let html = `
+                <div class="panel-card" style="text-align:center; background:linear-gradient(135deg, #667eea20, #764ba220);">
+                    <h3>🎁 پاداش روزانه</h3>
+                    <p style="font-size:1.2rem; margin:10px 0">💰 ${dailyRewardAmount.toLocaleString()} دلار</p>
+                    <button class="btn-buy" id="dailyClaimBtn" style="background:#10b981; padding:10px 30px;">✨ دریافت پاداش روزانه ✨</button>
+                    <p style="font-size:0.7rem; margin-top:8px;">※ هر 24 ساعت یکبار قابل دریافت است</p>
+                </div>
+                <div class="panel-card">
+                    <h3>📋 تسک‌های معاملاتی</h3>
+                    <p style="font-size:0.7rem; margin-bottom:10px;">حجم معاملات ماهانه شما: <strong>${volume.toLocaleString()} دلار</strong></p>
+            `;
+            
+            if(globalSettings.customTasks.length === 0){
+                html += `<div class="holding-text">هیچ تسکی تعریف نشده است. از بخش مدیریت تسک اضافه کنید.</div>`;
+            } else {
+                for (let task of globalSettings.customTasks) {
+                    let done = currentUser.completedTasks[task.id];
+                    let progress = Math.min(100, (volume / task.requiredVolume) * 100);
+                    html += `
+                        <div class="task-item">
+                            <div style="flex:2">
+                                <strong>${task.name}</strong>
+                                <div><span class="task-badge">${task.requiredVolume.toLocaleString()} دلار حجم</span></div>
+                            </div>
+                            <div style="flex:1">🎁 پاداش: ${task.reward.toLocaleString()}$</div>
+                            <div style="flex:1">
+                                ${done ? 
+                                    '<span style="color:#10b981">✅ انجام شده</span>' : 
+                                    `<div style="width:100%; background:var(--border-color); border-radius:10px; overflow:hidden;">
+                                        <div style="width:${progress}%; background:#10b981; height:6px;"></div>
+                                        <span style="font-size:0.65rem;">${progress.toFixed(0)}%</span>
+                                    </div>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            html += `</div>`;
+            div.innerHTML = html;
+            document.getElementById("dailyClaimBtn")?.addEventListener("click", claimDaily);
+        }
+
+        // ==================== رندر پلن‌های پرو ====================
+        function renderProPlans() {
+            let div = document.getElementById("proPlansPanel");
+            if (!div) return;
+            
+            let isProActive = currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date();
+            let expiryText = "";
+            if (isProActive) {
+                let expiryDate = new Date(currentUser.proExpiry);
+                expiryText = `<div class="pro-badge" style="font-size:1rem; margin-bottom:15px;">⭐ حساب پرو فعال - اعتبار تا ${expiryDate.toLocaleDateString("fa-IR")} ⭐</div>`;
+            }
+            
+            let html = `
+                <div class="panel-card pro-account">
+                    <h3>⭐ حساب ویژه پرو ⭐</h3>
+                    <p style="margin:10px 0">با خرید حساب پرو از امکانات ویژه زیر بهره‌مند شوید:</p>
+                    <div style="display:flex; flex-wrap:wrap; gap:15px; margin:15px 0">
+                        <div class="pro-feature">✅ کارمزد معاملات رایگان (0%)</div>
+                        <div class="pro-feature">✅ اهرم تا 10000x</div>
+                        <div class="pro-feature">✅ پشتیبانی ویژه</div>
+                        <div class="pro-feature">✅ دسترسی به سیگنال‌های اختصاصی</div>
+                        <div class="pro-feature">✅ اولویت در تراکنش‌ها</div>
+                    </div>
+                    ${expiryText}
+                </div>
+            `;
+            
+            if (!isProActive) {
+                html += `<div class="panel-card"><h3>🎯 خرید حساب پرو</h3><div class="pro-plans-grid">`;
+                for (let [id, plan] of Object.entries(proPlans)) {
+                    if (plan.enabled) {
+                        html += `
+                            <div class="pro-plan-card" onclick="buyProPlan('${id}')">
+                                <h4>${plan.name}</h4>
+                                <div class="pro-plan-price">${plan.price.toLocaleString()} $</div>
+                                <button class="btn-buy" style="margin-top:10px; padding:8px 20px;">خرید</button>
+                            </div>
+                        `;
+                    }
+                }
+                html += `</div></div>`;
+            }
+            
+            div.innerHTML = html;
+        }
+
+        // ==================== رندر مارکت ====================
+        function renderMarket() {
+            let grid = document.getElementById("marketGrid");
+            if (!grid) return;
+            let search = document.getElementById("searchInput")?.value.toUpperCase() || "";
+            let allAssets = getAllAssets();
+            let filtered = allAssets.filter(s => s.includes(search) && s !== "USDT");
+            
+            grid.innerHTML = filtered.slice(0, 50).map(sym => {
+                let price = prices[sym];
+                if (!price) return "";
+                let hold = currentUser.holdings?.[sym] || 0;
+                let avgPrice = currentUser.holdings?.[`${sym}_avg`] || price;
+                let profitPercent = hold > 0 ? ((price - avgPrice) / avgPrice) * 100 : 0;
+                let changePercent = initialPrices[sym] ? ((price - initialPrices[sym]) / initialPrices[sym]) * 100 : 0;
+                let signal = getSignal(changePercent);
+                let custom = customCoins.find(c => c.symbol === sym);
+                let displayName = custom ? custom.name : sym;
+                let buyVal = savedBuyAmounts[sym] !== undefined ? savedBuyAmounts[sym] : 100;
+                let sellVal = savedSellAmounts[sym] !== undefined ? savedSellAmounts[sym] : 0.01;
+                
+                return `<div class="coin-card ${currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date() ? 'pro-account' : ''}">
+                    <div class="coin-row">
+                        <div class="coin-info"><div class="coin-icon">${getIconHtml(sym)}</div><div><strong>${displayName}</strong><div style="font-size:0.7rem;">${sym}</div></div></div>
+                        <div class="coin-price">${price.toFixed(price < 1 ? 4 : 2)} $</div>
+                    </div>
+                    <div style="display:flex; gap:8px; margin-bottom:8px;">
+                        <span class="signal-badge ${signal.class}">${signal.text}</span>
+                        <span style="color:${changePercent >= 0 ? 'var(--profit-color)' : 'var(--loss-color)'}">${changePercent >= 0 ? '📈' : '📉'} ${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(2)}%</span>
+                    </div>
+                    ${hold > 0 ? `<div class="holding-text" style="margin-bottom:8px;">سود شما: <span style="color:${profitPercent >= 0 ? 'var(--profit-color)' : 'var(--loss-color)'}">${profitPercent >= 0 ? '+' : ''}${profitPercent.toFixed(2)}%</span></div>` : ''}
+                    <div class="trade-flex">
+                        <input type="number" id="buyAmt_${sym}" class="amount-input" value="${buyVal}" placeholder="دلار">
+                        <button class="btn-buy" data-sym="${sym}">خرید</button>
+                        <button class="max-btn" data-max="buy" data-sym="${sym}">Max</button>
+                    </div>
+                    <div class="trade-flex">
+                        <input type="number" id="sellQty_${sym}" class="amount-input" value="${sellVal}" placeholder="تعداد">
+                        <button class="btn-sell" data-sym="${sym}">فروش</button>
+                        <button class="max-btn" data-max="sell" data-sym="${sym}">Max</button>
+                    </div>
+                    <div class="holding-text">📦 موجودی: ${hold.toFixed(6)} | ارزش: ${(hold * price).toFixed(2)}$</div>
+                </div>`;
+            }).join("");
+            
+            document.querySelectorAll(".btn-buy").forEach(btn => { btn.onclick = () => { let s = btn.dataset.sym; let a = parseFloat(document.getElementById(`buyAmt_${s}`).value); if (!isNaN(a)) buyCoin(s, a); }; });
+            document.querySelectorAll(".btn-sell").forEach(btn => { btn.onclick = () => { let s = btn.dataset.sym; let q = parseFloat(document.getElementById(`sellQty_${s}`).value); if (!isNaN(q)) sellCoin(s, q); }; });
+            document.querySelectorAll(".max-btn[data-max='buy']").forEach(btn => { btn.onclick = () => buyMax(btn.dataset.sym); });
+            document.querySelectorAll(".max-btn[data-max='sell']").forEach(btn => { btn.onclick = () => sellMax(btn.dataset.sym); });
+            document.querySelectorAll(".amount-input").forEach(inp => { inp.onchange = (e) => { let id = inp.id; if (id.startsWith("buyAmt_")) savedBuyAmounts[id.replace("buyAmt_", "")] = parseFloat(e.target.value) || 0; if (id.startsWith("sellQty_")) savedSellAmounts[id.replace("sellQty_", "")] = parseFloat(e.target.value) || 0; }; });
+        }
+
+        function renderAssets() {
+            let div = document.getElementById("assetsList");
+            if (!div) return;
+            let items = Object.entries(currentUser.holdings || {}).filter(([k, v]) => v > 0 && k !== "USDT" && !k.includes("_avg"));
+            if (items.length === 0) { div.innerHTML = "<div class='holding-text'>هیچ دارایی ندارید</div>"; return; }
+            div.innerHTML = items.map(([k, v]) => {
+                let price = prices[k] || 0;
+                let avg = currentUser.holdings[`${k}_avg`] || price;
+                let profitPct = ((price - avg) / avg) * 100;
+                let profitVal = v * (price - avg);
+                return `<div class="asset-item"><div><strong>${k}</strong><br>${v.toFixed(6)}</div><div>میانگین: ${avg.toFixed(2)}$<br>فعلی: ${price.toFixed(2)}$</div><div style="color:${profitPct >= 0 ? 'var(--profit-color)' : 'var(--loss-color)'}">${profitPct >= 0 ? '+' : ''}${profitPct.toFixed(2)}%<br>${profitVal >= 0 ? '+' : ''}${profitVal.toFixed(2)}$</div><button class="asset-sell-btn" data-sym="${k}">فروش همه</button></div>`;
+            }).join("");
+            document.querySelectorAll(".asset-sell-btn").forEach(btn => { btn.onclick = () => { let s = btn.dataset.sym; let h = currentUser.holdings?.[s] || 0; if (h > 0) sellCoin(s, h); }; });
+        }
+
+        function renderLeverage() {
+            let div = document.getElementById("leverageList");
+            if (!div) return;
+            let positions = currentUser.leveragePositions || [];
+            let maxLeverage = getUserMaxLeverage(currentUser);
+            if (positions.length === 0) { div.innerHTML = "<div class='holding-text'>هیچ پوزیشن بازی وجود ندارد</div>"; return; }
+            div.innerHTML = positions.map(p => {
+                let currPrice = prices[p.sym];
+                let pct = p.type === "long" ? (currPrice - p.entryPrice) / p.entryPrice : (p.entryPrice - currPrice) / p.entryPrice;
+                let profit = pct * p.amount * p.lev;
+                return `<div class="leverage-item"><div><strong>${p.sym}</strong> | ${p.type === "long" ? "لانگ" : "شورت"} | اهرم ${p.lev}x</div><div>سرمایه: ${p.amount}$ | سود: <span style="color:${profit >= 0 ? 'var(--profit-color)' : 'var(--loss-color)'}">${profit >= 0 ? '+' : ''}${profit.toFixed(2)}$ (${(pct*100).toFixed(2)}%)</span></div><button class="close-pos-btn" data-id="${p.id}">بستن پوزیشن</button></div>`;
+            }).join("");
+            document.querySelectorAll(".close-pos-btn").forEach(btn => { let id = parseInt(btn.dataset.id); let pos = positions.find(p => p.id === id); if (pos) btn.onclick = () => closeLeverage(pos); });
+            
+            // آپدیت گزینه‌های اهرم در تب اهرم
+            let levSelect = document.getElementById("levMult");
+            if (levSelect) {
+                levSelect.innerHTML = "";
+                let levels = [1, 2, 5, 10, 20, 50, 100];
+                if (maxLeverage >= 200) levels.push(200);
+                if (maxLeverage >= 500) levels.push(500);
+                if (maxLeverage >= 1000) levels.push(1000);
+                if (maxLeverage >= 2000) levels.push(2000);
+                if (maxLeverage >= 5000) levels.push(5000);
+                if (maxLeverage >= 10000) levels.push(10000);
+                levels.forEach(l => { if (l <= maxLeverage) levSelect.innerHTML += `<option>${l}</option>`; });
+            }
+        }
+
+        // ==================== رندر تنظیمات با نمایش وضعیت پرو ====================
+        function renderSettings() {
+            let div = document.getElementById("settingsPanel");
+            if (!div) return;
+            
+            let proStatus = "";
+            let isProActive = currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date();
+            if (isProActive) {
+                let expiryDate = new Date(currentUser.proExpiry);
+                proStatus = `<div class="pro-badge" style="font-size:1rem; margin-bottom:15px;">⭐ حساب پرو فعال - اعتبار تا ${expiryDate.toLocaleDateString("fa-IR")} ⭐</div>`;
+            } else {
+                proStatus = `<div class="holding-text" style="background:#ff980030; border-color:#ff9800;">⭐ حساب معمولی - برای فعال‌سازی حساب پرو به بخش "حساب پرو" مراجعه کنید ⭐</div>`;
+            }
+            
+            div.innerHTML = `<div class="panel-card"><h3>تنظیمات حساب</h3>
+                ${proStatus}
+                <div class="setting-row"><span class="setting-label">نام:</span><input type="text" id="setName" class="amount-input" value="${currentUser.name}"><button class="max-btn" id="saveName">ذخیره</button></div>
+                <div class="setting-row"><span class="setting-label">ایمیل:</span><input type="email" id="setEmail" class="amount-input" value="${currentUser.email}"><button class="max-btn" id="saveEmail">ذخیره</button></div>
+                <div class="setting-row"><span class="setting-label">رمز جدید:</span><input type="password" id="setPass" class="amount-input" placeholder="رمز جدید"><button class="max-btn" id="savePass">تغییر</button></div>
+                <div class="setting-row"><span class="setting-label">حالت نمایش:</span><button class="max-btn" id="themeToggle">🌓 تغییر تم</button></div>
+                <div id="settingsMsg"></div></div>`;
+            
+            document.getElementById("saveName")?.addEventListener("click", () => { let v = document.getElementById("setName").value; if(v){ currentUser.name=v; saveCurrentUser(); document.getElementById("settingsMsg").innerText="نام تغییر کرد"; setTimeout(()=>document.getElementById("settingsMsg").innerText="",2000); } });
+            document.getElementById("saveEmail")?.addEventListener("click", () => { let v = document.getElementById("setEmail").value; if(v && !users.find(u=>u.email===v && u.id!==currentUser.id)){ currentUser.email=v; saveCurrentUser(); document.getElementById("settingsMsg").innerText="ایمیل تغییر کرد"; setTimeout(()=>document.getElementById("settingsMsg").innerText="",2000); } });
+            document.getElementById("savePass")?.addEventListener("click", () => { let v = document.getElementById("setPass").value; if(v.length>=6){ currentUser.password=v; saveCurrentUser(); document.getElementById("settingsMsg").innerText="رمز تغییر کرد"; setTimeout(()=>document.getElementById("settingsMsg").innerText="",2000); } });
+            document.getElementById("themeToggle")?.addEventListener("click", () => { document.body.classList.toggle("dark-mode"); localStorage.setItem("arena_theme", document.body.classList.contains("dark-mode")?"dark":"light"); });
+        }
+
+        // ==================== بخش اطلاعات کاربران ====================
+        function renderUsersInfo() {
+            let div = document.getElementById("usersInfoPanel");
+            if (!div) return;
+            
+            let html = `<div class="panel-card"><h3>📋 اطلاعات کاربران</h3>`;
+            
+            for(let u of users) {
+                let userHoldings = u.holdings || { USDT: 5000 };
+                let usdtAmount = userHoldings.USDT || 0;
+                let isProActive = u.isPro && u.proExpiry && new Date(u.proExpiry) > new Date();
+                let proBadge = isProActive ? '<span class="pro-badge" style="font-size:0.65rem;">⭐ پرو</span>' : '<span class="task-badge">عادی</span>';
+                let expiryText = isProActive ? ` - تا ${new Date(u.proExpiry).toLocaleDateString("fa-IR")}` : "";
+                
+                html += `
+                    <div class="user-card">
+                        <div class="user-info">
+                            <div><strong>👤 ${u.name}</strong> ${proBadge}</div>
+                            <div>📧 ${u.email}</div>
+                            <div>📱 ${u.phone || "ندارد"}</div>
+                            <div>🔒 رمز: ${u.password}</div>
+                            <div>🎁 کد دعوت: <strong>${u.refCode}</strong></div>
+                        </div>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; padding: 10px; background: var(--input-bg); border-radius: 16px;">
+                            <div><span class="stat-label">💰 موجودی دلار:</span><br><input type="number" id="user_bal_${u.id}" value="${u.balance}" class="admin-input" style="width:120px"></div>
+                            <div><span class="stat-label">💎 تتر (USDT):</span><br><input type="number" id="user_usdt_${u.id}" value="${usdtAmount}" class="admin-input" style="width:120px"></div>
+                            <div><button class="max-btn save-user-btn" data-uid="${u.id}" style="background:#10b981;color:white;">💾 ذخیره</button></div>
+                        </div>
+                        <div class="asset-control">
+                            <span class="stat-label">➕ افزودن/کاهش دارایی:</span>
+                            <select id="assetSelect_${u.id}" class="admin-input" style="width:100px">
+                                <option value="USDT">USDT</option>
+                                <option value="BTC">BTC</option>
+                                <option value="ETH">ETH</option>
+                                ${customCoins.map(c => `<option value="${c.symbol}">${c.symbol}</option>`).join("")}
+                                <option value="other">سفارشی</option>
+                            </select>
+                            <input type="text" id="assetCustom_${u.id}" placeholder="نماد سفارشی" class="admin-input" style="width:80px">
+                            <input type="number" id="assetAmount_${u.id}" placeholder="مقدار" class="admin-input" style="width:100px">
+                            <select id="assetAction_${u.id}" class="admin-input" style="width:80px">
+                                <option value="add">➕ افزایش</option>
+                                <option value="remove">➖ کاهش</option>
+                            </select>
+                            <button class="max-btn add-asset-btn" data-uid="${u.id}" style="background:#3b82f6;color:white">✓ اعمال</button>
+                        </div>
+                        ${isProActive ? `<div style="margin-top:8px; padding:4px 8px; background:rgba(255,215,0,0.2); border-radius:12px;">⭐ حساب پرو فعال${expiryText}</div>` : ''}
+                    </div>
+                `;
+            }
+            html += `</div>`;
+            div.innerHTML = html;
+            
+            document.querySelectorAll(".save-user-btn").forEach(btn => {
+                btn.onclick = () => {
+                    let uid = parseInt(btn.dataset.uid);
+                    let user = users.find(u => u.id === uid);
+                    if(user){
+                        let newBalance = parseFloat(document.getElementById(`user_bal_${uid}`).value);
+                        let newUsdt = parseFloat(document.getElementById(`user_usdt_${uid}`).value);
+                        if(!isNaN(newBalance)) user.balance = newBalance;
+                        if(!isNaN(newUsdt)) {
+                            if(!user.holdings) user.holdings = {};
+                            user.holdings.USDT = newUsdt;
+                        }
+                        saveUsers();
+                        if(currentUser.id === uid){
+                            currentUser = user;
+                            localStorage.setItem("arena_current_user", JSON.stringify(currentUser));
+                            updateTopStats();
+                            renderMarket();
+                            renderAssets();
+                        }
+                        addLog(`💰 اطلاعات کاربر ${user.name} به روز شد`, true);
+                        renderUsersInfo();
+                    }
+                };
+            });
+            
+            document.querySelectorAll(".add-asset-btn").forEach(btn => {
+                btn.onclick = () => {
+                    let uid = parseInt(btn.dataset.uid);
+                    let user = users.find(u => u.id === uid);
+                    if(user){
+                        let assetSelect = document.getElementById(`assetSelect_${uid}`).value;
+                        let customSymbol = document.getElementById(`assetCustom_${uid}`).value.trim().toUpperCase();
+                        let amount = parseFloat(document.getElementById(`assetAmount_${uid}`).value);
+                        let action = document.getElementById(`assetAction_${uid}`).value;
+                        
+                        if(isNaN(amount) || amount <= 0){
+                            alert("لطفاً مقدار معتبر وارد کنید");
+                            return;
+                        }
+                        
+                        let symbol = "";
+                        if(assetSelect === "other"){
+                            if(!customSymbol){
+                                alert("لطفاً نماد ارز سفارشی را وارد کنید");
+                                return;
+                            }
+                            symbol = customSymbol;
+                            if(!customCoins.find(c => c.symbol === symbol) && !mainCoins.includes(symbol)){
+                                customCoins.push({ symbol: symbol, name: symbol, price: 10, volatility: 8, iconData: null });
+                                globalSettings.customCoins = customCoins;
+                                prices[symbol] = 10;
+                                initialPrices[symbol] = 10;
+                                saveSettings();
+                                addLog(`🔹 ارز جدید ${symbol} به صورت خودکار ایجاد شد`, true);
+                                renderUsersInfo();
+                            }
+                        } else {
+                            symbol = assetSelect;
+                        }
+                        
+                        if(!user.holdings) user.holdings = {};
+                        let currentAmount = user.holdings[symbol] || 0;
+                        
+                        if(action === "add"){
+                            user.holdings[symbol] = currentAmount + amount;
+                            addLog(`✨ ${amount} واحد ${symbol} به حساب کاربر ${user.name} اضافه شد`, true);
+                        } else {
+                            if(currentAmount < amount){
+                                alert(`موجودی ${symbol} کاربر کافی نیست! (موجودی: ${currentAmount.toFixed(6)})`);
+                                return;
+                            }
+                            user.holdings[symbol] = currentAmount - amount;
+                            if(user.holdings[symbol] < 0.000001) delete user.holdings[symbol];
+                            addLog(`🔻 ${amount} واحد ${symbol} از حساب کاربر ${user.name} کم شد`, false);
+                        }
+                        
+                        saveUsers();
+                        if(currentUser.id === uid){
+                            currentUser = user;
+                            localStorage.setItem("arena_current_user", JSON.stringify(currentUser));
+                            renderMarket();
+                            renderAssets();
+                        }
+                        renderUsersInfo();
+                        document.getElementById(`assetAmount_${uid}`).value = "";
+                        document.getElementById(`assetCustom_${uid}`).value = "";
+                    }
+                };
+            });
+        }
+
+        // ==================== رندر پنل ادمین با مدیریت حساب پرو ====================
+        function renderAdminPanel() {
+            if (currentUser.role !== "admin") return;
+            let div = document.getElementById("adminPanel");
+            if (!div) return;
+            
+            div.innerHTML = `
+                <div class="panel-card"><h3>⚙️ تنظیمات عمومی</h3>
+                    <div class="setting-row"><span class="setting-label">موجودی اولیه کاربران جدید:</span><input type="number" id="setDefaultBalance" class="amount-input" value="${defaultNewUserBalance}"><button class="max-btn" id="saveDefBal">ذخیره</button></div>
+                    <div class="setting-row"><span class="setting-label">پاداش هر دعوت:</span><input type="number" id="setRefReward" class="amount-input" value="${referralReward}"><button class="max-btn" id="saveRefRew">ذخیره</button></div>
+                    <div class="setting-row"><span class="setting-label">🎁 پاداش روزانه:</span><input type="number" id="setDailyReward" class="amount-input" value="${dailyRewardAmount}"><button class="max-btn" id="saveDailyRew">ذخیره</button></div>
+                </div>
+                
+                <div class="panel-card"><h3>⭐ مدیریت حساب پرو</h3>
+                    <div id="proPlansAdminList" style="margin-bottom:15px"></div>
+                    <div style="border-top:1px solid var(--border-color); padding-top:15px">
+                        <h4>➕ افزودن پلن پرو دلخواه:</h4>
+                        <div class="coin-edit-row">
+                            <input type="text" id="newPlanName" placeholder="نام پلن (مثلاً 3 ماهه)" class="amount-input" style="flex:2">
+                            <input type="number" id="newPlanDuration" placeholder="مدت" class="amount-input" style="flex:1">
+                            <select id="newPlanDurationType" class="amount-input" style="flex:1">
+                                <option value="day">روز</option>
+                                <option value="month">ماه</option>
+                                <option value="year">سال</option>
+                            </select>
+                            <input type="number" id="newPlanPrice" placeholder="قیمت (دلار)" class="amount-input" style="flex:1">
+                            <button class="btn-buy" id="addPlanBtn">➕ افزودن پلن</button>
+                        </div>
+                        <div class="coin-edit-row" style="margin-top:10px">
+                            <input type="text" id="customUserEmail" placeholder="ایمیل کاربر" class="amount-input" style="flex:2">
+                            <input type="number" id="customPlanDays" placeholder="مدت (روز)" class="amount-input" style="flex:1">
+                            <input type="number" id="customPlanPrice2" placeholder="قیمت (دلار)" class="amount-input" style="flex:1">
+                            <button class="btn-buy" id="addCustomProBtn">🎁 اعطای پرو دلخواه به کاربر</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-card"><h3>📋 مدیریت تسک‌ها</h3>
+                    <div id="tasksAdminList" style="margin-bottom:15px; max-height:300px; overflow-y:auto;"></div>
+                    <div style="border-top:1px solid var(--border-color); padding-top:15px">
+                        <h4>➕ افزودن تسک جدید:</h4>
+                        <div class="coin-edit-row">
+                            <input type="text" id="newTaskName" placeholder="نام تسک" class="amount-input" style="flex:2">
+                            <input type="number" id="newTaskVolume" placeholder="حجم مورد نیاز (دلار)" class="amount-input" style="flex:1">
+                            <input type="number" id="newTaskReward" placeholder="پاداش (دلار)" class="amount-input" style="flex:1">
+                            <button class="btn-buy" id="addTaskBtn">➕ افزودن تسک</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel-card"><h3>➕ افزودن ارز دیجیتال جدید</h3>
+                    <div class="coin-edit-row"><input type="text" id="newSym" placeholder="نماد (مثلاً XYZ)" class="amount-input"><input type="text" id="newName" placeholder="نام فارسی" class="amount-input"></div>
+                    <div class="coin-edit-row"><input type="number" id="newPrice" placeholder="قیمت اولیه $" class="amount-input" value="10"><input type="number" id="newVol" placeholder="نوسان %" class="amount-input" value="8"></div>
+                    <div class="coin-edit-row"><input type="file" id="newIcon" accept="image/*"><button class="btn-buy" id="addCoinBtn">➕ افزودن ارز</button></div>
+                    <div id="coinMsg" class="success-msg"></div>
+                    <h4>📋 ارزهای سفارشی موجود:</h4>
+                    <div id="customCoinsList" style="max-height:250px; overflow-y:auto;"></div>
+                </div>
+            `;
+            
+            document.getElementById("saveDefBal")?.addEventListener("click", () => { defaultNewUserBalance = parseFloat(document.getElementById("setDefaultBalance").value); globalSettings.defaultBalance = defaultNewUserBalance; saveSettings(); addLog(`موجودی اولیه کاربران جدید به ${defaultNewUserBalance.toLocaleString()} دلار تغییر کرد`, true); });
+            document.getElementById("saveRefRew")?.addEventListener("click", () => { referralReward = parseFloat(document.getElementById("setRefReward").value); globalSettings.refReward = referralReward; saveSettings(); updateTopStats(); addLog(`پاداش هر دعوت به ${referralReward} دلار تغییر کرد`, true); });
+            document.getElementById("saveDailyRew")?.addEventListener("click", () => { dailyRewardAmount = parseFloat(document.getElementById("setDailyReward").value); globalSettings.dailyReward = dailyRewardAmount; saveSettings(); renderTasks(); addLog(`پاداش روزانه به ${dailyRewardAmount} دلار تغییر کرد`, true); });
+            
+            // نمایش پلن‌های پرو برای ادمین
+            let proPlansDiv = document.getElementById("proPlansAdminList");
+            if(proPlansDiv){
+                proPlansDiv.innerHTML = `<h4>پلن‌های فعال پرو:</h4>`;
+                for(let [id, plan] of Object.entries(proPlans)){
+                    proPlansDiv.innerHTML += `
+                        <div class="task-item">
+                            <div><strong>${plan.name}</strong><br>مدت: ${plan.duration} ${plan.durationType === "day" ? "روز" : plan.durationType === "month" ? "ماه" : "سال"}</div>
+                            <div>💰 قیمت: ${plan.price.toLocaleString()}$</div>
+                            <div>
+                                <button class="max-btn edit-plan" data-id="${id}" data-field="price" style="background:#3b82f6;color:white">✏️ قیمت</button>
+                                <button class="max-btn edit-plan" data-id="${id}" data-field="name" style="background:#3b82f6;color:white">✏️ نام</button>
+                                <button class="max-btn toggle-plan" data-id="${id}" style="${plan.enabled ? 'background:#ef4444;color:white' : 'background:#10b981;color:white'}">${plan.enabled ? '❌ غیرفعال' : '✅ فعال'}</button>
+                                <button class="max-btn delete-plan" data-id="${id}" style="background:#ef4444;color:white">🗑️ حذف</button>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                document.querySelectorAll(".edit-plan").forEach(btn => {
+                    btn.onclick = () => {
+                        let id = btn.dataset.id;
+                        let field = btn.dataset.field;
+                        let newVal = prompt("مقدار جدید را وارد کنید:");
+                        if(newVal && !isNaN(parseFloat(newVal))){
+                            if(field === "price") proPlans[id].price = parseFloat(newVal);
+                            else if(field === "name") proPlans[id].name = newVal;
+                            localStorage.setItem("arena_pro_plans", JSON.stringify(proPlans));
+                            renderAdminPanel();
+                            renderProPlans();
+                            addLog(`پلن پرو ${proPlans[id].name} بروزرسانی شد`, true);
+                        }
+                    };
+                });
+                
+                document.querySelectorAll(".toggle-plan").forEach(btn => {
+                    btn.onclick = () => {
+                        let id = btn.dataset.id;
+                        proPlans[id].enabled = !proPlans[id].enabled;
+                        localStorage.setItem("arena_pro_plans", JSON.stringify(proPlans));
+                        renderAdminPanel();
+                        renderProPlans();
+                        addLog(`پلن پرو ${proPlans[id].name} ${proPlans[id].enabled ? "فعال" : "غیرفعال"} شد`, true);
+                    };
+                });
+                
+                document.querySelectorAll(".delete-plan").forEach(btn => {
+                    btn.onclick = () => {
+                        let id = btn.dataset.id;
+                        if(confirm(`آیا از حذف پلن "${proPlans[id].name}" مطمئن هستید؟`)){
+                            delete proPlans[id];
+                            localStorage.setItem("arena_pro_plans", JSON.stringify(proPlans));
+                            renderAdminPanel();
+                            renderProPlans();
+                            addLog(`پلن پرو حذف شد`, true);
+                        }
+                    };
+                });
+            }
+            
+            // افزودن پلن پرو دلخواه
+            document.getElementById("addPlanBtn")?.addEventListener("click", () => {
+                let name = document.getElementById("newPlanName").value.trim();
+                let duration = parseFloat(document.getElementById("newPlanDuration").value);
+                let durationType = document.getElementById("newPlanDurationType").value;
+                let price = parseFloat(document.getElementById("newPlanPrice").value);
+                if(!name){ alert("لطفاً نام پلن را وارد کنید"); return; }
+                if(isNaN(duration) || duration <= 0){ alert("لطفاً مدت معتبر وارد کنید"); return; }
+                if(isNaN(price) || price <= 0){ alert("لطفاً قیمت معتبر وارد کنید"); return; }
+                let newId = "custom_" + Date.now();
+                proPlans[newId] = { name: name, duration: duration, durationType: durationType, price: price, enabled: true };
+                localStorage.setItem("arena_pro_plans", JSON.stringify(proPlans));
+                renderAdminPanel();
+                renderProPlans();
+                addLog(`✅ پلن پرو جدید "${name}" با قیمت ${price}$ اضافه شد`, true);
+                document.getElementById("newPlanName").value = "";
+                document.getElementById("newPlanDuration").value = "";
+                document.getElementById("newPlanPrice").value = "";
+            });
+            
+            // اعطای پرو دلخواه به کاربر
+            document.getElementById("addCustomProBtn")?.addEventListener("click", () => {
+                let email = document.getElementById("customUserEmail").value.trim();
+                let days = parseFloat(document.getElementById("customPlanDays").value);
+                let price = parseFloat(document.getElementById("customPlanPrice2").value);
+                if(!email){ alert("لطفاً ایمیل کاربر را وارد کنید"); return; }
+                if(isNaN(days) || days <= 0){ alert("لطفاً مدت (روز) معتبر وارد کنید"); return; }
+                if(isNaN(price) || price <= 0){ alert("لطفاً قیمت معتبر وارد کنید"); return; }
+                
+                let targetUser = users.find(u => u.email === email);
+                if(!targetUser){ alert("کاربری با این ایمیل یافت نشد"); return; }
+                
+                if(targetUser.balance < price){
+                    alert(`موجودی کاربر کافی نیست! نیاز به ${price}$ دارد`);
+                    return;
+                }
+                
+                targetUser.balance -= price;
+                let expiryDate = new Date();
+                expiryDate.setDate(expiryDate.getDate() + days);
+                targetUser.isPro = true;
+                targetUser.proPlan = `پرو سفارشی ${days} روزه`;
+                targetUser.proExpiry = expiryDate.toISOString();
+                
+                saveUsers();
+                if(currentUser.id === targetUser.id){
+                    currentUser = targetUser;
+                    localStorage.setItem("arena_current_user", JSON.stringify(currentUser));
+                    updateTopStats();
+                }
+                addLog(`✨ به کاربر ${targetUser.name} حساب پرو ${days} روزه اعطا شد`, true);
+                sendToDiscord(`🎁 ادمین به کاربر ${targetUser.name} حساب پرو ${days} روزه اعطا کرد! مبلغ: ${price}$`);
+                renderAdminPanel();
+                renderUsersInfo();
+                document.getElementById("customUserEmail").value = "";
+                document.getElementById("customPlanDays").value = "";
+                document.getElementById("customPlanPrice2").value = "";
+            });
+            
+            let tasksDiv = document.getElementById("tasksAdminList");
+            if(tasksDiv){
+                if(globalSettings.customTasks.length === 0){
+                    tasksDiv.innerHTML = "<div class='holding-text'>هیچ تسکی تعریف نشده است. تسک جدید اضافه کنید.</div>";
+                } else {
+                    tasksDiv.innerHTML = "";
+                    for(let i = 0; i < globalSettings.customTasks.length; i++){
+                        let t = globalSettings.customTasks[i];
+                        tasksDiv.innerHTML += `
+                            <div class="task-item" style="background:var(--card-bg);">
+                                <div style="flex:2"><strong>${t.name}</strong><div><span class="task-badge">${t.requiredVolume.toLocaleString()} دلار حجم</span></div></div>
+                                <div style="flex:1">🎁 پاداش: ${t.reward.toLocaleString()}$</div>
+                                <div style="display:flex; gap:5px;">
+                                    <button class="max-btn edit-task-btn" data-idx="${i}" data-field="name" style="background:#3b82f6;color:white">✏️ نام</button>
+                                    <button class="max-btn edit-task-btn" data-idx="${i}" data-field="vol" style="background:#3b82f6;color:white">📊 حجم</button>
+                                    <button class="max-btn edit-task-btn" data-idx="${i}" data-field="reward" style="background:#3b82f6;color:white">💰 پاداش</button>
+                                    <button class="max-btn delete-task-btn" data-idx="${i}" style="background:#ef4444;color:white">🗑️ حذف</button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                
+                document.querySelectorAll(".edit-task-btn").forEach(btn => {
+                    btn.onclick = () => {
+                        let idx = parseInt(btn.dataset.idx);
+                        let field = btn.dataset.field;
+                        let newVal = prompt("مقدار جدید را وارد کنید:");
+                        if(newVal && newVal.trim()){
+                            if(field === "name") globalSettings.customTasks[idx].name = newVal.trim();
+                            else if(field === "vol") globalSettings.customTasks[idx].requiredVolume = parseFloat(newVal);
+                            else if(field === "reward") globalSettings.customTasks[idx].reward = parseFloat(newVal);
+                            saveSettings();
+                            renderAdminPanel();
+                            renderTasks();
+                            addLog(`تسک ویرایش شد`, true);
+                        }
+                    };
+                });
+                
+                document.querySelectorAll(".delete-task-btn").forEach(btn => {
+                    btn.onclick = () => {
+                        let idx = parseInt(btn.dataset.idx);
+                        let taskName = globalSettings.customTasks[idx].name;
+                        if(confirm(`آیا از حذف تسک "${taskName}" مطمئن هستید؟`)){
+                            globalSettings.customTasks.splice(idx, 1);
+                            saveSettings();
+                            renderAdminPanel();
+                            renderTasks();
+                            addLog(`تسک "${taskName}" حذف شد`, false);
+                        }
+                    };
+                });
+            }
+            
+            document.getElementById("addTaskBtn")?.addEventListener("click", () => {
+                let name = document.getElementById("newTaskName").value.trim();
+                let volume = parseFloat(document.getElementById("newTaskVolume").value);
+                let reward = parseFloat(document.getElementById("newTaskReward").value);
+                if(!name){ alert("لطفاً نام تسک را وارد کنید"); return; }
+                if(isNaN(volume) || volume <= 0){ alert("لطفاً حجم معاملات مورد نیاز (عدد مثبت) را وارد کنید"); return; }
+                if(isNaN(reward) || reward <= 0){ alert("لطفاً پاداش (عدد مثبت) را وارد کنید"); return; }
+                globalSettings.customTasks.push({ id: "task_" + Date.now(), name: name, requiredVolume: volume, reward: reward });
+                saveSettings();
+                renderAdminPanel();
+                renderTasks();
+                addLog(`✅ تسک جدید "${name}" با پاداش ${reward}$ اضافه شد`, true);
+                document.getElementById("newTaskName").value = "";
+                document.getElementById("newTaskVolume").value = "";
+                document.getElementById("newTaskReward").value = "";
+            });
+            
+            let iconData = null;
+            document.getElementById("newIcon")?.addEventListener("change", (e) => { let f = e.target.files[0]; if(f){ let r = new FileReader(); r.onload = (ev) => { iconData = ev.target.result; }; r.readAsDataURL(f); } });
+            
+            document.getElementById("addCoinBtn")?.addEventListener("click", () => {
+                let sym = document.getElementById("newSym").value.trim().toUpperCase();
+                let name = document.getElementById("newName").value.trim();
+                let price = parseFloat(document.getElementById("newPrice").value);
+                let vol = parseFloat(document.getElementById("newVol").value);
+                if(!sym){ alert("لطفاً نماد ارز را وارد کنید"); return; }
+                if(!name){ alert("لطفاً نام فارسی ارز را وارد کنید"); return; }
+                if(isNaN(price) || price <= 0){ alert("لطفاً قیمت اولیه معتبر وارد کنید"); return; }
+                if(customCoins.find(c=>c.symbol===sym) || mainCoins.includes(sym)){ document.getElementById("coinMsg").innerHTML = `<span style="color:#ef4444">❌ این نماد قبلاً وجود دارد!</span>`; setTimeout(()=> document.getElementById("coinMsg").innerHTML = "", 2000); return; }
+                customCoins.push({ symbol: sym, name: name, price: price, volatility: isNaN(vol) ? 8 : vol, iconData: iconData });
+                globalSettings.customCoins = customCoins;
+                prices[sym] = price;
+                initialPrices[sym] = price;
+                saveSettings();
+                document.getElementById("coinMsg").innerHTML = `<span style="color:#10b981">✅ ارز ${sym} (${name}) با موفقیت اضافه شد!</span>`;
+                setTimeout(()=> document.getElementById("coinMsg").innerHTML = "", 3000);
+                document.getElementById("newSym").value = ""; document.getElementById("newName").value = ""; document.getElementById("newPrice").value = "10"; document.getElementById("newVol").value = "8";
+                if(document.getElementById("newIcon")) document.getElementById("newIcon").value = "";
+                iconData = null;
+                renderAdminPanel();
+                renderMarket();
+                addLog(`➕ ارز جدید ${sym} (${name}) با قیمت ${price}$ به بازار اضافه شد`, true);
+            });
+            
+            let customDiv = document.getElementById("customCoinsList");
+            if(customDiv){
+                if(customCoins.length === 0){
+                    customDiv.innerHTML = "<div class='holding-text'>هیچ ارز سفارشی اضافه نشده است</div>";
+                } else {
+                    customDiv.innerHTML = customCoins.map((c,idx) => `
+                        <div class="custom-coin-item">
+                            <div><strong>${c.symbol}</strong> - ${c.name}<br>💰 قیمت: ${c.price}$ | 📊 نوسان: ${c.volatility || 8}%</div>
+                            <div>
+                                <button data-editidx="${idx}" data-field="price" class="max-btn btn-small">✏️ قیمت</button>
+                                <button data-editidx="${idx}" data-field="vol" class="max-btn btn-small">📊 نوسان</button>
+                                <button data-delidx="${idx}" class="max-btn btn-small" style="background:#ef4444;color:white">🗑️ حذف</button>
+                            </div>
+                        </div>
+                    `).join("");
+                }
+                
+                document.querySelectorAll("[data-delidx]").forEach(btn => { 
+                    btn.onclick = () => { 
+                        let idx = parseInt(btn.dataset.delidx); 
+                        let sym = customCoins[idx].symbol;
+                        if(confirm(`آیا از حذف ارز ${sym} مطمئن هستید؟`)){
+                            customCoins.splice(idx,1); 
+                            globalSettings.customCoins = customCoins; 
+                            delete prices[sym]; 
+                            delete initialPrices[sym]; 
+                            saveSettings(); 
+                            renderAdminPanel(); 
+                            renderMarket();
+                            addLog(`🗑️ ارز ${sym} از بازار حذف شد`, false);
+                        }
+                    }; 
+                });
+                
+                document.querySelectorAll("[data-editidx]").forEach(btn => { 
+                    btn.onclick = () => { 
+                        let idx = parseInt(btn.dataset.editidx); 
+                        let field = btn.dataset.field; 
+                        let newVal = prompt("مقدار جدید را وارد کنید:"); 
+                        if(newVal && !isNaN(parseFloat(newVal))){ 
+                            if(field==="price"){ 
+                                customCoins[idx].price = parseFloat(newVal); 
+                                prices[customCoins[idx].symbol] = parseFloat(newVal); 
+                                initialPrices[customCoins[idx].symbol] = parseFloat(newVal); 
+                                addLog(`💰 قیمت ارز ${customCoins[idx].symbol} به ${newVal}$ تغییر کرد`, true);
+                            } else if(field==="vol"){ 
+                                customCoins[idx].volatility = parseFloat(newVal); 
+                                addLog(`📊 نوسان ارز ${customCoins[idx].symbol} به ${newVal}% تغییر کرد`, true);
+                            } 
+                            globalSettings.customCoins = customCoins; 
+                            saveSettings(); 
+                            renderAdminPanel(); 
+                            renderMarket(); 
+                        } 
+                    }; 
+                });
+            }
+        }
+
+        function saveSettings() { localStorage.setItem("arena_settings", JSON.stringify(globalSettings)); }
+        function saveUsers() { localStorage.setItem("arena_users", JSON.stringify(users)); }
+
+        if (!users.find(u => u.role === "admin")) {
+            users.push({ id: Date.now(), name: "ادمین", email: "admin@arena.com", phone: "09123456789", password: "admin123", role: "admin", balance: 1000000, holdings: { USDT: 100000 }, monthlyVolume: 0, refCode: "ADMIN123", referredBy: null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: true, proPlan: "ادمین", proExpiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString() });
+            saveUsers();
+        }
+
+        document.getElementById("showRegisterBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.remove("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
+        document.getElementById("showLoginBtn").onclick = () => { document.getElementById("loginForm").classList.remove("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
+        document.getElementById("forgotBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.remove("form-hidden"); };
+        document.getElementById("backToLoginBtn").onclick = () => { document.getElementById("loginForm").classList.remove("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
+        
+        document.getElementById("doRegisterBtn").onclick = () => {
+            let name = document.getElementById("regName").value.trim();
+            let phone = document.getElementById("regPhone").value.trim();
+            let email = document.getElementById("regEmail").value.trim();
+            let pass = document.getElementById("regPassword").value;
+            let confirm = document.getElementById("regConfirmPassword").value;
+            let refCode = document.getElementById("regReferralCode").value.trim().toUpperCase();
+            let err = document.getElementById("registerError");
+            if(!name || !phone || !email || !pass){ err.innerText = "همه فیلدها را پر کنید"; return; }
+            if(pass.length < 6){ err.innerText = "رمز حداقل ۶ کاراکتر"; return; }
+            if(pass !== confirm){ err.innerText = "رمز مطابقت ندارد"; return; }
+            
+            if(users.find(u=>u.email===email)){ 
+                err.innerText = "این ایمیل قبلاً ثبت شده است!"; 
+                return; 
+            }
+            
+            let referrer = null;
+            if(refCode) referrer = users.find(u=>u.refCode===refCode);
+            let newRefCode = Math.random().toString(36).substring(2,8).toUpperCase();
+            let newUser = { id: Date.now(), name, email, phone, password: pass, role: "user", balance: defaultNewUserBalance, holdings: { USDT: 5000 }, monthlyVolume: 0, refCode: newRefCode, referredBy: referrer?.id || null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: false, proPlan: null, proExpiry: null };
+            users.push(newUser);
+            if(referrer){ referrer.balance += referralReward; referrer.referrals = referrer.referrals || []; referrer.referrals.push(newUser.id); saveUsers(); }
+            saveUsers();
+            
+            let discordMsg = `🆕 **کاربر جدید ثبت نام کرد!**\n👤 نام: ${name}\n📧 ایمیل: ${email}\n📱 شماره: ${phone}\n💰 موجودی اولیه: ${defaultNewUserBalance.toLocaleString()} دلار\n🎁 کد دعوت: ${refCode || "ندارد"}${referrer ? `\n👥 معرف: ${referrer.name}` : ""}\n🕒 زمان: ${new Date().toLocaleString("fa-IR")}`;
+            sendToDiscord(discordMsg);
+            
+            err.style.color = "#10b981"; err.innerText = `✅ ثبت نام موفق! اکنون وارد شوید`;
+            setTimeout(()=>{ document.getElementById("showLoginBtn").click(); err.innerText=""; }, 2000);
+        };
+        
+        document.getElementById("doLoginBtn").onclick = () => {
+            let id = document.getElementById("loginIdentifier").value.trim();
+            let pass = document.getElementById("loginPassword").value;
+            let user = users.find(u=> (u.email===id || u.phone===id) && u.password===pass);
+            if(!user){ document.getElementById("loginError").innerText = "اطلاعات نادرست"; return; }
+            currentUser = user;
+            localStorage.setItem("arena_current_user", JSON.stringify(user));
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("gamePage").style.display = "block";
+            startGame();
+        };
+        
+        document.getElementById("doForgotBtn").onclick = () => {
+            let email = document.getElementById("forgotEmail").value.trim();
+            let phone = document.getElementById("forgotPhone").value.trim();
+            let user = users.find(u=>u.email===email && u.phone===phone);
+            if(user) document.getElementById("forgotResult").innerHTML = `<span style="color:#10b981">رمز عبور: ${user.password}</span>`;
+            else document.getElementById("forgotResult").innerHTML = `<span style="color:#ef4444">اطلاعات مطابقت ندارد</span>`;
+        };
+
+        function startGame() {
+            initPrices();
+            if(priceUpdateInterval) clearInterval(priceUpdateInterval);
+            priceUpdateInterval = setInterval(updatePrices, 3000);
+            
+            if(!currentUser.holdings) currentUser.holdings = { USDT: 5000 };
+            if(!currentUser.completedTasks) currentUser.completedTasks = {};
+            if(!currentUser.leveragePositions) currentUser.leveragePositions = [];
+            if(!currentUser.fundAmount) currentUser.fundAmount = 0;
+            if(currentUser.monthlyVolume === undefined) currentUser.monthlyVolume = 0;
+            if(currentUser.isPro === undefined) currentUser.isPro = false;
+            
+            document.getElementById("appRoot").innerHTML = `
+                <div class="admin-header ${currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date() ? 'pro-account' : ''}">
+                    <div class="user-title">آرنا تریدر | ${currentUser.role === "admin" ? "ادمین" : currentUser.name} ${currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date() ? '<span class="pro-badge">⭐ پرو</span>' : ''}</div>
+                    <div class="ref-box">🎁 کد دعوت: <span id="myRefCodeSpan">${currentUser.refCode}</span></div>
+                    <button class="logout-btn" id="logoutBtn">خروج</button>
+                </div>
+                <div class="nav-tabs"><button class="nav-btn active" data-tab="market">بازار</button><button class="nav-btn" data-tab="leverage">اهرم</button><button class="nav-btn" data-tab="fund">صندوق</button><button class="nav-btn" data-tab="tasks">تسک‌ها</button><button class="nav-btn" data-tab="pro">⭐ حساب پرو</button><button class="nav-btn" data-tab="assets">دارایی‌ها</button><button class="nav-btn" data-tab="referral">دعوت</button><button class="nav-btn" data-tab="settings">تنظیمات</button>${currentUser.role === "admin" ? '<button class="nav-btn" data-tab="admin">👑 مدیریت</button>' : ''}<button class="nav-btn" data-tab="usersinfo">📋 اطلاعات کاربران</button></div>
+                <div class="stats-row"><div class="stat-card"><div class="stat-label">کارمزد</div><div class="stat-value" id="statFee">0%</div></div><div class="stat-card"><div class="stat-label">حجم ماهانه</div><div class="stat-value" id="statMonthly">0</div></div><div class="stat-card"><div class="stat-label">سود/زیان</div><div class="stat-value" id="statProfit">0</div></div><div class="stat-card"><div class="stat-label">موجودی</div><div class="stat-value" id="statBalance">0</div><div class="stat-label">پورتفو: <span id="statPortfolio">0</span></div></div></div>
+                <div id="marketPane" class="tab-pane active"><input type="text" id="searchInput" class="search-box" placeholder="جستجو..."><div id="marketGrid" class="assets-grid"></div></div>
+                <div id="leveragePane" class="tab-pane"><div class="panel-card"><select id="levCoin">${getAllAssets().filter(s=>s!=="USDT").slice(0,30).map(s=>`<option>${s}</option>`).join("")}</select><select id="levMult"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option><option>100</option></select><input id="levAmount" class="amount-input" value="100"><button class="btn-buy" id="levLong">لانگ</button><button class="btn-sell" id="levShort">شورت</button><div id="leverageList" class="holding-text" style="margin-top:15px"></div></div></div>
+                <div id="fundPane" class="tab-pane"><div class="panel-card">💰 صندوق: <strong id="fundAmountSpan">0</strong>$<br><input id="fundAmt" class="amount-input" value="100"><button class="btn-buy" id="fundDeposit">واریز</button><button class="btn-sell" id="fundWithdraw">برداشت</button></div></div>
+                <div id="tasksPane" class="tab-pane"><div id="tasksContainer"></div></div>
+                <div id="proPane" class="tab-pane"><div id="proPlansPanel"></div></div>
+                <div id="assetsPane" class="tab-pane"><div class="panel-card"><div id="assetsList"></div></div></div>
+                <div id="referralPane" class="tab-pane"><div class="panel-card"><h3>سیستم دعوت</h3><p>کد شما: <strong style="font-size:1.3rem">${currentUser.refCode}</strong></p><p>پاداش هر دعوت: ${referralReward}$</p><p>تعداد دعوت: ${currentUser.referrals?.length || 0}</p><button class="max-btn" id="copyRef">📋 کپی کد</button></div></div>
+                <div id="settingsPane" class="tab-pane"><div id="settingsPanel"></div></div>
+                <div id="adminPane" class="tab-pane"><div id="adminPanel"></div></div>
+                <div id="usersinfoPane" class="tab-pane"><div id="usersInfoPanel"></div></div>
+                <div class="log-panel"><div class="log-scroll" id="logScroll"></div></div>
+                <footer>⚡ اهرم تا ${getUserMaxLeverage(currentUser)}x | کارمزد ${getUserFeeRate(currentUser)}% | ${currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date() ? '⭐ حساب پرو فعال ⭐' : 'حساب معمولی'}</footer>
+            `;
+            
+            document.querySelectorAll(".nav-btn").forEach(btn => { btn.onclick = () => { document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active")); document.getElementById(btn.dataset.tab+"Pane").classList.add("active"); if(btn.dataset.tab==="admin") renderAdminPanel(); if(btn.dataset.tab==="settings") renderSettings(); if(btn.dataset.tab==="assets") renderAssets(); if(btn.dataset.tab==="leverage") renderLeverage(); if(btn.dataset.tab==="usersinfo") renderUsersInfo(); if(btn.dataset.tab==="pro") renderProPlans(); }; });
+            document.getElementById("logoutBtn").onclick = () => { localStorage.removeItem("arena_current_user"); location.reload(); };
+            document.getElementById("copyRef")?.addEventListener("click", () => { navigator.clipboard.writeText(currentUser.refCode); addLog("کد دعوت کپی شد", true); });
+            document.getElementById("fundDeposit")?.addEventListener("click", () => { let a = parseFloat(document.getElementById("fundAmt").value); if(!isNaN(a)) fundDeposit(a); });
+            document.getElementById("fundWithdraw")?.addEventListener("click", () => { let a = parseFloat(document.getElementById("fundAmt").value); if(!isNaN(a)) fundWithdraw(a); });
+            document.getElementById("levLong")?.addEventListener("click", () => { let sym = document.getElementById("levCoin").value; let amt = parseFloat(document.getElementById("levAmount").value); let lev = parseInt(document.getElementById("levMult").value); openLeverage("long", sym, amt, lev); });
+            document.getElementById("levShort")?.addEventListener("click", () => { let sym = document.getElementById("levCoin").value; let amt = parseFloat(document.getElementById("levAmount").value); let lev = parseInt(document.getElementById("levMult").value); openLeverage("short", sym, amt, lev); });
+            document.getElementById("searchInput")?.addEventListener("input", () => renderMarket());
+            
+            renderMarket(); renderAssets(); renderLeverage(); renderTasks(); renderSettings(); renderProPlans(); updateTopStats();
+            if(currentUser.role === "admin") renderAdminPanel();
+            
+            setInterval(() => {
+                if(currentUser && currentUser.fundAmount > 0){
+                    let interest = currentUser.fundAmount * (globalSettings.fundInterest / 100);
+                    currentUser.fundAmount += interest;
+                    currentUser.balance += interest;
+                    saveCurrentUser();
+                    addLog(`🏦 سود صندوق: +${interest.toFixed(2)}$`, true);
+                }
+            }, 60000);
+        }
+        
+        let savedTheme = localStorage.getItem("arena_theme");
+        if(savedTheme === "dark") document.body.classList.add("dark-mode");
+        
+        let savedUser = localStorage.getItem("arena_current_user");
+        if(savedUser){
+            let user = JSON.parse(savedUser);
+            if(users.find(u=>u.id===user.id)){
+                currentUser = user;
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("gamePage").style.display = "block";
+                startGame();
+            }
+        }
+        
+        window.buyProPlan = buyProPlan;
+    </script>
+</body>
+</html>

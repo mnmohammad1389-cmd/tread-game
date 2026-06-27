@@ -103,55 +103,288 @@
             margin: 5px 0;
         }
 
+        /* ========== صفحه لاگین جدید سه‌بعدی ========== */
         .login-page {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
         
         .login-container {
-            max-width: 450px;
+            max-width: 480px;
             width: 100%;
-            background: white;
-            border-radius: 32px;
-            padding: 40px 32px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            transform: perspective(1000px) rotateX(2deg);
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 45px 35px;
+            box-shadow: 
+                0 30px 60px -15px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: perspective(1000px) rotateX(3deg);
+            position: relative;
+            z-index: 1;
         }
         
         .login-container:hover {
-            transform: perspective(1000px) rotateX(0deg) translateY(-5px);
-            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+            transform: perspective(1000px) rotateX(0deg) translateY(-8px);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.8),
+                0 0 60px rgba(102, 126, 234, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
         
-        .logo-area { text-align: center; margin-bottom: 32px; }
-        .logo-icon { font-size: 3rem; margin-bottom: 12px; display: inline-block; transition: transform 0.3s ease; }
-        .logo-icon:hover { transform: scale(1.1) rotate(5deg); }
-        .logo-area h1 { font-size: 1.8rem; color: #1e293b; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .logo-area p { color: #666; font-size: 0.85rem; margin-top: 5px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: #334155; margin-bottom: 8px; }
-        .input-wrapper { position: relative; display: flex; align-items: center; }
-        .input-wrapper input { width: 100%; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 16px; font-size: 0.9rem; outline: none; background: #f8fafc; transition: all 0.3s ease; }
-        .input-wrapper input:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); transform: scale(1.01); }
-        .toggle-password { position: absolute; left: 16px; background: none; border: none; color: #94a3b8; cursor: pointer; }
-        .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.8rem; }
-        .forgot-link, .switch-link { color: #667eea; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
-        .forgot-link:hover, .switch-link:hover { color: #764ba2; text-shadow: 0 0 8px rgba(118, 75, 162, 0.3); }
-        .btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 16px; color: white; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .btn-submit::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s ease; }
-        .btn-submit:hover::before { left: 100%; }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); }
-        .btn-submit:active { transform: translateY(1px); }
-        .switch-tab { text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
-        .form-hidden { display: none; }
-        .error-msg { color: #ef4444; font-size: 0.75rem; text-align: center; margin-top: 10px; }
-        .success-msg { color: #10b981; font-size: 0.75rem; text-align: center; margin-top: 10px; }
-
+        .logo-area {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+        
+        .logo-icon {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 8px 30px rgba(255, 215, 0, 0.15));
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+        
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        
+        .logo-icon:hover {
+            transform: scale(1.15) rotate(8deg);
+        }
+        
+        .logo-area h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: goldShine 3s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes goldShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .logo-area p {
+            color: rgba(226, 232, 240, 0.6);
+            font-size: 0.9rem;
+            margin-top: 6px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+        
+        .logo-area .subtitle-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(226, 232, 240, 0.7);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 1.5px solid rgba(51, 65, 85, 0.6);
+            border-radius: 20px;
+            font-size: 0.95rem;
+            outline: none;
+            background: rgba(15, 23, 42, 0.6);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-group input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.08), 0 0 30px rgba(255, 215, 0, 0.03);
+            transform: scale(1.01);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(148, 163, 184, 0.4);
+        }
+        
+        .form-group input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px rgba(15, 23, 42, 0.8) inset !important;
+            -webkit-text-fill-color: #e2e8f0 !important;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            font-size: 0.85rem;
+            color: rgba(226, 232, 240, 0.6);
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #FFD700;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .forgot-link, .switch-link {
+            color: #FFD700;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .forgot-link::after, .switch-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: #FFD700;
+            transition: width 0.3s ease;
+        }
+        
+        .forgot-link:hover::after, .switch-link:hover::after {
+            width: 100%;
+        }
+        
+        .forgot-link:hover, .switch-link:hover {
+            color: #FFE44D;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FFD700, #F59E0B);
+            border: none;
+            border-radius: 20px;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.15);
+        }
+        
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.25);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        
+        .switch-tab {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(51, 65, 85, 0.3);
+            color: rgba(226, 232, 240, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        .form-hidden {
+            display: none;
+        }
+        
+        .error-msg {
+            color: #f87171;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(248, 113, 113, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(248, 113, 113, 0.1);
+        }
+        
+        .success-msg {
+            color: #34d399;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(52, 211, 153, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(52, 211, 153, 0.1);
+        }
+        
         .game-page { background: var(--bg-color); min-height: 100vh; padding: 20px; display: none; }
         .app-container { max-width: 1600px; margin: 0 auto; }
         .admin-header { background: var(--card-bg); border-radius: 28px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border: 1px solid var(--border-color); }
@@ -214,44 +447,287 @@
         .pro-plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 15px; }
         .fund-box { background: var(--card-bg); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); }
         .fund-upgrade-btn { background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
+
+        /* استایل‌های بخش شرط‌بندی */
+        .bet-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+        .bet-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .bet-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .bet-option-btn {
+            background: var(--input-bg);
+            border: 2px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 60px;
+        }
+        .bet-option-btn:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        .bet-option-btn.selected {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.2);
+        }
+        .dice-result {
+            font-size: 5rem;
+            text-align: center;
+            padding: 30px;
+            margin: 10px 0;
+            background: var(--input-bg);
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dice-result.spinning {
+            animation: diceSpin 0.5s ease-in-out;
+        }
+        @keyframes diceSpin {
+            0% { transform: rotate(0deg) scale(0.5); opacity: 0.3; }
+            25% { transform: rotate(90deg) scale(1.2); }
+            50% { transform: rotate(180deg) scale(0.8); opacity: 0.7; }
+            75% { transform: rotate(270deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); opacity: 1; }
+        }
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 20px;
+            margin: 10px 0;
+            background: var(--input-bg);
+            border-radius: 20px;
+            border: 2px solid var(--border-color);
+            min-height: 150px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .slot-reel {
+            font-size: 4.5rem;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            border-radius: 16px;
+            border: 3px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .slot-reel.spinning {
+            animation: slotSpin 0.3s ease-in-out;
+        }
+        @keyframes slotSpin {
+            0% { transform: scale(0.7) rotate(-20deg); opacity: 0.3; }
+            50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .slot-sum {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            margin-top: 10px;
+            background: var(--input-bg);
+            border-radius: 16px;
+            border: 2px solid var(--border-color);
+            transition: all 0.5s ease;
+        }
+        .slot-sum.hidden-sum {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            height: 0;
+            padding: 0;
+            margin: 0;
+            border: none;
+            overflow: hidden;
+        }
+        .slot-sum.visible-sum {
+            opacity: 1;
+            transform: translateY(0);
+            height: auto;
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px solid var(--border-color);
+        }
+        .bet-result {
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 12px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .bet-result.win {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+        .bet-result.lose {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #f87171;
+        }
+        .bet-result.draw {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid #fbbf24;
+        }
+        .bet-history {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .bet-history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 12px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+        .bet-history-item.win { color: #10b981; }
+        .bet-history-item.lose { color: #f87171; }
+        .bet-history-item.draw { color: #fbbf24; }
+        .btn-bet {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-bet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+        .btn-bet:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .dice-face {
+            font-size: 5rem;
+            line-height: 1;
+        }
+
+        /* استایل سه‌بعدی برای دکمه‌های لاگین */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon .icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(148, 163, 184, 0.3);
+            font-size: 1.2rem;
+        }
+        
+        .input-icon input {
+            padding-right: 50px !important;
+        }
     </style>
 </head>
 <body>
+    <!-- ========== صفحه لاگین جدید ========== -->
     <div id="loginPage" class="login-page">
         <div class="login-container">
             <div class="logo-area">
                 <div class="logo-icon">🌾</div>
                 <h1>آرنا تریدر</h1>
                 <p>بازار جهانی ارزهای دیجیتال</p>
+                <div class="subtitle-line"></div>
             </div>
+            
+            <!-- فرم ورود -->
             <div id="loginForm">
-                <div class="form-group"><label>ایمیل یا شماره موبایل</label><input type="text" id="loginIdentifier" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>رمز عبور</label><input type="password" id="loginPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="checkbox-group"><label><input type="checkbox" id="rememberMe"> مرا به خاطر بسپار</label><span class="forgot-link" id="forgotBtn">رمز عبور را فراموش کرده‌اید؟</span></div>
-                <button class="btn-submit" id="doLoginBtn">ورود امن</button>
-                <div class="switch-tab">حساب کاربری ندارید؟ <span class="switch-link" id="showRegisterBtn">ثبت نام</span></div>
+                <div class="form-group">
+                    <label>نام کاربری یا ایمیل</label>
+                    <div class="input-icon">
+                        <span class="icon">👤</span>
+                        <input type="text" id="loginIdentifier" placeholder="ایمیل یا شماره موبایل خود را وارد کنید">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>رمز عبور</label>
+                    <div class="input-icon">
+                        <span class="icon">🔒</span>
+                        <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید">
+                    </div>
+                </div>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="rememberMe"> مرا به خاطر بسپار</label>
+                    <span class="forgot-link" id="forgotBtn">فراموشی رمز؟</span>
+                </div>
+                <button class="btn-submit" id="doLoginBtn">← ورود →</button>
+                <div class="switch-tab">
+                    حساب کاربری ندارید؟ <span class="switch-link" id="showRegisterBtn">ثبت نام کنید</span>
+                </div>
                 <div id="loginError" class="error-msg"></div>
             </div>
+            
+            <!-- فرم ثبت‌نام -->
             <div id="registerForm" class="form-hidden">
-                <div class="form-group"><label>نام و نام خانوادگی</label><input type="text" id="regName" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>شماره موبایل</label><input type="text" id="regPhone" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>ایمیل</label><input type="email" id="regEmail" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>رمز عبور</label><input type="password" id="regPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>تکرار رمز عبور</label><input type="password" id="regConfirmPassword" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>🎁 کد دعوت</label><input type="text" id="regReferralCode" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <button class="btn-submit" id="doRegisterBtn">ثبت نام امن</button>
-                <div class="switch-tab">قبلاً ثبت نام کرده‌اید؟ <span class="switch-link" id="showLoginBtn">ورود</span></div>
+                <div class="form-group"><label>نام کامل</label><input type="text" id="regName" placeholder="نام و نام خانوادگی"></div>
+                <div class="form-group"><label>نام کاربری</label><input type="text" id="regUsername" placeholder="نام کاربری"></div>
+                <div class="form-group"><label>ایمیل</label><input type="email" id="regEmail" placeholder="ایمیل خود را وارد کنید"></div>
+                <div class="form-group"><label>شماره همراه</label><input type="text" id="regPhone" placeholder="شماره موبایل"></div>
+                <div class="form-group"><label>رمز عبور</label><input type="password" id="regPassword" placeholder="رمز عبور (حداقل ۶ کاراکتر)"></div>
+                <div class="form-group"><label>تکرار رمز عبور</label><input type="password" id="regConfirmPassword" placeholder="تکرار رمز عبور"></div>
+                <div class="form-group"><label>🎁 کد دعوت (اختیاری)</label><input type="text" id="regReferralCode" placeholder="کد دعوت"></div>
+                <button class="btn-submit" id="doRegisterBtn">ثبت‌نام ❤️</button>
+                <div class="switch-tab">
+                    قبلاً ثبت‌نام کردید؟ <span class="switch-link" id="showLoginBtn">وارد شوید</span>
+                </div>
                 <div id="registerError" class="error-msg"></div>
             </div>
+            
+            <!-- فرم فراموشی رمز -->
             <div id="forgotForm" class="form-hidden">
-                <div class="form-group"><label>ایمیل ثبت شده</label><input type="email" id="forgotEmail" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
-                <div class="form-group"><label>شماره همراه ثبت شده</label><input type="text" id="forgotPhone" style="width:100%; padding:14px; border:1.5px solid #e2e8f0; border-radius:16px;"></div>
+                <div class="form-group"><label>ایمیل</label><input type="email" id="forgotEmail" placeholder="ایمیل ثبت شده"></div>
+                <div class="form-group"><label>شماره همراه</label><input type="text" id="forgotPhone" placeholder="شماره همراه ثبت شده"></div>
                 <button class="btn-submit" id="doForgotBtn">بازیابی رمز عبور</button>
-                <div class="switch-tab"><span class="switch-link" id="backToLoginBtn">← بازگشت به ورود</span></div>
+                <div class="switch-tab">
+                    <span class="switch-link" id="backToLoginBtn">← بازگشت به ورود</span>
+                </div>
                 <div id="forgotResult" class="error-msg"></div>
             </div>
         </div>
     </div>
+
+    <!-- ========== صفحه بازی ========== -->
     <div id="gamePage" class="game-page"><div class="app-container" id="appRoot"></div></div>
 
     <script>
@@ -1358,6 +1834,319 @@
             });
         }
 
+        // ==================== بخش شرط‌بندی با قوانین جدید ====================
+        let betHistory = [];
+        let isRolling = false;
+        let isSpinning = false;
+        let slotSumTimeout = null;
+
+        // نمادهای تاس (یونیکد)
+        const DICE_FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+
+        function renderBetting() {
+            let div = document.getElementById("bettingPanel");
+            if (!div) return;
+            
+            let html = `
+                <div class="bet-card">
+                    <h3>🎲 تاس انداختن</h3>
+                    <p style="font-size:0.8rem; margin-bottom:10px;">مبلغ شرط خود را وارد کنید و یک گزینه را انتخاب کنید:</p>
+                    
+                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
+                        <input type="number" id="diceBetAmount" class="amount-input" value="10" placeholder="مبلغ شرط" style="flex:1; min-width:100px;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                            <button class="bet-option-btn dice-option" data-bet="even">زوج (ضریب 1.5)</button>
+                            <button class="bet-option-btn dice-option" data-bet="odd">فرد (ضریب 1.5)</button>
+                            <button class="bet-option-btn dice-option" data-bet="1">1 (ضریب 3)</button>
+                            <button class="bet-option-btn dice-option" data-bet="2">2 (ضریب 3)</button>
+                            <button class="bet-option-btn dice-option" data-bet="3">3 (ضریب 3)</button>
+                            <button class="bet-option-btn dice-option" data-bet="4">4 (ضریب 3)</button>
+                            <button class="bet-option-btn dice-option" data-bet="5">5 (ضریب 3)</button>
+                            <button class="bet-option-btn dice-option" data-bet="6">6 (ضریب 3)</button>
+                        </div>
+                    </div>
+                    
+                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                        <span style="font-size:0.8rem;">انتخاب شما: <strong id="diceSelected">هیچ</strong></span>
+                        <button class="btn-bet" id="rollDiceBtn" ${isRolling ? 'disabled' : ''}>🎲 تاس بینداز</button>
+                    </div>
+                    
+                    <div class="dice-result" id="diceResult">
+                        <span class="dice-face">🎲</span>
+                    </div>
+                    <div id="diceBetResult" class="bet-result"></div>
+                </div>
+                
+                <div class="bet-card">
+                    <h3>🎰 ماشین شانس (Slot Machine)</h3>
+                    <p style="font-size:0.8rem; margin-bottom:10px;">سه عدد 1 تا 6 تصادفی ظاهر می‌شوند.</p>
+                    <p style="font-size:0.75rem; margin-bottom:10px; color:#fbbf24;">
+                        🏆 قوانین جدید: جمع ≤ 12 = باخت | 13 = ضریب 1.5 | 14 = ضریب 2 | 15 = ضریب 2.5 | 16-17 = ضریب 3 | 18 = جک‌پات (ضریب 3)
+                    </p>
+                    
+                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
+                        <input type="number" id="slotBetAmount" class="amount-input" value="10" placeholder="مبلغ شرط" style="flex:1; min-width:100px;">
+                        <button class="btn-bet" id="spinSlotBtn" ${isSpinning ? 'disabled' : ''}>🎰 بچرخون</button>
+                    </div>
+                    
+                    <div class="slot-machine" id="slotMachine">
+                        <div class="slot-reel" id="slot1">🎲</div>
+                        <div class="slot-reel" id="slot2">🎲</div>
+                        <div class="slot-reel" id="slot3">🎲</div>
+                    </div>
+                    <div class="slot-sum hidden-sum" id="slotSum">جمع اعداد: -</div>
+                    <div id="slotBetResult" class="bet-result"></div>
+                </div>
+                
+                <div class="bet-card">
+                    <h3>📊 تاریخچه شرط‌بندی</h3>
+                    <div class="bet-history" id="betHistoryContainer">
+                        ${betHistory.length === 0 ? '<div class="holding-text">هنوز شرطی ثبت نشده است</div>' : betHistory.slice(-20).reverse().map(item => `
+                            <div class="bet-history-item ${item.result}">
+                                <span>${item.type}</span>
+                                <span>💰 ${item.amount}$</span>
+                                <span>${item.result === 'win' ? '✅ برد +' + item.profit.toFixed(2) + '$' : item.result === 'draw' ? '🔄 مساوی' : '❌ باخت -' + item.amount.toFixed(2) + '$'}</span>
+                                <span style="font-size:0.6rem;">${item.time}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            div.innerHTML = html;
+            
+            // انتخاب گزینه‌های تاس
+            let selectedDiceBet = null;
+            document.querySelectorAll(".dice-option").forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelectorAll(".dice-option").forEach(b => b.classList.remove("selected"));
+                    btn.classList.add("selected");
+                    selectedDiceBet = btn.dataset.bet;
+                    const labels = { even: "زوج", odd: "فرد", "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6" };
+                    document.getElementById("diceSelected").innerText = labels[selectedDiceBet] || selectedDiceBet;
+                };
+            });
+            
+            // تاس انداختن با انیمیشن
+            document.getElementById("rollDiceBtn")?.addEventListener("click", () => {
+                if (isRolling) return;
+                if (!selectedDiceBet) {
+                    document.getElementById("diceBetResult").className = "bet-result lose";
+                    document.getElementById("diceBetResult").innerText = "❌ لطفاً یک گزینه را انتخاب کنید!";
+                    return;
+                }
+                
+                let amount = parseFloat(document.getElementById("diceBetAmount").value);
+                if (isNaN(amount) || amount <= 0) {
+                    document.getElementById("diceBetResult").className = "bet-result lose";
+                    document.getElementById("diceBetResult").innerText = "❌ مبلغ شرط نامعتبر است!";
+                    return;
+                }
+                
+                if (amount > currentUser.balance) {
+                    document.getElementById("diceBetResult").className = "bet-result lose";
+                    document.getElementById("diceBetResult").innerText = `❌ موجودی کافی نیست! (موجودی: ${currentUser.balance.toFixed(2)}$)`;
+                    return;
+                }
+                
+                isRolling = true;
+                document.getElementById("rollDiceBtn").disabled = true;
+                document.getElementById("diceResult").classList.add("spinning");
+                
+                let spins = 0;
+                const maxSpins = 10 + Math.floor(Math.random() * 5);
+                let interval = setInterval(() => {
+                    const randomFace = Math.floor(Math.random() * 6);
+                    document.getElementById("diceResult").innerHTML = `<span class="dice-face">${DICE_FACES[randomFace]}</span>`;
+                    spins++;
+                    if (spins >= maxSpins) {
+                        clearInterval(interval);
+                        const diceResult = Math.floor(Math.random() * 6) + 1;
+                        document.getElementById("diceResult").innerHTML = `<span class="dice-face">${DICE_FACES[diceResult - 1]}</span>`;
+                        document.getElementById("diceResult").classList.remove("spinning");
+                        document.getElementById("diceResult").style.borderColor = "#10b981";
+                        
+                        let win = false;
+                        let multiplier = 0;
+                        let profit = 0;
+                        let resultText = "";
+                        
+                        if (selectedDiceBet === "even" && diceResult % 2 === 0) {
+                            win = true;
+                            multiplier = 1.5;
+                        } else if (selectedDiceBet === "odd" && diceResult % 2 === 1) {
+                            win = true;
+                            multiplier = 1.5;
+                        } else if (selectedDiceBet === diceResult.toString()) {
+                            win = true;
+                            multiplier = 3;
+                        }
+                        
+                        if (win) {
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 برد! تاس ${diceResult} آمد. سود خالص: +${(profit - amount).toFixed(2)}$ (ضریب ${multiplier}x)`;
+                            document.getElementById("diceBetResult").className = "bet-result win";
+                            document.getElementById("diceBetResult").innerHTML = `✅ ${resultText}`;
+                            betHistory.push({ type: `تاس (${selectedDiceBet})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎲 برد تاس! عدد ${diceResult} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else {
+                            currentUser.balance -= amount;
+                            resultText = `😞 باخت! تاس ${diceResult} آمد. مبلغ ${amount}$ از دست رفت.`;
+                            document.getElementById("diceBetResult").className = "bet-result lose";
+                            document.getElementById("diceBetResult").innerHTML = `❌ ${resultText}`;
+                            betHistory.push({ type: `تاس (${selectedDiceBet})`, amount: amount, profit: -amount, result: "lose", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎲 باخت تاس! عدد ${diceResult} - ${amount}$ از دست رفت`, false);
+                        }
+                        
+                        saveCurrentUser();
+                        updateTopStats();
+                        isRolling = false;
+                        document.getElementById("rollDiceBtn").disabled = false;
+                        renderBetting();
+                    }
+                }, 100);
+            });
+            
+            // ماشین شانس با قوانین جدید
+            document.getElementById("spinSlotBtn")?.addEventListener("click", () => {
+                if (isSpinning) return;
+                
+                let amount = parseFloat(document.getElementById("slotBetAmount").value);
+                if (isNaN(amount) || amount <= 0) {
+                    document.getElementById("slotBetResult").className = "bet-result lose";
+                    document.getElementById("slotBetResult").innerText = "❌ مبلغ شرط نامعتبر است!";
+                    return;
+                }
+                
+                if (amount > currentUser.balance) {
+                    document.getElementById("slotBetResult").className = "bet-result lose";
+                    document.getElementById("slotBetResult").innerText = `❌ موجودی کافی نیست! (موجودی: ${currentUser.balance.toFixed(2)}$)`;
+                    return;
+                }
+                
+                isSpinning = true;
+                document.getElementById("spinSlotBtn").disabled = true;
+                
+                let spins = 0;
+                const maxSpins = 8 + Math.floor(Math.random() * 4);
+                let interval = setInterval(() => {
+                    const r1 = Math.floor(Math.random() * 6);
+                    const r2 = Math.floor(Math.random() * 6);
+                    const r3 = Math.floor(Math.random() * 6);
+                    document.getElementById("slot1").innerHTML = DICE_FACES[r1];
+                    document.getElementById("slot2").innerHTML = DICE_FACES[r2];
+                    document.getElementById("slot3").innerHTML = DICE_FACES[r3];
+                    document.getElementById("slot1").classList.add("spinning");
+                    document.getElementById("slot2").classList.add("spinning");
+                    document.getElementById("slot3").classList.add("spinning");
+                    
+                    spins++;
+                    if (spins >= maxSpins) {
+                        clearInterval(interval);
+                        
+                        const slot1 = Math.floor(Math.random() * 6) + 1;
+                        const slot2 = Math.floor(Math.random() * 6) + 1;
+                        const slot3 = Math.floor(Math.random() * 6) + 1;
+                        const sum = slot1 + slot2 + slot3;
+                        
+                        document.getElementById("slot1").innerHTML = DICE_FACES[slot1 - 1];
+                        document.getElementById("slot2").innerHTML = DICE_FACES[slot2 - 1];
+                        document.getElementById("slot3").innerHTML = DICE_FACES[slot3 - 1];
+                        document.getElementById("slot1").classList.remove("spinning");
+                        document.getElementById("slot2").classList.remove("spinning");
+                        document.getElementById("slot3").classList.remove("spinning");
+                        
+                        // نمایش جمع با انیمیشن برای 10 ثانیه
+                        const sumElement = document.getElementById("slotSum");
+                        sumElement.className = "slot-sum visible-sum";
+                        sumElement.innerHTML = `جمع اعداد: ${slot1} + ${slot2} + ${slot3} = ${sum}`;
+                        
+                        // پاک کردن تایمر قبلی
+                        if (slotSumTimeout) {
+                            clearTimeout(slotSumTimeout);
+                            slotSumTimeout = null;
+                        }
+                        
+                        // مخفی کردن بعد از 10 ثانیه
+                        slotSumTimeout = setTimeout(() => {
+                            sumElement.className = "slot-sum hidden-sum";
+                            slotSumTimeout = null;
+                        }, 10000);
+                        
+                        // محاسبه نتیجه بر اساس قوانین جدید
+                        let profit = 0;
+                        let multiplier = 0;
+                        let resultText = "";
+                        let resultClass = "";
+                        
+                        if (sum === 18) {
+                            // جک‌پات - ضریب 3
+                            multiplier = 3;
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 جک‌پات! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 3x! سود: +${(profit - amount).toFixed(2)}$`;
+                            resultClass = "win";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 جک‌پات ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else if (sum >= 16 && sum <= 17) {
+                            // ضریب 3
+                            multiplier = 3;
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 3x! سود: +${(profit - amount).toFixed(2)}$`;
+                            resultClass = "win";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else if (sum === 15) {
+                            // ضریب 2.5
+                            multiplier = 2.5;
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 2.5x! سود: +${(profit - amount).toFixed(2)}$`;
+                            resultClass = "win";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else if (sum === 14) {
+                            // ضریب 2
+                            multiplier = 2;
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 2x! سود: +${(profit - amount).toFixed(2)}$`;
+                            resultClass = "win";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else if (sum === 13) {
+                            // ضریب 1.5
+                            multiplier = 1.5;
+                            profit = amount * multiplier;
+                            currentUser.balance += profit - amount;
+                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 1.5x! سود: +${(profit - amount).toFixed(2)}$`;
+                            resultClass = "win";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
+                        } else if (sum <= 12) {
+                            // باخت
+                            currentUser.balance -= amount;
+                            resultText = `😞 باخت! ${slot1}${slot2}${slot3} جمع ${sum} - مبلغ ${amount}$ از دست رفت.`;
+                            resultClass = "lose";
+                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: -amount, result: "lose", time: new Date().toLocaleTimeString("fa-IR") });
+                            addLog(`🎰 باخت ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - ${amount}$ از دست رفت`, false);
+                        }
+                        
+                        document.getElementById("slotBetResult").className = `bet-result ${resultClass}`;
+                        document.getElementById("slotBetResult").innerHTML = resultText;
+                        
+                        saveCurrentUser();
+                        updateTopStats();
+                        isSpinning = false;
+                        document.getElementById("spinSlotBtn").disabled = false;
+                        setTimeout(() => renderBetting(), 300);
+                    }
+                }, 120);
+            });
+        }
+
         function renderAdminPanel() {
             if (currentUser.role !== "admin") return;
             let div = document.getElementById("adminPanel");
@@ -1600,6 +2389,7 @@
             saveUsers();
         }
 
+        // ========== مدیریت فرم‌های لاگین ==========
         document.getElementById("showRegisterBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.remove("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
         document.getElementById("showLoginBtn").onclick = () => { document.getElementById("loginForm").classList.remove("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
         document.getElementById("forgotBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.remove("form-hidden"); };
@@ -1607,25 +2397,48 @@
         
         document.getElementById("doRegisterBtn").onclick = () => {
             let name = document.getElementById("regName").value.trim();
+            let username = document.getElementById("regUsername").value.trim();
             let phone = document.getElementById("regPhone").value.trim();
             let email = document.getElementById("regEmail").value.trim();
             let pass = document.getElementById("regPassword").value;
             let confirm = document.getElementById("regConfirmPassword").value;
             let refCode = document.getElementById("regReferralCode").value.trim().toUpperCase();
             let err = document.getElementById("registerError");
-            if(!name || !phone || !email || !pass){ err.innerText = "همه فیلدها را پر کنید"; return; }
+            if(!name || !username || !phone || !email || !pass){ err.innerText = "همه فیلدها را پر کنید"; return; }
             if(pass.length < 6){ err.innerText = "رمز حداقل ۶ کاراکتر"; return; }
             if(pass !== confirm){ err.innerText = "رمز مطابقت ندارد"; return; }
             
-            if(users.find(u=>u.email===email)){ 
-                err.innerText = "این ایمیل قبلاً ثبت شده است!"; 
+            if(users.find(u=>u.email===email || u.username===username)){ 
+                err.innerText = "این ایمیل یا نام کاربری قبلاً ثبت شده است!"; 
                 return; 
             }
             
             let referrer = null;
             if(refCode) referrer = users.find(u=>u.refCode===refCode);
             let newRefCode = Math.random().toString(36).substring(2,8).toUpperCase();
-            let newUser = { id: Date.now(), name, email, phone, password: pass, role: "user", balance: defaultNewUserBalance, holdings: { USDT: 5000 }, monthlyVolume: 0, refCode: newRefCode, referredBy: referrer?.id || null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: false, proPlan: null, proExpiry: null, funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } } };
+            let newUser = { 
+                id: Date.now(), 
+                name: name, 
+                username: username,
+                email: email, 
+                phone: phone, 
+                password: pass, 
+                role: "user", 
+                balance: defaultNewUserBalance, 
+                holdings: { USDT: 5000 }, 
+                monthlyVolume: 0, 
+                refCode: newRefCode, 
+                referredBy: referrer?.id || null, 
+                referrals: [], 
+                completedTasks: {}, 
+                fundAmount: 0, 
+                leveragePositions: [], 
+                lastDaily: null, 
+                isPro: false, 
+                proPlan: null, 
+                proExpiry: null, 
+                funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } } 
+            };
             users.push(newUser);
             if(referrer){ 
                 let rewardAmount = (referrer.isPro && referrer.proExpiry && new Date(referrer.proExpiry) > new Date()) ? referralRewardPro : referralReward;
@@ -1637,7 +2450,7 @@
             }
             saveUsers();
             
-            let discordMsg = `🆕 **کاربر جدید ثبت نام کرد!**\n👤 نام: ${name}\n📧 ایمیل: ${email}\n📱 شماره: ${phone}\n💰 موجودی اولیه: ${defaultNewUserBalance.toLocaleString()} دلار\n🎁 کد دعوت: ${refCode || "ندارد"}${referrer ? `\n👥 معرف: ${referrer.name}` : ""}\n🕒 زمان: ${new Date().toLocaleString("fa-IR")}`;
+            let discordMsg = `🆕 **کاربر جدید ثبت نام کرد!**\n👤 نام: ${name}\n👤 نام کاربری: ${username}\n📧 ایمیل: ${email}\n📱 شماره: ${phone}\n💰 موجودی اولیه: ${defaultNewUserBalance.toLocaleString()} دلار\n🎁 کد دعوت: ${refCode || "ندارد"}${referrer ? `\n👥 معرف: ${referrer.name}` : ""}\n🕒 زمان: ${new Date().toLocaleString("fa-IR")}`;
             sendToDiscord(discordMsg);
             
             err.style.color = "#10b981"; err.innerText = `✅ ثبت نام موفق! اکنون وارد شوید`;
@@ -1647,7 +2460,7 @@
         document.getElementById("doLoginBtn").onclick = () => {
             let id = document.getElementById("loginIdentifier").value.trim();
             let pass = document.getElementById("loginPassword").value;
-            let user = users.find(u=> (u.email===id || u.phone===id) && u.password===pass);
+            let user = users.find(u=> (u.email===id || u.username===id || u.phone===id) && u.password===pass);
             if(!user){ document.getElementById("loginError").innerText = "اطلاعات نادرست"; return; }
             currentUser = user;
             localStorage.setItem("arena_current_user", JSON.stringify(user));
@@ -1696,6 +2509,7 @@
                     <button class="nav-btn" data-tab="pro">⭐ حساب پرو</button>
                     <button class="nav-btn" data-tab="assets">دارایی‌ها</button>
                     <button class="nav-btn" data-tab="referral">دعوت</button>
+                    <button class="nav-btn" data-tab="betting">🎲 شرط‌بندی</button>
                     <button class="nav-btn" data-tab="settings">تنظیمات</button>
                     ${currentUser.role === "admin" ? '<button class="nav-btn" data-tab="admin">👑 مدیریت</button>' : ''}
                     ${currentUser.role === "admin" ? '<button class="nav-btn" data-tab="usersinfo">📋 اطلاعات کاربران</button>' : ''}
@@ -1713,6 +2527,7 @@
                 <div id="proPane" class="tab-pane"><div id="proPlansPanel"></div></div>
                 <div id="assetsPane" class="tab-pane"><div class="panel-card"><div id="assetsList"></div></div></div>
                 <div id="referralPane" class="tab-pane"><div class="panel-card"><h3>سیستم دعوت</h3><p>کد شما: <strong style="font-size:1.3rem">${currentUser.refCode}</strong></p><p>پاداش هر دعوت: ${(currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date()) ? referralRewardPro : referralReward}$</p><p>تعداد دعوت: ${currentUser.referrals?.length || 0}</p><button class="max-btn" id="copyRef">📋 کپی کد</button></div></div>
+                <div id="bettingPane" class="tab-pane"><div id="bettingPanel"></div></div>
                 <div id="settingsPane" class="tab-pane"><div id="settingsPanel"></div></div>
                 <div id="adminPane" class="tab-pane"><div id="adminPanel"></div></div>
                 ${currentUser.role === "admin" ? '<div id="usersinfoPane" class="tab-pane"><div id="usersInfoPanel"></div></div>' : ''}
@@ -1733,6 +2548,7 @@
                     if(btn.dataset.tab==="usersinfo" && currentUser.role === "admin") renderUsersInfo(); 
                     if(btn.dataset.tab==="pro") renderProPlans(); 
                     if(btn.dataset.tab==="fund") renderFundPanel(); 
+                    if(btn.dataset.tab==="betting") renderBetting(); 
                 }; 
             });
             document.getElementById("logoutBtn").onclick = () => { localStorage.removeItem("arena_current_user"); location.reload(); };
@@ -1741,7 +2557,7 @@
             document.getElementById("levShort")?.addEventListener("click", () => { let sym = document.getElementById("levCoin").value; let amt = parseFloat(document.getElementById("levAmount").value); let lev = parseInt(document.getElementById("levMult").value); openLeverage("short", sym, amt, lev); });
             document.getElementById("searchInput")?.addEventListener("input", () => renderMarket());
             
-            renderMarket(); renderAssets(); renderLeverage(); renderTasks(); renderSettings(); renderProPlans(); renderFundPanel(); updateTopStats();
+            renderMarket(); renderAssets(); renderLeverage(); renderTasks(); renderSettings(); renderProPlans(); renderFundPanel(); renderBetting(); updateTopStats();
             if(currentUser.role === "admin") renderAdminPanel();
             if(currentUser.funds) renderFundPanel();
             

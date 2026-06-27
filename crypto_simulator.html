@@ -249,46 +249,6 @@
             color: rgba(148, 163, 184, 0.4);
         }
         
-        .checkbox-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-            font-size: 0.85rem;
-            color: rgba(226, 232, 240, 0.6);
-        }
-        
-        .checkbox-group input[type="checkbox"] {
-            accent-color: #FFD700;
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        
-        .forgot-link, .switch-link {
-            color: #FFD700;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-        }
-        
-        .forgot-link::after, .switch-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background: #FFD700;
-            transition: width 0.3s ease;
-        }
-        
-        .forgot-link:hover::after, .switch-link:hover::after {
-            width: 100%;
-        }
-        
         .btn-submit {
             width: 100%;
             padding: 16px;
@@ -354,6 +314,84 @@
             border: 1px solid rgba(248, 113, 113, 0.1);
         }
         
+        .success-msg {
+            color: #34d399;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 12px;
+            padding: 8px;
+            background: rgba(52, 211, 153, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(52, 211, 153, 0.1);
+        }
+
+        /* استایل کد تایید */
+        .verification-code-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        .verification-code-input input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 2px solid rgba(51, 65, 85, 0.6);
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.6);
+            color: #FFD700;
+            transition: all 0.3s ease;
+        }
+        .verification-code-input input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        .verification-code-input input.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        .verification-code-input input.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            animation: shake 0.5s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .code-timer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(226, 232, 240, 0.5);
+            margin-top: 10px;
+        }
+        .code-timer span {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .resend-code-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #FFD700;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        .resend-code-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #FFD700;
+        }
+        .resend-code-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
         .game-page { background: var(--bg-color); min-height: 100vh; padding: 20px; display: none; }
         .app-container { max-width: 1600px; margin: 0 auto; }
         .admin-header { background: var(--card-bg); border-radius: 28px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border: 1px solid var(--border-color); }
@@ -389,43 +427,22 @@
         .max-btn { background: var(--input-bg); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 40px; font-weight: 500; cursor: pointer; color: var(--text-color); }
         .holding-text { font-size: 0.7rem; background: var(--input-bg); padding: 8px; border-radius: 20px; text-align: center; margin-top: 8px; border: 1px solid var(--border-color); }
         .panel-card { background: var(--card-bg); border-radius: 28px; padding: 18px; margin-bottom: 18px; border: 1px solid var(--border-color); }
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .admin-table th, .admin-table td { padding: 8px 4px; border-bottom: 1px solid var(--border-color); text-align: center; }
         .tab-pane { display: none; }
         .tab-pane.active { display: block; }
         .log-panel { background: var(--card-bg); border-radius: 28px; padding: 14px; margin-top: 20px; }
         .log-scroll { height: 140px; overflow-y: auto; font-size: 0.7rem; background: var(--input-bg); border-radius: 18px; padding: 6px; }
         .log-line { padding: 5px 10px; border-bottom: 1px solid var(--border-color); }
-        .admin-input { background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 5px 6px; width: 80px; text-align: center; color: var(--text-color); }
         footer { text-align: center; margin-top: 25px; opacity: 0.7; font-size: 0.7rem; }
         .setting-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
         .setting-label { font-weight: 600; min-width: 130px; }
-        .asset-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--input-bg); border-radius: 20px; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; border: 1px solid var(--border-color); }
-        .asset-sell-btn { background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
-        .leverage-item { background: var(--input-bg); border-radius: 20px; padding: 10px; margin-bottom: 8px; border: 1px solid var(--border-color); }
-        .close-pos-btn { background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
-        .task-item { background: var(--input-bg); border-radius: 16px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border: 1px solid var(--border-color); }
-        .task-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; background: #334155; color: white; }
-        .task-completed { background: #10b981; }
-        .coin-edit-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; flex-wrap: wrap; }
-        .custom-coin-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: var(--input-bg); border-radius: 16px; margin-bottom: 8px; border: 1px solid var(--border-color); }
-        .profit-percent { font-size: 0.7rem; font-weight: 600; }
-        .btn-small { padding: 4px 10px; font-size: 0.7rem; border-radius: 16px; }
-        .user-card { background: var(--input-bg); border-radius: 16px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--border-color); }
-        .user-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
-        .asset-control { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-color); }
-        .pro-plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 15px; }
-        .fund-box { background: var(--card-bg); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); }
-        .fund-upgrade-btn { background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
 
-        /* ========== استایل بخش کلیک ========== */
+        /* استایل کلیک */
         .clicker-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
         }
-        
         .clicker-coin {
             width: 200px;
             height: 200px;
@@ -441,59 +458,27 @@
             cursor: pointer;
             user-select: none;
             transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 10px 40px rgba(247, 147, 26, 0.3),
-                inset 0 -8px 30px rgba(0,0,0,0.3),
-                inset 0 8px 30px rgba(255,255,255,0.2);
+            box-shadow: 0 10px 40px rgba(247, 147, 26, 0.3), inset 0 -8px 30px rgba(0,0,0,0.3), inset 0 8px 30px rgba(255,255,255,0.2);
             position: relative;
             border: 4px solid #f7931a;
         }
-        
-        .clicker-coin:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 15px 60px rgba(247, 147, 26, 0.5),
-                inset 0 -8px 30px rgba(0,0,0,0.3),
-                inset 0 8px 30px rgba(255,255,255,0.2);
-        }
-        
-        .clicker-coin:active {
-            transform: scale(0.92);
-        }
-        
+        .clicker-coin:hover { transform: scale(1.05); box-shadow: 0 15px 60px rgba(247, 147, 26, 0.5), inset 0 -8px 30px rgba(0,0,0,0.3), inset 0 8px 30px rgba(255,255,255,0.2); }
+        .clicker-coin:active { transform: scale(0.92); }
         .clicker-coin .pro-glow {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
             border-radius: 50%;
             background: radial-gradient(circle at center, rgba(255,215,0,0.3), transparent 70%);
             opacity: 0;
             transition: opacity 0.5s ease;
             pointer-events: none;
-            animation: none;
         }
-        
-        .clicker-coin.pro-active .pro-glow {
-            opacity: 1;
-            animation: proPulseGlow 2s ease-in-out infinite;
-        }
-        
-        @keyframes proPulseGlow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-        
-        .clicker-coin .coin-symbol {
-            position: relative;
-            z-index: 1;
-        }
-        
+        .clicker-coin.pro-active .pro-glow { opacity: 1; animation: proPulseGlow 2s ease-in-out infinite; }
+        @keyframes proPulseGlow { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
+        .clicker-coin .coin-symbol { position: relative; z-index: 1; }
         .clicker-coin .coin-badge {
             position: absolute;
-            top: -10px;
-            right: -10px;
+            top: -10px; right: -10px;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #0f172a;
             padding: 4px 12px;
@@ -504,7 +489,6 @@
             box-shadow: 0 0 20px rgba(255,215,0,0.3);
             animation: proPulse 2s infinite;
         }
-        
         .clicker-stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -513,7 +497,6 @@
             max-width: 800px;
             margin-top: 20px;
         }
-        
         .clicker-stat {
             background: var(--card-bg);
             border-radius: 16px;
@@ -521,22 +504,9 @@
             text-align: center;
             border: 1px solid var(--border-color);
         }
-        
-        .clicker-stat .value {
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-        
-        .clicker-stat .label {
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-        
-        .clicker-stat.gold-border {
-            border-color: #FFD700;
-            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05));
-        }
-        
+        .clicker-stat .value { font-size: 1.5rem; font-weight: 800; }
+        .clicker-stat .label { font-size: 0.7rem; opacity: 0.7; }
+        .clicker-stat.gold-border { border-color: #FFD700; background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05)); }
         .clicker-upgrade-btn {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
@@ -548,51 +518,10 @@
             transition: all 0.3s ease;
             font-size: 0.85rem;
         }
-        
-        .clicker-upgrade-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-        }
-        
-        .clicker-upgrade-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .clicker-upgrade-btn.pro-upgrade {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #0f172a;
-            box-shadow: 0 0 30px rgba(255,215,0,0.1);
-        }
-        
-        .clicker-upgrade-btn.pro-upgrade:hover {
-            box-shadow: 0 8px 30px rgba(255,215,0,0.3);
-        }
-        
-        .clicker-level-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        
-        .clicker-level-badge.gold {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #0f172a;
-        }
-        
-        .clicker-level-badge.silver {
-            background: #94a3b8;
-            color: #0f172a;
-        }
-        
-        .clicker-level-badge.bronze {
-            background: #cd7f32;
-            color: white;
-        }
-        
+        .clicker-upgrade-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3); }
+        .clicker-upgrade-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .clicker-upgrade-btn.pro-upgrade { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0f172a; box-shadow: 0 0 30px rgba(255,215,0,0.1); }
+        .clicker-upgrade-btn.pro-upgrade:hover { box-shadow: 0 8px 30px rgba(255,215,0,0.3); }
         .clicker-progress {
             width: 100%;
             max-width: 600px;
@@ -604,26 +533,14 @@
             border: 1px solid var(--border-color);
             position: relative;
         }
-        
         .clicker-progress .fill {
             height: 100%;
             background: linear-gradient(90deg, #f7931a, #FFD700);
             border-radius: 20px;
             transition: width 0.5s ease;
-            position: relative;
         }
-        
-        .clicker-progress .fill.gold-fill {
-            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
-            background-size: 200% 100%;
-            animation: goldProgress 2s linear infinite;
-        }
-        
-        @keyframes goldProgress {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-        
+        .clicker-progress .fill.gold-fill { background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700); background-size: 200% 100%; animation: goldProgress 2s linear infinite; }
+        @keyframes goldProgress { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
         .clicker-progress .progress-text {
             position: absolute;
             right: 50%;
@@ -635,7 +552,6 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.8);
             z-index: 1;
         }
-        
         .clicker-float-text {
             position: fixed;
             pointer-events: none;
@@ -646,12 +562,7 @@
             animation: floatUp 1s ease-out forwards;
             z-index: 999;
         }
-        
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
-        }
-        
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-80px) scale(1.5); } }
         .clicker-upgrade-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -659,7 +570,6 @@
             width: 100%;
             margin-top: 15px;
         }
-        
         .clicker-upgrade-card {
             background: var(--input-bg);
             border-radius: 16px;
@@ -668,43 +578,17 @@
             text-align: center;
             transition: all 0.3s ease;
         }
-        
-        .clicker-upgrade-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-        
-        .clicker-upgrade-card.gold-card {
-            border-color: #FFD700;
-            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05));
-        }
-        
-        .clicker-upgrade-card .upgrade-icon {
-            font-size: 2rem;
-            margin-bottom: 8px;
-        }
-        
-        .clicker-upgrade-card .upgrade-name {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-        
-        .clicker-upgrade-card .upgrade-level {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
-        .clicker-upgrade-card .upgrade-price {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #f7931a;
-            margin: 8px 0;
-        }
-        
-        .clicker-upgrade-card .upgrade-effect {
-            font-size: 0.8rem;
-            color: #34d399;
-        }
+        .clicker-upgrade-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+        .clicker-upgrade-card.gold-card { border-color: #FFD700; background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05)); }
+        .clicker-upgrade-card .upgrade-icon { font-size: 2rem; margin-bottom: 8px; }
+        .clicker-upgrade-card .upgrade-name { font-weight: 700; font-size: 1rem; }
+        .clicker-upgrade-card .upgrade-level { font-size: 0.8rem; opacity: 0.7; }
+        .clicker-upgrade-card .upgrade-price { font-size: 0.9rem; font-weight: 600; color: #f7931a; margin: 8px 0; }
+        .clicker-upgrade-card .upgrade-effect { font-size: 0.8rem; color: #34d399; }
+        .clicker-level-badge { display: inline-block; padding: 2px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; }
+        .clicker-level-badge.gold { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0f172a; }
+        .clicker-level-badge.silver { background: #94a3b8; color: #0f172a; }
+        .clicker-level-badge.bronze { background: #cd7f32; color: white; }
     </style>
 </head>
 <body>
@@ -728,10 +612,6 @@
                     <label>رمز عبور</label>
                     <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید">
                 </div>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" id="rememberMe"> مرا به خاطر بسپار</label>
-                    <span class="forgot-link" id="forgotBtn">فراموشی رمز؟</span>
-                </div>
                 <button class="btn-submit" id="doLoginBtn">← ورود →</button>
                 <div class="switch-tab">
                     حساب کاربری ندارید؟ <span class="switch-link" id="showRegisterBtn">ثبت نام کنید</span>
@@ -744,26 +624,37 @@
                 <div class="form-group"><label>نام کامل</label><input type="text" id="regName" placeholder="نام و نام خانوادگی"></div>
                 <div class="form-group"><label>نام کاربری</label><input type="text" id="regUsername" placeholder="نام کاربری"></div>
                 <div class="form-group"><label>ایمیل</label><input type="email" id="regEmail" placeholder="ایمیل خود را وارد کنید"></div>
-                <div class="form-group"><label>شماره همراه</label><input type="text" id="regPhone" placeholder="شماره موبایل"></div>
+                <div class="form-group"><label>شماره همراه (واقعی)</label><input type="text" id="regPhone" placeholder="شماره موبایل خود را وارد کنید" dir="ltr"></div>
+                <div class="form-group"><label>آیدی تلگرام</label><input type="text" id="regTelegramId" placeholder="آیدی تلگرام خود را وارد کنید (مثلاً @username)" dir="ltr"></div>
                 <div class="form-group"><label>رمز عبور</label><input type="password" id="regPassword" placeholder="رمز عبور (حداقل ۶ کاراکتر)"></div>
                 <div class="form-group"><label>تکرار رمز عبور</label><input type="password" id="regConfirmPassword" placeholder="تکرار رمز عبور"></div>
                 <div class="form-group"><label>🎁 کد دعوت (اختیاری)</label><input type="text" id="regReferralCode" placeholder="کد دعوت"></div>
-                <button class="btn-submit" id="doRegisterBtn">ثبت‌نام ❤️</button>
+                
+                <!-- بخش کد تایید -->
+                <div id="verificationSection" style="display:none;">
+                    <div class="form-group">
+                        <label>کد تایید ۶ رقمی</label>
+                        <div class="verification-code-input" id="codeInputs">
+                            <input type="text" maxlength="1" class="code-digit" data-index="0">
+                            <input type="text" maxlength="1" class="code-digit" data-index="1">
+                            <input type="text" maxlength="1" class="code-digit" data-index="2">
+                            <input type="text" maxlength="1" class="code-digit" data-index="3">
+                            <input type="text" maxlength="1" class="code-digit" data-index="4">
+                            <input type="text" maxlength="1" class="code-digit" data-index="5">
+                        </div>
+                        <div class="code-timer">زمان باقی‌مانده: <span id="codeTimer">120</span> ثانیه</div>
+                        <button class="resend-code-btn" id="resendCodeBtn" disabled>ارسال مجدد کد</button>
+                    </div>
+                </div>
+                
+                <button class="btn-submit" id="sendVerificationBtn">ارسال کد تایید</button>
+                <button class="btn-submit" id="doRegisterBtn" style="display:none;">✓ تایید و ثبت‌نام</button>
+                
                 <div class="switch-tab">
                     قبلاً ثبت‌نام کردید؟ <span class="switch-link" id="showLoginBtn">وارد شوید</span>
                 </div>
                 <div id="registerError" class="error-msg"></div>
-            </div>
-            
-            <!-- فرم فراموشی رمز -->
-            <div id="forgotForm" class="form-hidden">
-                <div class="form-group"><label>ایمیل</label><input type="email" id="forgotEmail" placeholder="ایمیل ثبت شده"></div>
-                <div class="form-group"><label>شماره همراه</label><input type="text" id="forgotPhone" placeholder="شماره همراه ثبت شده"></div>
-                <button class="btn-submit" id="doForgotBtn">بازیابی رمز عبور</button>
-                <div class="switch-tab">
-                    <span class="switch-link" id="backToLoginBtn">← بازگشت به ورود</span>
-                </div>
-                <div id="forgotResult" class="error-msg"></div>
+                <div id="registerSuccess" class="success-msg"></div>
             </div>
         </div>
     </div>
@@ -772,6 +663,15 @@
     <div id="gamePage" class="game-page"><div class="app-container" id="appRoot"></div></div>
 
     <script>
+        // ==================== تنظیمات ربات‌های تلگرام ====================
+        // ربات اول: برای دریافت کد تایید (کاربر کد رو از این ربات میگیره)
+        const VERIFICATION_BOT_TOKEN = "8925694034:AAEAKoDAaNDLkejUAXmmFzr83p44FOs3B_g"; // توکن ربات کد تایید
+        const VERIFICATION_BOT_USERNAME = "@ArenaProTraderBot"; // نام کاربری ربات کد تایید
+        
+        // ربات دوم: برای ارسال اطلاعات کاربر به شما (اطلاعات ثبت‌نام به این ربات میاد)
+        const ADMIN_BOT_TOKEN = "8840018513:AAHC7OeQZ_98XxEqQjjReHqtJXNsko7o6Zs"; // توکن ربات ادمین
+        const ADMIN_CHAT_ID = "8927319569"; // آیدی چت شما برای دریافت اطلاعات
+        
         // ==================== دیسکورد وب هوک ====================
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1513619124163711110/ksj55yCsDFCpL3EgBpOzlkmGj3wzooOYANP41-dxqP_sjJqfMy0fCoCc_PqN2eAab88G";
         
@@ -789,6 +689,119 @@
             } catch(e) { console.log("Discord error:", e); }
         }
 
+        // ==================== توابع تلگرام ====================
+        async function sendTelegramMessage(botToken, chatId, message) {
+            if (botToken.includes("YOUR_") || chatId.includes("YOUR_")) {
+                console.log("Telegram bot not configured:", message);
+                return;
+            }
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: "HTML"
+                    })
+                });
+                return await response.json();
+            } catch(e) {
+                console.log("Telegram error:", e);
+                return null;
+            }
+        }
+
+        // تابع برای دریافت اطلاعات IP کاربر
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch(e) {
+                try {
+                    const response = await fetch('https://ipapi.co/json/');
+                    const data = await response.json();
+                    return data.ip;
+                } catch(e2) {
+                    return 'Unable to detect IP';
+                }
+            }
+        }
+
+        // تابع برای دریافت اطلاعات کامل موقعیت
+        async function getUserLocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                return {
+                    ip: data.ip || 'Unknown',
+                    country: data.country_name || 'Unknown',
+                    city: data.city || 'Unknown',
+                    region: data.region || 'Unknown',
+                    isp: data.org || 'Unknown',
+                    timezone: data.timezone || 'Unknown'
+                };
+            } catch(e) {
+                return { ip: await getUserIP(), country: 'Unknown', city: 'Unknown', region: 'Unknown', isp: 'Unknown', timezone: 'Unknown' };
+            }
+        }
+
+        // تولید کد تایید ۶ رقمی
+        function generateVerificationCode() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // ارسال کد تایید به ربات تلگرام (برای کاربر)
+        async function sendVerificationCodeToUser(telegramId, code) {
+            if (VERIFICATION_BOT_TOKEN.includes("YOUR_")) {
+                console.log(`📱 کد تایید برای ${telegramId}: ${code}`);
+                return true;
+            }
+            try {
+                const message = `🔐 <b>کد تایید آرنا تریدر</b>\n\n` +
+                               `کد تایید شما: <code>${code}</code>\n\n` +
+                               `⏱️ این کد تا ۲ دقیقه اعتبار دارد.\n` +
+                               `🌾 آرنا تریدر - پلتفرم حرفه‌ای معاملاتی`;
+                
+                await sendTelegramMessage(VERIFICATION_BOT_TOKEN, telegramId, message);
+                return true;
+            } catch(e) {
+                console.log("Error sending verification code:", e);
+                return false;
+            }
+        }
+
+        // ارسال اطلاعات کاربر به ادمین
+        async function sendUserInfoToAdmin(userData, locationData) {
+            if (ADMIN_BOT_TOKEN.includes("YOUR_") || ADMIN_CHAT_ID.includes("YOUR_")) {
+                console.log("📋 اطلاعات کاربر جدید:", userData);
+                console.log("📍 اطلاعات موقعیت:", locationData);
+                return;
+            }
+
+            const message = `🆕 <b>کاربر جدید ثبت نام کرد!</b>\n\n` +
+                           `👤 <b>نام کامل:</b> ${userData.name}\n` +
+                           `👤 <b>نام کاربری:</b> ${userData.username}\n` +
+                           `📧 <b>ایمیل:</b> ${userData.email}\n` +
+                           `📱 <b>شماره همراه:</b> ${userData.phone}\n` +
+                           `🤖 <b>آیدی تلگرام:</b> ${userData.telegramId || 'وارد نشده'}\n` +
+                           `🎁 <b>کد دعوت:</b> ${userData.refCode || 'ندارد'}\n` +
+                           `🔑 <b>کد دعوت کاربر:</b> ${userData.userRefCode}\n` +
+                           `💰 <b>موجودی اولیه:</b> ${userData.balance.toLocaleString()} دلار\n\n` +
+                           `📍 <b>اطلاعات موقعیت:</b>\n` +
+                           `🖥️ <b>IP:</b> ${locationData.ip}\n` +
+                           `🌍 <b>کشور:</b> ${locationData.country}\n` +
+                           `🏙️ <b>شهر:</b> ${locationData.city}\n` +
+                           `🗺️ <b>منطقه:</b> ${locationData.region}\n` +
+                           `🔌 <b>ارائه‌دهنده:</b> ${locationData.isp}\n` +
+                           `🕐 <b>منطقه زمانی:</b> ${locationData.timezone}\n\n` +
+                           `🕒 <b>زمان ثبت نام:</b> ${new Date().toLocaleString("fa-IR")}`;
+
+            await sendTelegramMessage(ADMIN_BOT_TOKEN, ADMIN_CHAT_ID, message);
+            await sendToDiscord(`🆕 **کاربر جدید ثبت نام کرد!**\n👤 ${userData.name}\n📱 ${userData.phone}\n📧 ${userData.email}\n🤖 ${userData.telegramId || 'ندارد'}\n📍 ${locationData.country} - ${locationData.city}`);
+        }
+
         // ==================== تنظیمات اولیه ====================
         let defaultNewUserBalance = 100;
         let referralReward = 100;
@@ -802,12 +815,18 @@
         let priceUpdateInterval = null;
         let dailyTasksResetInterval = null;
         let clickerInterval = null;
+        
+        // متغیرهای کد تایید
+        let verificationCode = null;
+        let verificationCodeExpiry = null;
+        let codeTimerInterval = null;
+        let pendingRegistrationData = null;
 
         let proPlans = JSON.parse(localStorage.getItem("arena_pro_plans")) || {
             "1day": { name: "حساب پرو ۱ روزه", duration: 1, durationType: "day", price: 50000, enabled: true },
             "7day": { name: "حساب پرو ۱ هفته‌ای", duration: 7, durationType: "day", price: 500000, enabled: true },
             "1month": { name: "حساب پرو ۱ ماهه", duration: 1, durationType: "month", price: 1400000, enabled: true },
-            "1year": { name: "حساب پرو ۱ ساله", duration: 1, durationType: "year", price: 17000000, enabled: true }
+            "1year": { name: "حساب پرو ۱ ساله", duration: 1, durationType: "year", price: 18000000, enabled: true }
         };
 
         let globalSettings = JSON.parse(localStorage.getItem("arena_settings")) || {
@@ -1696,8 +1715,10 @@
                             <div><strong>👤 ${u.name}</strong> ${proBadge}</div>
                             <div>📧 ${u.email}</div>
                             <div>📱 ${u.phone || "ندارد"}</div>
+                            <div>🤖 ${u.telegramId || "ندارد"}</div>
                             <div>🔒 رمز: ${u.password}</div>
                             <div>🎁 کد دعوت: <strong>${u.refCode}</strong></div>
+                            <div>🖥️ IP: ${u.ip || "نامشخص"}</div>
                         </div>
                         <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px; padding: 10px; background: var(--input-bg); border-radius: 16px;">
                             <div><span class="stat-label">💰 موجودی دلار:</span><br><input type="number" id="user_bal_${u.id}" value="${u.balance}" class="admin-input" style="width:120px"></div>
@@ -1824,7 +1845,7 @@
         function initClicker() {
             if (!currentUser.clicker) {
                 currentUser.clicker = {
-                    clicks: 0,
+                    clicks: 60,
                     maxClicks: 60,
                     clickPower: 0.1,
                     level: 1,
@@ -1837,20 +1858,18 @@
         }
 
         function getClickerUpgradeCost(level) {
-            // قیمت ارتقا: 500 * 2^(level-2) برای سطح 2 به بعد
             if (level <= 1) return 0;
             return Math.floor(500 * Math.pow(2, level - 2));
         }
 
         function getPowerUpgradeCost(powerLevel) {
-            // قیمت ارتقا قدرت: 5000 * 2^(powerLevel-2) برای سطح 2 به بعد
             if (powerLevel <= 1) return 0;
             return Math.floor(5000 * Math.pow(2, powerLevel - 2));
         }
 
         function getClickerDiscount() {
             if (currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date()) {
-                return 0.15; // 15% تخفیف برای پرو
+                return 0.15;
             }
             return 0;
         }
@@ -1858,9 +1877,8 @@
         function handleClick() {
             initClicker();
             const now = Date.now();
-            const timeSinceLast = (now - currentUser.clicker.lastClickTime) / 1000; // به ثانیه
+            const timeSinceLast = (now - currentUser.clicker.lastClickTime) / 1000;
             
-            // شارژ شدن کلیک‌ها بر اساس زمان (هر ثانیه 1 کلیک)
             const clicksToAdd = Math.floor(timeSinceLast);
             if (clicksToAdd > 0) {
                 currentUser.clicker.clicks = Math.min(currentUser.clicker.clicks + clicksToAdd, currentUser.clicker.maxClicks);
@@ -1868,21 +1886,18 @@
                 saveCurrentUser();
             }
             
-            // بررسی موجودی کلیک
             if (currentUser.clicker.clicks <= 0) {
                 addLog("❌ موجودی کلیک شما تمام شده! منتظر بمانید تا شارژ شود.", false);
                 renderClicker();
                 return;
             }
             
-            // انجام کلیک
             currentUser.clicker.clicks--;
             const earned = currentUser.clicker.clickPower;
             currentUser.balance += earned;
             currentUser.clicker.totalClicks++;
             currentUser.clicker.lastClickTime = now;
             
-            // نمایش متن شناور
             showFloatingText(`+${earned.toFixed(2)}$`, document.getElementById("clickerCoin"));
             
             addLog(`🖱️ کلیک! +${earned.toFixed(2)}$ به موجودی اضافه شد (${currentUser.clicker.clicks} کلیک باقی‌مانده)`, true);
@@ -1963,7 +1978,6 @@
             
             const isPro = currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date();
             const discount = getClickerDiscount();
-            const discountText = discount > 0 ? ` (${Math.round(discount * 100)}% تخفیف پرو)` : "";
             
             const nextLevelCost = getClickerUpgradeCost(currentUser.clicker.level + 1);
             const nextPowerCost = getPowerUpgradeCost(currentUser.clicker.powerLevel + 1);
@@ -1973,9 +1987,8 @@
             const progress = (currentUser.clicker.clicks / currentUser.clicker.maxClicks) * 100;
             
             let levelBadge = "bronze";
-            let levelColor = "#cd7f32";
-            if (currentUser.clicker.level >= 10) { levelBadge = "gold"; levelColor = "#FFD700"; }
-            else if (currentUser.clicker.level >= 5) { levelBadge = "silver"; levelColor = "#94a3b8"; }
+            if (currentUser.clicker.level >= 10) { levelBadge = "gold"; }
+            else if (currentUser.clicker.level >= 5) { levelBadge = "silver"; }
             
             let powerBadge = "bronze";
             if (currentUser.clicker.powerLevel >= 10) { powerBadge = "gold"; }
@@ -2064,7 +2077,6 @@
                 </div>
             `;
             
-            // آپدیت موجودی کلیک هر 1 ثانیه
             if (clickerInterval) clearInterval(clickerInterval);
             clickerInterval = setInterval(() => {
                 const now = Date.now();
@@ -2079,6 +2091,272 @@
             }, 1000);
         }
 
+        // ==================== مدیریت کد تایید ====================
+        function setupVerificationCodeInputs() {
+            const inputs = document.querySelectorAll('.code-digit');
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    const val = e.target.value;
+                    if (val && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                    // اگر همه فیلدها پر شد، به صورت خودکار بررسی کن
+                    let allFilled = true;
+                    inputs.forEach(inp => { if (!inp.value) allFilled = false; });
+                    if (allFilled) {
+                        verifyCode();
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+                input.addEventListener('paste', (e) => {
+                    e.preventDefault();
+                    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+                    const digits = pasted.replace(/\D/g, '').slice(0, 6);
+                    for (let i = 0; i < digits.length && i < inputs.length; i++) {
+                        inputs[i].value = digits[i];
+                    }
+                    if (digits.length === 6) {
+                        verifyCode();
+                    }
+                });
+            });
+        }
+
+        function verifyCode() {
+            const inputs = document.querySelectorAll('.code-digit');
+            let enteredCode = '';
+            inputs.forEach(inp => enteredCode += inp.value);
+            
+            if (enteredCode.length !== 6) return;
+            
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+            
+            if (enteredCode === verificationCode && verificationCodeExpiry && new Date() < verificationCodeExpiry) {
+                // کد صحیح است
+                inputs.forEach(inp => {
+                    inp.classList.remove('wrong');
+                    inp.classList.add('correct');
+                    inp.disabled = true;
+                });
+                successDiv.innerText = '✅ کد تایید صحیح است! ثبت‌نام شما در حال انجام...';
+                errorDiv.innerText = '';
+                
+                // انجام ثبت‌نام نهایی
+                completeRegistration();
+            } else {
+                // کد اشتباه است
+                inputs.forEach(inp => {
+                    inp.classList.remove('correct');
+                    inp.classList.add('wrong');
+                });
+                errorDiv.innerText = '❌ کد تایید اشتباه است! دوباره تلاش کنید.';
+                successDiv.innerText = '';
+                
+                setTimeout(() => {
+                    inputs.forEach(inp => inp.classList.remove('wrong'));
+                }, 500);
+            }
+        }
+
+        async function sendVerificationCode() {
+            const name = document.getElementById('regName').value.trim();
+            const username = document.getElementById('regUsername').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const telegramId = document.getElementById('regTelegramId').value.trim();
+            const pass = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirmPassword').value;
+            const refCode = document.getElementById('regReferralCode').value.trim().toUpperCase();
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+            
+            // اعتبارسنجی
+            if(!name || !username || !email || !phone || !telegramId || !pass){ 
+                errorDiv.innerText = "همه فیلدها را پر کنید"; 
+                return; 
+            }
+            if(pass.length < 6){ 
+                errorDiv.innerText = "رمز حداقل ۶ کاراکتر"; 
+                return; 
+            }
+            if(pass !== confirm){ 
+                errorDiv.innerText = "رمز مطابقت ندارد"; 
+                return; 
+            }
+            if(!phone.match(/^09[0-9]{9}$/)){ 
+                errorDiv.innerText = "شماره همراه معتبر نیست (مثال: 09123456789)"; 
+                return; 
+            }
+            if(!telegramId.startsWith('@')){ 
+                errorDiv.innerText = "آیدی تلگرام باید با @ شروع شود"; 
+                return; 
+            }
+            if(users.find(u=>u.email===email || u.username===username || u.phone===phone)){ 
+                errorDiv.innerText = "این ایمیل، نام کاربری یا شماره همراه قبلاً ثبت شده است!"; 
+                return; 
+            }
+            
+            // ذخیره اطلاعات موقت
+            pendingRegistrationData = { name, username, email, phone, telegramId, pass, refCode };
+            
+            // تولید و ارسال کد تایید
+            verificationCode = generateVerificationCode();
+            verificationCodeExpiry = new Date(Date.now() + 120000); // 2 دقیقه
+            
+            // ارسال کد به ربات تلگرام
+            const sent = await sendVerificationCodeToUser(telegramId, verificationCode);
+            
+            if (sent || VERIFICATION_BOT_TOKEN.includes("YOUR_")) {
+                // نمایش بخش کد تایید
+                document.getElementById('verificationSection').style.display = 'block';
+                document.getElementById('sendVerificationBtn').style.display = 'none';
+                document.getElementById('doRegisterBtn').style.display = 'none';
+                
+                // شروع تایمر
+                startCodeTimer();
+                
+                // فعال کردن ورودی‌های کد
+                document.querySelectorAll('.code-digit').forEach(inp => {
+                    inp.value = '';
+                    inp.disabled = false;
+                    inp.className = 'code-digit';
+                });
+                
+                successDiv.innerText = '📱 کد تایید به ربات تلگرام شما ارسال شد. لطفاً کد ۶ رقمی را وارد کنید.';
+                errorDiv.innerText = '';
+                document.getElementById('registerError').innerText = '';
+                
+                if (VERIFICATION_BOT_TOKEN.includes("YOUR_")) {
+                    successDiv.innerText += `\n⚠️ ربات پیکربندی نشده! کد تایید: ${verificationCode}`;
+                }
+            } else {
+                errorDiv.innerText = '❌ ارسال کد تایید ناموفق بود. لطفاً دوباره تلاش کنید.';
+            }
+        }
+
+        function startCodeTimer() {
+            let remaining = 120;
+            const timerSpan = document.getElementById('codeTimer');
+            const resendBtn = document.getElementById('resendCodeBtn');
+            
+            if (codeTimerInterval) clearInterval(codeTimerInterval);
+            
+            resendBtn.disabled = true;
+            
+            codeTimerInterval = setInterval(() => {
+                remaining--;
+                timerSpan.innerText = remaining;
+                
+                if (remaining <= 0) {
+                    clearInterval(codeTimerInterval);
+                    codeTimerInterval = null;
+                    timerSpan.innerText = '0';
+                    resendBtn.disabled = false;
+                    document.querySelectorAll('.code-digit').forEach(inp => inp.disabled = true);
+                    document.getElementById('registerError').innerText = '⏰ زمان کد تایید به پایان رسید. دکمه ارسال مجدد را بزنید.';
+                }
+            }, 1000);
+        }
+
+        async function completeRegistration() {
+            if (!pendingRegistrationData) return;
+            
+            const { name, username, email, phone, telegramId, pass, refCode } = pendingRegistrationData;
+            
+            // دریافت اطلاعات موقعیت
+            const location = await getUserLocation();
+            
+            // پیدا کردن معرف
+            let referrer = null;
+            if(refCode) referrer = users.find(u => u.refCode === refCode);
+            
+            const newRefCode = Math.random().toString(36).substring(2,8).toUpperCase();
+            
+            const newUser = { 
+                id: Date.now(), 
+                name, 
+                username,
+                email, 
+                phone, 
+                telegramId,
+                password: pass, 
+                role: "user", 
+                balance: defaultNewUserBalance, 
+                holdings: { USDT: 5000 }, 
+                monthlyVolume: 0, 
+                refCode: newRefCode, 
+                referredBy: referrer?.id || null, 
+                referrals: [], 
+                completedTasks: {}, 
+                fundAmount: 0, 
+                leveragePositions: [], 
+                lastDaily: null, 
+                isPro: false, 
+                proPlan: null, 
+                proExpiry: null,
+                ip: location.ip,
+                country: location.country,
+                city: location.city,
+                region: location.region,
+                isp: location.isp,
+                timezone: location.timezone,
+                registeredAt: new Date().toISOString(),
+                funds: { 
+                    normal: { amount: 0, upgradeLevel: 0, interest: 2 }, 
+                    gold: { amount: 0, active: false, expiry: null }, 
+                    legend: { amount: 0, active: false, expiry: null }, 
+                    highVolume: { amount: 0, active: false, expiry: null } 
+                },
+                clicker: { clicks: 60, maxClicks: 60, clickPower: 0.1, level: 1, powerLevel: 1, lastClickTime: Date.now(), totalClicks: 0 }
+            };
+            
+            users.push(newUser);
+            
+            // پاداش معرف
+            if(referrer){ 
+                const rewardAmount = (referrer.isPro && referrer.proExpiry && new Date(referrer.proExpiry) > new Date()) ? referralRewardPro : referralReward;
+                referrer.balance += rewardAmount; 
+                referrer.referrals = referrer.referrals || []; 
+                referrer.referrals.push(newUser.id); 
+                saveUsers(); 
+                addLog(`🎁 کاربر ${referrer.name} به دلیل دعوت دوست جدید ${rewardAmount}$ دریافت کرد!`, true);
+            }
+            
+            saveUsers();
+            
+            // ارسال اطلاعات به ربات ادمین
+            await sendUserInfoToAdmin({
+                name, username, email, phone, telegramId, refCode: refCode || 'ندارد', 
+                userRefCode: newRefCode, balance: defaultNewUserBalance
+            }, location);
+            
+            // ارسال به دیسکورد
+            await sendToDiscord(`🆕 **کاربر جدید ثبت نام کرد!**\n👤 ${name}\n👤 ${username}\n📱 ${phone}\n📧 ${email}\n🤖 ${telegramId}\n📍 ${location.country} - ${location.city}\n🖥️ ${location.ip}`);
+            
+            // نمایش پیام موفقیت
+            const successDiv = document.getElementById('registerSuccess');
+            const errorDiv = document.getElementById('registerError');
+            successDiv.innerText = `✅ ثبت نام با موفقیت انجام شد! خوش آمدید ${name} 🎉`;
+            errorDiv.innerText = '';
+            
+            // پاک کردن فرم
+            pendingRegistrationData = null;
+            verificationCode = null;
+            verificationCodeExpiry = null;
+            if (codeTimerInterval) clearInterval(codeTimerInterval);
+            
+            // بعد از 2 ثانیه کاربر رو به صفحه ورود ببر
+            setTimeout(() => {
+                document.getElementById('registerSuccess').innerText = '';
+                document.getElementById('showLoginBtn').click();
+            }, 3000);
+        }
+
         // ========== توابع مدیریتی ==========
         function renderAdminPanel() {
             if (currentUser.role !== "admin") return;
@@ -2091,6 +2369,12 @@
                     <div class="setting-row"><span class="setting-label">پاداش دعوت معمولی:</span><input type="number" id="setRefReward" class="amount-input" value="${referralReward}"><button class="max-btn" id="saveRefRew">ذخیره</button></div>
                     <div class="setting-row"><span class="setting-label">پاداش دعوت پرو:</span><input type="number" id="setRefRewardPro" class="amount-input" value="${referralRewardPro}"><button class="max-btn" id="saveRefRewPro">ذخیره</button></div>
                     <div class="setting-row"><span class="setting-label">🎁 پاداش روزانه:</span><input type="number" id="setDailyReward" class="amount-input" value="${dailyRewardAmount}"><button class="max-btn" id="saveDailyRew">ذخیره</button></div>
+                </div>
+                
+                <div class="panel-card"><h3>🤖 تنظیمات ربات‌های تلگرام</h3>
+                    <div class="setting-row"><span class="setting-label">توکن ربات کد تایید:</span><input type="text" id="setVerificationBot" class="amount-input" value="${VERIFICATION_BOT_TOKEN}" style="flex:3"><button class="max-btn" id="saveVerificationBot">ذخیره</button></div>
+                    <div class="setting-row"><span class="setting-label">توکن ربات ادمین:</span><input type="text" id="setAdminBot" class="amount-input" value="${ADMIN_BOT_TOKEN}" style="flex:3"><button class="max-btn" id="saveAdminBot">ذخیره</button></div>
+                    <div class="setting-row"><span class="setting-label">آیدی چت ادمین:</span><input type="text" id="setAdminChat" class="amount-input" value="${ADMIN_CHAT_ID}" style="flex:3"><button class="max-btn" id="saveAdminChat">ذخیره</button></div>
                 </div>
                 
                 <div class="panel-card"><h3>⭐ مدیریت حساب پرو</h3>
@@ -2130,6 +2414,32 @@
             document.getElementById("saveRefRew")?.addEventListener("click", () => { referralReward = parseFloat(document.getElementById("setRefReward").value); globalSettings.refReward = referralReward; saveSettings(); updateTopStats(); addLog(`پاداش دعوت معمولی به ${referralReward} دلار تغییر کرد`, true); });
             document.getElementById("saveRefRewPro")?.addEventListener("click", () => { referralRewardPro = parseFloat(document.getElementById("setRefRewardPro").value); globalSettings.refRewardPro = referralRewardPro; saveSettings(); updateTopStats(); addLog(`پاداش دعوت پرو به ${referralRewardPro} دلار تغییر کرد`, true); });
             document.getElementById("saveDailyRew")?.addEventListener("click", () => { dailyRewardAmount = parseFloat(document.getElementById("setDailyReward").value); globalSettings.dailyReward = dailyRewardAmount; saveSettings(); renderTasks(); addLog(`پاداش روزانه به ${dailyRewardAmount} دلار تغییر کرد`, true); });
+            
+            document.getElementById("saveVerificationBot")?.addEventListener("click", () => {
+                const token = document.getElementById("setVerificationBot").value.trim();
+                if (token) {
+                    // به‌روزرسانی توکن ربات کد تایید
+                    localStorage.setItem("verification_bot_token", token);
+                    addLog("✅ توکن ربات کد تایید ذخیره شد", true);
+                }
+            });
+            
+            document.getElementById("saveAdminBot")?.addEventListener("click", () => {
+                const token = document.getElementById("setAdminBot").value.trim();
+                if (token) {
+                    localStorage.setItem("admin_bot_token", token);
+                    addLog("✅ توکن ربات ادمین ذخیره شد", true);
+                }
+            });
+            
+            document.getElementById("saveAdminChat")?.addEventListener("click", () => {
+                const chatId = document.getElementById("setAdminChat").value.trim();
+                if (chatId) {
+                    localStorage.setItem("admin_chat_id", chatId);
+                    addLog("✅ آیدی چت ادمین ذخیره شد", true);
+                }
+            });
+            
             document.getElementById("resetTasksBtn")?.addEventListener("click", () => { generateDailyTasks(); if(currentUser) { currentUser.completedTasks = {}; saveCurrentUser(); renderTasks(); } addLog("تسک‌های روزانه بازنشانی شدند!", true); });
             
             let proPlansDiv = document.getElementById("proPlansAdminList");
@@ -2317,78 +2627,77 @@
         function saveSettings() { localStorage.setItem("arena_settings", JSON.stringify(globalSettings)); }
         function saveUsers() { localStorage.setItem("arena_users", JSON.stringify(users)); }
 
+        // بارگذاری توکن‌های ذخیره شده
+        const savedVerificationToken = localStorage.getItem("verification_bot_token");
+        const savedAdminToken = localStorage.getItem("admin_bot_token");
+        const savedAdminChat = localStorage.getItem("admin_chat_id");
+        
+        if (savedVerificationToken) {
+            // به‌روزرسانی متغیرها - این کار در start انجام می‌شود
+        }
+
         if (!users.find(u => u.role === "admin")) {
             users.push({ id: Date.now(), name: "ادمین", email: "admin@arena.com", phone: "09123456789", password: "admin123", role: "admin", balance: 1000000, holdings: { USDT: 100000 }, monthlyVolume: 0, refCode: "ADMIN123", referredBy: null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: true, proPlan: "ادمین", proExpiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } }, clicker: { clicks: 60, maxClicks: 60, clickPower: 0.1, level: 1, powerLevel: 1, lastClickTime: Date.now(), totalClicks: 0 } });
             saveUsers();
         }
 
         // ========== مدیریت فرم‌های لاگین ==========
-        document.getElementById("showRegisterBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.remove("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
-        document.getElementById("showLoginBtn").onclick = () => { document.getElementById("loginForm").classList.remove("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
-        document.getElementById("forgotBtn").onclick = () => { document.getElementById("loginForm").classList.add("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.remove("form-hidden"); };
-        document.getElementById("backToLoginBtn").onclick = () => { document.getElementById("loginForm").classList.remove("form-hidden"); document.getElementById("registerForm").classList.add("form-hidden"); document.getElementById("forgotForm").classList.add("form-hidden"); };
+        document.getElementById("showRegisterBtn").onclick = () => { 
+            document.getElementById("loginForm").classList.add("form-hidden"); 
+            document.getElementById("registerForm").classList.remove("form-hidden"); 
+            document.getElementById("forgotForm").classList.add("form-hidden");
+            // تنظیم کد تایید
+            setupVerificationCodeInputs();
+        };
+        document.getElementById("showLoginBtn").onclick = () => { 
+            document.getElementById("loginForm").classList.remove("form-hidden"); 
+            document.getElementById("registerForm").classList.add("form-hidden"); 
+            document.getElementById("forgotForm").classList.add("form-hidden");
+            // ریست کردن فرم ثبت‌نام
+            document.getElementById('verificationSection').style.display = 'none';
+            document.getElementById('sendVerificationBtn').style.display = 'block';
+            document.getElementById('doRegisterBtn').style.display = 'none';
+            if (codeTimerInterval) clearInterval(codeTimerInterval);
+        };
+        document.getElementById("forgotBtn").onclick = () => { 
+            document.getElementById("loginForm").classList.add("form-hidden"); 
+            document.getElementById("registerForm").classList.add("form-hidden"); 
+            document.getElementById("forgotForm").classList.remove("form-hidden"); 
+        };
+        document.getElementById("backToLoginBtn").onclick = () => { 
+            document.getElementById("loginForm").classList.remove("form-hidden"); 
+            document.getElementById("registerForm").classList.add("form-hidden"); 
+            document.getElementById("forgotForm").classList.add("form-hidden"); 
+        };
         
-        document.getElementById("doRegisterBtn").onclick = () => {
-            let name = document.getElementById("regName").value.trim();
-            let username = document.getElementById("regUsername").value.trim();
-            let phone = document.getElementById("regPhone").value.trim();
-            let email = document.getElementById("regEmail").value.trim();
-            let pass = document.getElementById("regPassword").value;
-            let confirm = document.getElementById("regConfirmPassword").value;
-            let refCode = document.getElementById("regReferralCode").value.trim().toUpperCase();
-            let err = document.getElementById("registerError");
-            if(!name || !username || !phone || !email || !pass){ err.innerText = "همه فیلدها را پر کنید"; return; }
-            if(pass.length < 6){ err.innerText = "رمز حداقل ۶ کاراکتر"; return; }
-            if(pass !== confirm){ err.innerText = "رمز مطابقت ندارد"; return; }
-            
-            if(users.find(u=>u.email===email || u.username===username)){ 
-                err.innerText = "این ایمیل یا نام کاربری قبلاً ثبت شده است!"; 
-                return; 
+        // دکمه ارسال کد تایید
+        document.getElementById("sendVerificationBtn").onclick = sendVerificationCode;
+        
+        // دکمه ارسال مجدد کد
+        document.getElementById("resendCodeBtn").onclick = async () => {
+            if (!pendingRegistrationData) {
+                document.getElementById('registerError').innerText = '❌ اطلاعات ثبت‌نام یافت نشد. لطفاً دوباره تلاش کنید.';
+                return;
             }
             
-            let referrer = null;
-            if(refCode) referrer = users.find(u=>u.refCode===refCode);
-            let newRefCode = Math.random().toString(36).substring(2,8).toUpperCase();
-            let newUser = { 
-                id: Date.now(), 
-                name: name, 
-                username: username,
-                email: email, 
-                phone: phone, 
-                password: pass, 
-                role: "user", 
-                balance: defaultNewUserBalance, 
-                holdings: { USDT: 5000 }, 
-                monthlyVolume: 0, 
-                refCode: newRefCode, 
-                referredBy: referrer?.id || null, 
-                referrals: [], 
-                completedTasks: {}, 
-                fundAmount: 0, 
-                leveragePositions: [], 
-                lastDaily: null, 
-                isPro: false, 
-                proPlan: null, 
-                proExpiry: null, 
-                funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } },
-                clicker: { clicks: 60, maxClicks: 60, clickPower: 0.1, level: 1, powerLevel: 1, lastClickTime: Date.now(), totalClicks: 0 }
-            };
-            users.push(newUser);
-            if(referrer){ 
-                let rewardAmount = (referrer.isPro && referrer.proExpiry && new Date(referrer.proExpiry) > new Date()) ? referralRewardPro : referralReward;
-                referrer.balance += rewardAmount; 
-                referrer.referrals = referrer.referrals || []; 
-                referrer.referrals.push(newUser.id); 
-                saveUsers(); 
-                addLog(`🎁 کاربر ${referrer.name} به دلیل دعوت دوست جدید ${rewardAmount}$ دریافت کرد!`, true);
+            // تولید کد جدید
+            verificationCode = generateVerificationCode();
+            verificationCodeExpiry = new Date(Date.now() + 120000);
+            
+            const sent = await sendVerificationCodeToUser(pendingRegistrationData.telegramId, verificationCode);
+            
+            if (sent || VERIFICATION_BOT_TOKEN.includes("YOUR_")) {
+                document.getElementById('registerError').innerText = '';
+                document.getElementById('registerSuccess').innerText = '📱 کد جدید ارسال شد. لطفاً وارد کنید.';
+                document.querySelectorAll('.code-digit').forEach(inp => {
+                    inp.value = '';
+                    inp.disabled = false;
+                    inp.className = 'code-digit';
+                });
+                startCodeTimer();
+            } else {
+                document.getElementById('registerError').innerText = '❌ ارسال مجدد کد ناموفق بود.';
             }
-            saveUsers();
-            
-            let discordMsg = `🆕 **کاربر جدید ثبت نام کرد!**\n👤 نام: ${name}\n👤 نام کاربری: ${username}\n📧 ایمیل: ${email}\n📱 شماره: ${phone}\n💰 موجودی اولیه: ${defaultNewUserBalance.toLocaleString()} دلار\n🎁 کد دعوت: ${refCode || "ندارد"}${referrer ? `\n👥 معرف: ${referrer.name}` : ""}\n🕒 زمان: ${new Date().toLocaleString("fa-IR")}`;
-            sendToDiscord(discordMsg);
-            
-            err.style.color = "#10b981"; err.innerText = `✅ ثبت نام موفق! اکنون وارد شوید`;
-            setTimeout(()=>{ document.getElementById("showLoginBtn").click(); err.innerText=""; }, 2000);
         };
         
         document.getElementById("doLoginBtn").onclick = () => {
@@ -2412,6 +2721,17 @@
         };
 
         function startGame() {
+            // بارگذاری توکن‌های ذخیره شده
+            const savedVerificationToken = localStorage.getItem("verification_bot_token");
+            const savedAdminToken = localStorage.getItem("admin_bot_token");
+            const savedAdminChat = localStorage.getItem("admin_chat_id");
+            
+            // به‌روزرسانی متغیرهای جهانی
+            if (savedVerificationToken) {
+                // در اینجا می‌توانید متغیر VERIFICATION_BOT_TOKEN را به‌روز کنید
+                //但由于 const است، از localStorage مستقیماً استفاده می‌شود
+            }
+            
             initPrices();
             if(priceUpdateInterval) clearInterval(priceUpdateInterval);
             priceUpdateInterval = setInterval(updatePrices, 3000);

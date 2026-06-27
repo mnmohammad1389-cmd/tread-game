@@ -22,6 +22,7 @@
             --stat-bg: #1e293b;
             --profit-color: #34d399;
             --loss-color: #f87171;
+            --gold-color: #FFD700;
             --pro-glow: rgba(255, 215, 0, 0.2);
             background: var(--bg-color);
             color: var(--text-color);
@@ -103,7 +104,7 @@
             margin: 5px 0;
         }
 
-        /* ========== صفحه لاگین جدید سه‌بعدی ========== */
+        /* ========== صفحه لاگین ========== */
         .login-page {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             min-height: 100vh;
@@ -177,10 +178,6 @@
             50% { transform: translateY(-12px) rotate(3deg); }
         }
         
-        .logo-icon:hover {
-            transform: scale(1.15) rotate(8deg);
-        }
-        
         .logo-area h1 {
             font-size: 2rem;
             font-weight: 800;
@@ -252,11 +249,6 @@
             color: rgba(148, 163, 184, 0.4);
         }
         
-        .form-group input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 1000px rgba(15, 23, 42, 0.8) inset !important;
-            -webkit-text-fill-color: #e2e8f0 !important;
-        }
-        
         .checkbox-group {
             display: flex;
             justify-content: space-between;
@@ -270,13 +262,6 @@
             accent-color: #FFD700;
             width: 18px;
             height: 18px;
-            cursor: pointer;
-        }
-        
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
             cursor: pointer;
         }
         
@@ -302,11 +287,6 @@
         
         .forgot-link:hover::after, .switch-link:hover::after {
             width: 100%;
-        }
-        
-        .forgot-link:hover, .switch-link:hover {
-            color: #FFE44D;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.15);
         }
         
         .btn-submit {
@@ -374,17 +354,6 @@
             border: 1px solid rgba(248, 113, 113, 0.1);
         }
         
-        .success-msg {
-            color: #34d399;
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 12px;
-            padding: 8px;
-            background: rgba(52, 211, 153, 0.08);
-            border-radius: 12px;
-            border: 1px solid rgba(52, 211, 153, 0.1);
-        }
-        
         .game-page { background: var(--bg-color); min-height: 100vh; padding: 20px; display: none; }
         .app-container { max-width: 1600px; margin: 0 auto; }
         .admin-header { background: var(--card-bg); border-radius: 28px; padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border: 1px solid var(--border-color); }
@@ -394,6 +363,7 @@
         .nav-tabs { display: flex; flex-wrap: wrap; gap: 8px; background: var(--nav-bg); padding: 10px 16px; border-radius: 50px; margin-bottom: 24px; border: 1px solid var(--border-color); }
         .nav-btn { background: transparent; border: none; padding: 8px 18px; border-radius: 40px; font-weight: 600; cursor: pointer; color: var(--text-color); font-size: 0.85rem; }
         .nav-btn.active { background: #1e3a5f; color: white; }
+        .nav-btn.gold-active { background: linear-gradient(135deg, #FFD700, #FFA500); color: #0f172a; box-shadow: 0 0 30px rgba(255,215,0,0.2); }
         .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px; margin-bottom: 24px; }
         .stat-card { background: var(--stat-bg); border-radius: 24px; padding: 14px 16px; border: 1px solid var(--border-color); }
         .stat-value { font-size: 1.4rem; font-weight: 800; }
@@ -448,220 +418,297 @@
         .fund-box { background: var(--card-bg); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); }
         .fund-upgrade-btn { background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; }
 
-        /* استایل‌های بخش شرط‌بندی */
-        .bet-card {
-            background: var(--card-bg);
-            border-radius: 28px;
+        /* ========== استایل بخش کلیک ========== */
+        .clicker-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
-            margin-bottom: 20px;
+        }
+        
+        .clicker-coin {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #f7931a, #b35d0e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 10px 40px rgba(247, 147, 26, 0.3),
+                inset 0 -8px 30px rgba(0,0,0,0.3),
+                inset 0 8px 30px rgba(255,255,255,0.2);
+            position: relative;
+            border: 4px solid #f7931a;
+        }
+        
+        .clicker-coin:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 15px 60px rgba(247, 147, 26, 0.5),
+                inset 0 -8px 30px rgba(0,0,0,0.3),
+                inset 0 8px 30px rgba(255,255,255,0.2);
+        }
+        
+        .clicker-coin:active {
+            transform: scale(0.92);
+        }
+        
+        .clicker-coin .pro-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.3), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            animation: none;
+        }
+        
+        .clicker-coin.pro-active .pro-glow {
+            opacity: 1;
+            animation: proPulseGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes proPulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .clicker-coin .coin-symbol {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .clicker-coin .coin-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0f172a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+            animation: proPulse 2s infinite;
+        }
+        
+        .clicker-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        
+        .clicker-stat {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 12px 16px;
+            text-align: center;
             border: 1px solid var(--border-color);
         }
-        .bet-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        
+        .clicker-stat .value {
+            font-size: 1.5rem;
+            font-weight: 800;
         }
-        .bet-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
+        
+        .clicker-stat .label {
+            font-size: 0.7rem;
+            opacity: 0.7;
         }
-        .bet-option-btn {
-            background: var(--input-bg);
-            border: 2px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 16px;
-            cursor: pointer;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: all 0.3s ease;
-            min-width: 60px;
+        
+        .clicker-stat.gold-border {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05));
         }
-        .bet-option-btn:hover {
-            border-color: #667eea;
-            transform: scale(1.05);
-        }
-        .bet-option-btn.selected {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.2);
-        }
-        .dice-result {
-            font-size: 5rem;
-            text-align: center;
-            padding: 30px;
-            margin: 10px 0;
-            background: var(--input-bg);
-            border-radius: 20px;
-            border: 2px solid var(--border-color);
-            transition: all 0.3s ease;
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .dice-result.spinning {
-            animation: diceSpin 0.5s ease-in-out;
-        }
-        @keyframes diceSpin {
-            0% { transform: rotate(0deg) scale(0.5); opacity: 0.3; }
-            25% { transform: rotate(90deg) scale(1.2); }
-            50% { transform: rotate(180deg) scale(0.8); opacity: 0.7; }
-            75% { transform: rotate(270deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); opacity: 1; }
-        }
-        .slot-machine {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 30px 20px;
-            margin: 10px 0;
-            background: var(--input-bg);
-            border-radius: 20px;
-            border: 2px solid var(--border-color);
-            min-height: 150px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .slot-reel {
-            font-size: 4.5rem;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-color);
-            border-radius: 16px;
-            border: 3px solid var(--border-color);
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-        .slot-reel.spinning {
-            animation: slotSpin 0.3s ease-in-out;
-        }
-        @keyframes slotSpin {
-            0% { transform: scale(0.7) rotate(-20deg); opacity: 0.3; }
-            50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-        .slot-sum {
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-align: center;
-            padding: 15px;
-            margin-top: 10px;
-            background: var(--input-bg);
-            border-radius: 16px;
-            border: 2px solid var(--border-color);
-            transition: all 0.5s ease;
-        }
-        .slot-sum.hidden-sum {
-            opacity: 0;
-            transform: translateY(-10px);
-            pointer-events: none;
-            height: 0;
-            padding: 0;
-            margin: 0;
-            border: none;
-            overflow: hidden;
-        }
-        .slot-sum.visible-sum {
-            opacity: 1;
-            transform: translateY(0);
-            height: auto;
-            padding: 15px;
-            margin-top: 10px;
-            border: 2px solid var(--border-color);
-        }
-        .bet-result {
-            font-size: 1.1rem;
-            font-weight: 700;
-            padding: 12px;
-            border-radius: 16px;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .bet-result.win {
-            background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            border: 1px solid #10b981;
-        }
-        .bet-result.lose {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid #f87171;
-        }
-        .bet-result.draw {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid #fbbf24;
-        }
-        .bet-history {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 10px;
-        }
-        .bet-history-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 12px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.8rem;
-        }
-        .bet-history-item.win { color: #10b981; }
-        .bet-history-item.lose { color: #f87171; }
-        .bet-history-item.draw { color: #fbbf24; }
-        .btn-bet {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+        
+        .clicker-upgrade-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 8px 20px;
             border-radius: 40px;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.85rem;
         }
-        .btn-bet:hover {
+        
+        .clicker-upgrade-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
         }
-        .btn-bet:disabled {
+        
+        .clicker-upgrade-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
         }
-        .dice-face {
-            font-size: 5rem;
-            line-height: 1;
-        }
-
-        /* استایل سه‌بعدی برای دکمه‌های لاگین */
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        
+        .clicker-upgrade-btn.pro-upgrade {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0f172a;
+            box-shadow: 0 0 30px rgba(255,215,0,0.1);
         }
         
-        .input-icon {
+        .clicker-upgrade-btn.pro-upgrade:hover {
+            box-shadow: 0 8px 30px rgba(255,215,0,0.3);
+        }
+        
+        .clicker-level-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .clicker-level-badge.gold {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #0f172a;
+        }
+        
+        .clicker-level-badge.silver {
+            background: #94a3b8;
+            color: #0f172a;
+        }
+        
+        .clicker-level-badge.bronze {
+            background: #cd7f32;
+            color: white;
+        }
+        
+        .clicker-progress {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px 0;
+            background: var(--input-bg);
+            border-radius: 20px;
+            height: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
             position: relative;
         }
         
-        .input-icon .icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(148, 163, 184, 0.3);
-            font-size: 1.2rem;
+        .clicker-progress .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f7931a, #FFD700);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            position: relative;
         }
         
-        .input-icon input {
-            padding-right: 50px !important;
+        .clicker-progress .fill.gold-fill {
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+            background-size: 200% 100%;
+            animation: goldProgress 2s linear infinite;
+        }
+        
+        @keyframes goldProgress {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+        
+        .clicker-progress .progress-text {
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            font-size: 0.6rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            z-index: 1;
+        }
+        
+        .clicker-float-text {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+            animation: floatUp 1s ease-out forwards;
+            z-index: 999;
+        }
+        
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
+        }
+        
+        .clicker-upgrade-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        
+        .clicker-upgrade-card {
+            background: var(--input-bg);
+            border-radius: 16px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .clicker-upgrade-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        
+        .clicker-upgrade-card.gold-card {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,165,0,0.05));
+        }
+        
+        .clicker-upgrade-card .upgrade-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .clicker-upgrade-card .upgrade-name {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .clicker-upgrade-card .upgrade-level {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .clicker-upgrade-card .upgrade-price {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #f7931a;
+            margin: 8px 0;
+        }
+        
+        .clicker-upgrade-card .upgrade-effect {
+            font-size: 0.8rem;
+            color: #34d399;
         }
     </style>
 </head>
 <body>
-    <!-- ========== صفحه لاگین جدید ========== -->
+    <!-- ========== صفحه لاگین ========== -->
     <div id="loginPage" class="login-page">
         <div class="login-container">
             <div class="logo-area">
@@ -675,17 +722,11 @@
             <div id="loginForm">
                 <div class="form-group">
                     <label>نام کاربری یا ایمیل</label>
-                    <div class="input-icon">
-                        <span class="icon">👤</span>
-                        <input type="text" id="loginIdentifier" placeholder="ایمیل یا شماره موبایل خود را وارد کنید">
-                    </div>
+                    <input type="text" id="loginIdentifier" placeholder="ایمیل یا شماره موبایل خود را وارد کنید">
                 </div>
                 <div class="form-group">
                     <label>رمز عبور</label>
-                    <div class="input-icon">
-                        <span class="icon">🔒</span>
-                        <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید">
-                    </div>
+                    <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید">
                 </div>
                 <div class="checkbox-group">
                     <label><input type="checkbox" id="rememberMe"> مرا به خاطر بسپار</label>
@@ -760,6 +801,7 @@
         let savedSellAmounts = {};
         let priceUpdateInterval = null;
         let dailyTasksResetInterval = null;
+        let clickerInterval = null;
 
         let proPlans = JSON.parse(localStorage.getItem("arena_pro_plans")) || {
             "1day": { name: "حساب پرو ۱ روزه", duration: 1, durationType: "day", price: 5000, enabled: true },
@@ -791,28 +833,10 @@
             ]
         };
 
-        // ارزهای اصلی (1000 ارز)
+        // ارزهای اصلی
         const mainCoins = [
             "BTC", "ETH", "USDT", "BNB", "XRP", "SOL", "ADA", "DOGE", "TRX", "TON",
-            "DAI", "LINK", "BCH", "XLM", "MATIC", "LTC", "NEAR", "AVAX", "SHIB", "DOT",
-            "LEO", "ZEC", "XMR", "HYPE", "USDC", "CRO", "HBAR", "SUI", "XAUt", "PAXG",
-            "TAO", "ONDO", "WLFI", "MNT", "WLD", "M", "ASTER", "OKB", "UNI", "ICP",
-            "ETC", "ALGO", "FIL", "APT", "KAS", "VET", "STX", "QNT", "PEPE", "AAVE",
-            "RENDER", "FET", "DASH", "INJ", "XDC", "FLR", "SEI", "KITE", "CHZ", "TIA",
-            "XTZ", "KAIA", "GNO", "CFX", "DCR", "MON", "IOTA", "TEL", "THETA", "XCN",
-            "PLASMA", "IP", "DYDX", "AR", "GALA", "XEC", "WEMIX", "S", "SAHARA", "EGLD",
-            "BERA", "ZANO", "NOCK", "0G", "KTA", "AIOZ", "ENJ", "PLUME", "ZETA", "ZIG",
-            "ROSE", "CTC", "RON", "QUBIC", "ASTR", "PEAQ", "KAVA", "XNO", "ELF", "DUSK",
-            "DGB", "MOVE", "CCD", "LDO", "GRT", "FLOKI", "FF", "NFT", "JASMY", "JTO",
-            "B", "OP", "STRK", "ENS", "PENDLE", "AKT", "AXS", "NEX", "SAND", "TWT",
-            "STG", "PIEVERSE", "RAY", "NEO", "WIF", "SYRUP", "COMP", "BAT", "TRAC",
-            "GWEI", "EIGEN", "SKYAI", "MANA", "CVX", "FARTCOIN", "HOME", "DEEP", "CFG",
-            "SFP", "APE", "RUNE", "ZK", "WAL", "TAG", "GLM", "VSN", "HNT", "ABA",
-            "RIVER", "NXPC", "1INCH", "CHEEMS", "ATH", "RAVE", "BANANAS31", "KAITO",
-            "SENT", "GRASS", "FLUID", "ZEN", "AWE", "LPT", "FORM", "RSR", "SNX", "FTT",
-            "GAS", "BSV", "FDUSD", "BEAT", "ETHFI", "CRV", "PYTH", "IMX", "LIT", "2Z",
-            "BTT", "SPX", "ZBCN", "EOS", "ONT", "WAVES", "ZRX", "GNT", "ANT", "MAID",
-            "PIVX", "NAV", "NXS", "VTC", "GRC", "BLK", "PPC", "NMC", "XPM", "DMD"
+            "DAI", "LINK", "BCH", "XLM", "MATIC", "LTC", "NEAR", "AVAX", "SHIB", "DOT"
         ];
         
         let prices = {};
@@ -823,42 +847,7 @@
                 "BTC": 42000, "ETH": 2800, "BNB": 320, "XRP": 0.5, "SOL": 100,
                 "ADA": 0.35, "DOGE": 0.12, "TRX": 0.1, "TON": 5, "DAI": 1,
                 "LINK": 15, "BCH": 250, "XLM": 0.12, "MATIC": 0.8, "LTC": 70,
-                "NEAR": 3, "AVAX": 35, "SHIB": 0.00002, "DOT": 7, "LEO": 4,
-                "ZEC": 30, "XMR": 150, "HYPE": 0.5, "USDC": 1, "CRO": 0.08,
-                "HBAR": 0.06, "SUI": 0.8, "XAUt": 2000, "PAXG": 1900, "TAO": 150,
-                "ONDO": 0.5, "WLFI": 0.3, "MNT": 0.8, "WLD": 2, "M": 0.1,
-                "ASTER": 0.5, "OKB": 40, "UNI": 6, "ICP": 5, "ETC": 20,
-                "ALGO": 0.15, "FIL": 4, "APT": 8, "KAS": 0.1, "VET": 0.02,
-                "STX": 1, "QNT": 100, "PEPE": 0.00001, "AAVE": 80, "RENDER": 2,
-                "FET": 0.5, "DASH": 30, "INJ": 15, "XDC": 0.03, "FLR": 0.01,
-                "SEI": 0.3, "KITE": 0.1, "CHZ": 0.07, "TIA": 5, "XTZ": 0.8,
-                "KAIA": 0.1, "GNO": 200, "CFX": 0.1, "DCR": 15, "MON": 0.5,
-                "IOTA": 0.2, "TEL": 0.02, "THETA": 1, "XCN": 0.01, "PLASMA": 0.05,
-                "IP": 0.5, "DYDX": 2, "AR": 10, "GALA": 0.02, "XEC": 0.00005,
-                "WEMIX": 1, "S": 0.2, "SAHARA": 0.1, "EGLD": 40, "BERA": 0.3,
-                "ZANO": 0.8, "NOCK": 0.05, "0G": 0.01, "KTA": 0.2, "AIOZ": 0.1,
-                "ENJ": 0.3, "PLUME": 0.2, "ZETA": 0.5, "ZIG": 0.05, "ROSE": 0.05,
-                "CTC": 0.1, "RON": 1.5, "QUBIC": 0.01, "ASTR": 0.05, "PEAQ": 0.1,
-                "KAVA": 0.6, "XNO": 1, "ELF": 0.3, "DUSK": 0.1, "DGB": 0.005,
-                "MOVE": 0.05, "CCD": 0.03, "LDO": 1.5, "GRT": 0.1, "FLOKI": 0.0001,
-                "FF": 0.01, "NFT": 0.01, "JASMY": 0.02, "JTO": 1, "B": 0.02,
-                "OP": 1.5, "STRK": 0.5, "ENS": 15, "PENDLE": 2, "AKT": 1,
-                "AXS": 6, "NEX": 0.5, "SAND": 0.4, "TWT": 1, "STG": 0.5,
-                "PIEVERSE": 0.01, "RAY": 0.5, "NEO": 10, "WIF": 1, "SYRUP": 0.01,
-                "COMP": 40, "BAT": 0.2, "TRAC": 0.3, "GWEI": 0.0001, "EIGEN": 0.5,
-                "SKYAI": 0.01, "MANA": 0.4, "CVX": 3, "FARTCOIN": 0.001, "HOME": 0.1,
-                "DEEP": 0.05, "CFG": 0.2, "SFP": 0.6, "APE": 1.2, "RUNE": 2,
-                "ZK": 0.1, "WAL": 0.2, "TAG": 0.01, "GLM": 0.3, "VSN": 0.1,
-                "HNT": 5, "ABA": 0.02, "RIVER": 0.5, "NXPC": 0.01, "1INCH": 0.3,
-                "CHEEMS": 0.00001, "ATH": 0.1, "RAVE": 0.01, "BANANAS31": 0.001, "KAITO": 0.05,
-                "SENT": 0.01, "GRASS": 0.02, "FLUID": 0.05, "ZEN": 8, "AWE": 0.01,
-                "LPT": 5, "FORM": 0.01, "RSR": 0.005, "SNX": 2, "FTT": 1.5,
-                "GAS": 3, "BSV": 40, "FDUSD": 1, "BEAT": 0.01, "ETHFI": 2,
-                "CRV": 0.4, "PYTH": 0.3, "IMX": 1.5, "LIT": 0.8, "2Z": 0.01,
-                "BTT": 0.000001, "SPX": 0.01, "ZBCN": 0.001, "EOS": 0.7, "ONT": 0.3,
-                "WAVES": 2, "ZRX": 0.4, "GNT": 0.1, "ANT": 5, "MAID": 0.3,
-                "PIVX": 0.5, "NAV": 0.2, "NXS": 0.1, "VTC": 0.3, "GRC": 0.01,
-                "BLK": 0.05, "PPC": 0.2, "NMC": 0.5, "XPM": 0.1, "DMD": 0.3
+                "NEAR": 3, "AVAX": 35, "SHIB": 0.00002, "DOT": 7
             };
             for (let s of mainCoins) {
                 if (basePrices[s]) {
@@ -1060,7 +1049,7 @@
 
         // ==================== سیستم تسک‌های روزانه ====================
         function generateDailyTasks() {
-            const taskCount = 10;
+            const taskCount = 5;
             const newTasks = [];
             for (let i = 0; i < taskCount; i++) {
                 const difficulty = Math.random();
@@ -1139,7 +1128,7 @@
             renderTasks();
         }
 
-        // ==================== سیستم صندوق‌های جداگانه ====================
+        // ==================== سیستم صندوق‌ها ====================
         function initUserFunds() {
             if (!currentUser.funds) {
                 currentUser.funds = {
@@ -1305,25 +1294,21 @@
                 let interest = currentUser.funds.normal.amount * (currentUser.funds.normal.interest / 100);
                 currentUser.funds.normal.amount += interest;
                 totalInterest += interest;
-                addLog(`🏦 سود صندوق معمولی: +${interest.toFixed(2)}$ (${currentUser.funds.normal.interest}%)`, true);
             }
             if (currentUser.funds.gold.active && currentUser.funds.gold.amount > 0) {
                 let interest = currentUser.funds.gold.amount * (5.5 / 100);
                 currentUser.funds.gold.amount += interest;
                 totalInterest += interest;
-                addLog(`✨ سود صندوق طلایی: +${interest.toFixed(2)}$ (5.5%)`, true);
             }
             if (currentUser.funds.legend.active && currentUser.funds.legend.amount > 0) {
                 let interest = currentUser.funds.legend.amount * (7 / 100);
                 currentUser.funds.legend.amount += interest;
                 totalInterest += interest;
-                addLog(`👑 سود صندوق لجندری: +${interest.toFixed(2)}$ (7%)`, true);
             }
             if (currentUser.funds.highVolume.active && currentUser.funds.highVolume.amount > 0) {
                 let interest = currentUser.funds.highVolume.amount * (10 / 100);
                 currentUser.funds.highVolume.amount += interest;
                 totalInterest += interest;
-                addLog(`📊 سود صندوق ویژه معاملات: +${interest.toFixed(2)}$ (10%)`, true);
             }
             
             if (totalInterest > 0) {
@@ -1362,6 +1347,7 @@
             sendToDiscord(`🌟 کاربر ${currentUser.name} حساب پرو ${plan.name} را فعال کرد! مبلغ: ${price}$`);
             renderSettings();
             renderProPlans();
+            renderClicker();
             updateTopStats();
         }
 
@@ -1398,7 +1384,6 @@
                 <div class="panel-card">
                     <h3>📋 تسک‌های روزانه</h3>
                     <p style="font-size:0.7rem; margin-bottom:10px;">حجم معاملات ماهانه شما: <strong>${volume.toLocaleString()} دلار</strong></p>
-                    <p style="font-size:0.7rem; margin-bottom:10px;">تسک‌ها هر روز ساعت 00:00 به وقت ایران رفرش می‌شوند</p>
             `;
             if(globalSettings.customTasks.length === 0){
                 html += `<div class="holding-text">در حال بارگذاری تسک‌های روزانه...</div>`;
@@ -1452,6 +1437,7 @@
                         <div class="pro-feature">✅ پشتیبانی ویژه</div>
                         <div class="pro-feature">✅ سود صندوق 5%</div>
                         <div class="pro-feature">✅ پاداش دعوت 300 دلار</div>
+                        <div class="pro-feature">✅ 15% تخفیف ارتقا کلیک</div>
                     </div>
                     ${expiryText}
                 </div>
@@ -1834,319 +1820,266 @@
             });
         }
 
-        // ==================== بخش شرط‌بندی با قوانین جدید ====================
-        let betHistory = [];
-        let isRolling = false;
-        let isSpinning = false;
-        let slotSumTimeout = null;
+        // ==================== بخش کلیک (Clicker) ====================
+        function initClicker() {
+            if (!currentUser.clicker) {
+                currentUser.clicker = {
+                    clicks: 0,
+                    maxClicks: 60,
+                    clickPower: 0.1,
+                    level: 1,
+                    powerLevel: 1,
+                    lastClickTime: Date.now(),
+                    totalClicks: 0
+                };
+                saveCurrentUser();
+            }
+        }
 
-        // نمادهای تاس (یونیکد)
-        const DICE_FACES = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+        function getClickerUpgradeCost(level) {
+            // قیمت ارتقا: 500 * 2^(level-2) برای سطح 2 به بعد
+            if (level <= 1) return 0;
+            return Math.floor(500 * Math.pow(2, level - 2));
+        }
 
-        function renderBetting() {
-            let div = document.getElementById("bettingPanel");
+        function getPowerUpgradeCost(powerLevel) {
+            // قیمت ارتقا قدرت: 5000 * 2^(powerLevel-2) برای سطح 2 به بعد
+            if (powerLevel <= 1) return 0;
+            return Math.floor(5000 * Math.pow(2, powerLevel - 2));
+        }
+
+        function getClickerDiscount() {
+            if (currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date()) {
+                return 0.15; // 15% تخفیف برای پرو
+            }
+            return 0;
+        }
+
+        function handleClick() {
+            initClicker();
+            const now = Date.now();
+            const timeSinceLast = (now - currentUser.clicker.lastClickTime) / 1000; // به ثانیه
+            
+            // شارژ شدن کلیک‌ها بر اساس زمان (هر ثانیه 1 کلیک)
+            const clicksToAdd = Math.floor(timeSinceLast);
+            if (clicksToAdd > 0) {
+                currentUser.clicker.clicks = Math.min(currentUser.clicker.clicks + clicksToAdd, currentUser.clicker.maxClicks);
+                currentUser.clicker.lastClickTime = now;
+                saveCurrentUser();
+            }
+            
+            // بررسی موجودی کلیک
+            if (currentUser.clicker.clicks <= 0) {
+                addLog("❌ موجودی کلیک شما تمام شده! منتظر بمانید تا شارژ شود.", false);
+                renderClicker();
+                return;
+            }
+            
+            // انجام کلیک
+            currentUser.clicker.clicks--;
+            const earned = currentUser.clicker.clickPower;
+            currentUser.balance += earned;
+            currentUser.clicker.totalClicks++;
+            currentUser.clicker.lastClickTime = now;
+            
+            // نمایش متن شناور
+            showFloatingText(`+${earned.toFixed(2)}$`, document.getElementById("clickerCoin"));
+            
+            addLog(`🖱️ کلیک! +${earned.toFixed(2)}$ به موجودی اضافه شد (${currentUser.clicker.clicks} کلیک باقی‌مانده)`, true);
+            
+            saveCurrentUser();
+            updateTopStats();
+            renderClicker();
+        }
+
+        function showFloatingText(text, element) {
+            const rect = element.getBoundingClientRect();
+            const float = document.createElement("div");
+            float.className = "clicker-float-text";
+            float.innerText = text;
+            float.style.left = rect.left + rect.width / 2 - 30 + "px";
+            float.style.top = rect.top - 10 + "px";
+            document.body.appendChild(float);
+            setTimeout(() => float.remove(), 1000);
+        }
+
+        function upgradeClicker() {
+            initClicker();
+            const discount = getClickerDiscount();
+            const cost = getClickerUpgradeCost(currentUser.clicker.level + 1);
+            const discountedCost = Math.floor(cost * (1 - discount));
+            
+            if (cost === 0) {
+                addLog("❌ شما در بالاترین سطح هستید!", false);
+                return;
+            }
+            
+            if (currentUser.balance < discountedCost) {
+                addLog(`❌ موجودی کافی نیست! نیاز به ${discountedCost.toLocaleString()}$ دارید`, false);
+                return;
+            }
+            
+            currentUser.balance -= discountedCost;
+            currentUser.clicker.level++;
+            currentUser.clicker.maxClicks += 60;
+            currentUser.clicker.clicks = Math.min(currentUser.clicker.clicks + 60, currentUser.clicker.maxClicks);
+            
+            addLog(`⬆️ سطح کلیک به ${currentUser.clicker.level} ارتقا یافت! ظرفیت کلیک: ${currentUser.clicker.maxClicks}`, true);
+            saveCurrentUser();
+            updateTopStats();
+            renderClicker();
+        }
+
+        function upgradePower() {
+            initClicker();
+            const discount = getClickerDiscount();
+            const cost = getPowerUpgradeCost(currentUser.clicker.powerLevel + 1);
+            const discountedCost = Math.floor(cost * (1 - discount));
+            
+            if (cost === 0) {
+                addLog("❌ شما در بالاترین سطح قدرت هستید!", false);
+                return;
+            }
+            
+            if (currentUser.balance < discountedCost) {
+                addLog(`❌ موجودی کافی نیست! نیاز به ${discountedCost.toLocaleString()}$ دارید`, false);
+                return;
+            }
+            
+            currentUser.balance -= discountedCost;
+            currentUser.clicker.powerLevel++;
+            currentUser.clicker.clickPower += 0.1;
+            
+            addLog(`⬆️ قدرت کلیک به ${currentUser.clicker.clickPower.toFixed(1)}$ ارتقا یافت! سطح: ${currentUser.clicker.powerLevel}`, true);
+            saveCurrentUser();
+            updateTopStats();
+            renderClicker();
+        }
+
+        function renderClicker() {
+            initClicker();
+            const div = document.getElementById("clickerPanel");
             if (!div) return;
             
-            let html = `
-                <div class="bet-card">
-                    <h3>🎲 تاس انداختن</h3>
-                    <p style="font-size:0.8rem; margin-bottom:10px;">مبلغ شرط خود را وارد کنید و یک گزینه را انتخاب کنید:</p>
+            const isPro = currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date();
+            const discount = getClickerDiscount();
+            const discountText = discount > 0 ? ` (${Math.round(discount * 100)}% تخفیف پرو)` : "";
+            
+            const nextLevelCost = getClickerUpgradeCost(currentUser.clicker.level + 1);
+            const nextPowerCost = getPowerUpgradeCost(currentUser.clicker.powerLevel + 1);
+            const discountedLevelCost = nextLevelCost > 0 ? Math.floor(nextLevelCost * (1 - discount)) : 0;
+            const discountedPowerCost = nextPowerCost > 0 ? Math.floor(nextPowerCost * (1 - discount)) : 0;
+            
+            const progress = (currentUser.clicker.clicks / currentUser.clicker.maxClicks) * 100;
+            
+            let levelBadge = "bronze";
+            let levelColor = "#cd7f32";
+            if (currentUser.clicker.level >= 10) { levelBadge = "gold"; levelColor = "#FFD700"; }
+            else if (currentUser.clicker.level >= 5) { levelBadge = "silver"; levelColor = "#94a3b8"; }
+            
+            let powerBadge = "bronze";
+            if (currentUser.clicker.powerLevel >= 10) { powerBadge = "gold"; }
+            else if (currentUser.clicker.powerLevel >= 5) { powerBadge = "silver"; }
+            
+            const proClass = isPro ? 'pro-active' : '';
+            
+            div.innerHTML = `
+                <div class="clicker-container">
+                    <div class="clicker-coin ${proClass}" id="clickerCoin" onclick="handleClick()">
+                        <span class="coin-symbol">₿</span>
+                        <div class="pro-glow"></div>
+                        ${isPro ? '<div class="coin-badge">⭐ PRO</div>' : ''}
+                    </div>
                     
-                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
-                        <input type="number" id="diceBetAmount" class="amount-input" value="10" placeholder="مبلغ شرط" style="flex:1; min-width:100px;">
-                        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                            <button class="bet-option-btn dice-option" data-bet="even">زوج (ضریب 1.5)</button>
-                            <button class="bet-option-btn dice-option" data-bet="odd">فرد (ضریب 1.5)</button>
-                            <button class="bet-option-btn dice-option" data-bet="1">1 (ضریب 3)</button>
-                            <button class="bet-option-btn dice-option" data-bet="2">2 (ضریب 3)</button>
-                            <button class="bet-option-btn dice-option" data-bet="3">3 (ضریب 3)</button>
-                            <button class="bet-option-btn dice-option" data-bet="4">4 (ضریب 3)</button>
-                            <button class="bet-option-btn dice-option" data-bet="5">5 (ضریب 3)</button>
-                            <button class="bet-option-btn dice-option" data-bet="6">6 (ضریب 3)</button>
+                    <div style="margin-top:10px; font-size:0.8rem; color:rgba(226,232,240,0.6);">
+                        برای کسب درآمد کلیک کنید
+                    </div>
+                    
+                    <div class="clicker-progress">
+                        <div class="fill ${isPro ? 'gold-fill' : ''}" style="width:${progress}%"></div>
+                        <div class="progress-text">${currentUser.clicker.clicks} / ${currentUser.clicker.maxClicks}</div>
+                    </div>
+                    
+                    <div class="clicker-stats">
+                        <div class="clicker-stat ${isPro ? 'gold-border' : ''}">
+                            <div class="value">${currentUser.clicker.clicks}</div>
+                            <div class="label">🔄 کلیک باقی‌مانده</div>
+                        </div>
+                        <div class="clicker-stat ${isPro ? 'gold-border' : ''}">
+                            <div class="value">${currentUser.clicker.clickPower.toFixed(2)}$</div>
+                            <div class="label">💰 قدرت هر کلیک</div>
+                        </div>
+                        <div class="clicker-stat ${isPro ? 'gold-border' : ''}">
+                            <div class="value">${currentUser.clicker.totalClicks.toLocaleString()}</div>
+                            <div class="label">📊 کل کلیک‌ها</div>
+                        </div>
+                        <div class="clicker-stat ${isPro ? 'gold-border' : ''}">
+                            <div class="value">${currentUser.clicker.maxClicks}</div>
+                            <div class="label">⏱️ ظرفیت کلیک</div>
                         </div>
                     </div>
                     
-                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-                        <span style="font-size:0.8rem;">انتخاب شما: <strong id="diceSelected">هیچ</strong></span>
-                        <button class="btn-bet" id="rollDiceBtn" ${isRolling ? 'disabled' : ''}>🎲 تاس بینداز</button>
+                    <div style="margin-top:10px; font-size:0.7rem; color:rgba(226,232,240,0.4);">
+                        ⚡ هر ثانیه 1 کلیک شارژ می‌شود (حداکثر ظرفیت)
+                        ${isPro ? ' ⭐ فعال‌سازی پرو = 15% تخفیف ارتقا' : ''}
                     </div>
                     
-                    <div class="dice-result" id="diceResult">
-                        <span class="dice-face">🎲</span>
-                    </div>
-                    <div id="diceBetResult" class="bet-result"></div>
-                </div>
-                
-                <div class="bet-card">
-                    <h3>🎰 ماشین شانس (Slot Machine)</h3>
-                    <p style="font-size:0.8rem; margin-bottom:10px;">سه عدد 1 تا 6 تصادفی ظاهر می‌شوند.</p>
-                    <p style="font-size:0.75rem; margin-bottom:10px; color:#fbbf24;">
-                        🏆 قوانین جدید: جمع ≤ 12 = باخت | 13 = ضریب 1.5 | 14 = ضریب 2 | 15 = ضریب 2.5 | 16-17 = ضریب 3 | 18 = جک‌پات (ضریب 3)
-                    </p>
-                    
-                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
-                        <input type="number" id="slotBetAmount" class="amount-input" value="10" placeholder="مبلغ شرط" style="flex:1; min-width:100px;">
-                        <button class="btn-bet" id="spinSlotBtn" ${isSpinning ? 'disabled' : ''}>🎰 بچرخون</button>
-                    </div>
-                    
-                    <div class="slot-machine" id="slotMachine">
-                        <div class="slot-reel" id="slot1">🎲</div>
-                        <div class="slot-reel" id="slot2">🎲</div>
-                        <div class="slot-reel" id="slot3">🎲</div>
-                    </div>
-                    <div class="slot-sum hidden-sum" id="slotSum">جمع اعداد: -</div>
-                    <div id="slotBetResult" class="bet-result"></div>
-                </div>
-                
-                <div class="bet-card">
-                    <h3>📊 تاریخچه شرط‌بندی</h3>
-                    <div class="bet-history" id="betHistoryContainer">
-                        ${betHistory.length === 0 ? '<div class="holding-text">هنوز شرطی ثبت نشده است</div>' : betHistory.slice(-20).reverse().map(item => `
-                            <div class="bet-history-item ${item.result}">
-                                <span>${item.type}</span>
-                                <span>💰 ${item.amount}$</span>
-                                <span>${item.result === 'win' ? '✅ برد +' + item.profit.toFixed(2) + '$' : item.result === 'draw' ? '🔄 مساوی' : '❌ باخت -' + item.amount.toFixed(2) + '$'}</span>
-                                <span style="font-size:0.6rem;">${item.time}</span>
+                    <div class="clicker-upgrade-grid">
+                        <div class="clicker-upgrade-card ${isPro ? 'gold-card' : ''}">
+                            <div class="upgrade-icon">⬆️</div>
+                            <div class="upgrade-name">سطح کلیک</div>
+                            <div class="upgrade-level">
+                                سطح فعلی: <span class="clicker-level-badge ${levelBadge}">${currentUser.clicker.level}</span>
                             </div>
-                        `).join('')}
+                            <div class="upgrade-price">
+                                ${nextLevelCost > 0 ? `${discountedLevelCost.toLocaleString()}$` : 'حداکثر سطح!'}
+                                ${discount > 0 && nextLevelCost > 0 ? `<span style="font-size:0.6rem;opacity:0.6;"> (قیمت اصلی: ${nextLevelCost.toLocaleString()}$)</span>` : ''}
+                            </div>
+                            <div class="upgrade-effect">+۶۰ ظرفیت کلیک</div>
+                            <button class="clicker-upgrade-btn ${isPro ? 'pro-upgrade' : ''}" 
+                                    onclick="upgradeClicker()" 
+                                    ${nextLevelCost === 0 || currentUser.balance < discountedLevelCost ? 'disabled' : ''}>
+                                ارتقا
+                            </button>
+                        </div>
+                        
+                        <div class="clicker-upgrade-card ${isPro ? 'gold-card' : ''}">
+                            <div class="upgrade-icon">⚡</div>
+                            <div class="upgrade-name">قدرت کلیک</div>
+                            <div class="upgrade-level">
+                                سطح فعلی: <span class="clicker-level-badge ${powerBadge}">${currentUser.clicker.powerLevel}</span>
+                            </div>
+                            <div class="upgrade-price">
+                                ${nextPowerCost > 0 ? `${discountedPowerCost.toLocaleString()}$` : 'حداکثر سطح!'}
+                                ${discount > 0 && nextPowerCost > 0 ? `<span style="font-size:0.6rem;opacity:0.6;"> (قیمت اصلی: ${nextPowerCost.toLocaleString()}$)</span>` : ''}
+                            </div>
+                            <div class="upgrade-effect">+۰.۱$ به هر کلیک</div>
+                            <button class="clicker-upgrade-btn ${isPro ? 'pro-upgrade' : ''}" 
+                                    onclick="upgradePower()" 
+                                    ${nextPowerCost === 0 || currentUser.balance < discountedPowerCost ? 'disabled' : ''}>
+                                ارتقا
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
             
-            div.innerHTML = html;
-            
-            // انتخاب گزینه‌های تاس
-            let selectedDiceBet = null;
-            document.querySelectorAll(".dice-option").forEach(btn => {
-                btn.onclick = () => {
-                    document.querySelectorAll(".dice-option").forEach(b => b.classList.remove("selected"));
-                    btn.classList.add("selected");
-                    selectedDiceBet = btn.dataset.bet;
-                    const labels = { even: "زوج", odd: "فرد", "1": "1", "2": "2", "3": "3", "4": "4", "5": "5", "6": "6" };
-                    document.getElementById("diceSelected").innerText = labels[selectedDiceBet] || selectedDiceBet;
-                };
-            });
-            
-            // تاس انداختن با انیمیشن
-            document.getElementById("rollDiceBtn")?.addEventListener("click", () => {
-                if (isRolling) return;
-                if (!selectedDiceBet) {
-                    document.getElementById("diceBetResult").className = "bet-result lose";
-                    document.getElementById("diceBetResult").innerText = "❌ لطفاً یک گزینه را انتخاب کنید!";
-                    return;
+            // آپدیت موجودی کلیک هر 1 ثانیه
+            if (clickerInterval) clearInterval(clickerInterval);
+            clickerInterval = setInterval(() => {
+                const now = Date.now();
+                const timeSinceLast = (now - currentUser.clicker.lastClickTime) / 1000;
+                const clicksToAdd = Math.floor(timeSinceLast);
+                if (clicksToAdd > 0) {
+                    currentUser.clicker.clicks = Math.min(currentUser.clicker.clicks + clicksToAdd, currentUser.clicker.maxClicks);
+                    currentUser.clicker.lastClickTime = now;
+                    saveCurrentUser();
+                    renderClicker();
                 }
-                
-                let amount = parseFloat(document.getElementById("diceBetAmount").value);
-                if (isNaN(amount) || amount <= 0) {
-                    document.getElementById("diceBetResult").className = "bet-result lose";
-                    document.getElementById("diceBetResult").innerText = "❌ مبلغ شرط نامعتبر است!";
-                    return;
-                }
-                
-                if (amount > currentUser.balance) {
-                    document.getElementById("diceBetResult").className = "bet-result lose";
-                    document.getElementById("diceBetResult").innerText = `❌ موجودی کافی نیست! (موجودی: ${currentUser.balance.toFixed(2)}$)`;
-                    return;
-                }
-                
-                isRolling = true;
-                document.getElementById("rollDiceBtn").disabled = true;
-                document.getElementById("diceResult").classList.add("spinning");
-                
-                let spins = 0;
-                const maxSpins = 10 + Math.floor(Math.random() * 5);
-                let interval = setInterval(() => {
-                    const randomFace = Math.floor(Math.random() * 6);
-                    document.getElementById("diceResult").innerHTML = `<span class="dice-face">${DICE_FACES[randomFace]}</span>`;
-                    spins++;
-                    if (spins >= maxSpins) {
-                        clearInterval(interval);
-                        const diceResult = Math.floor(Math.random() * 6) + 1;
-                        document.getElementById("diceResult").innerHTML = `<span class="dice-face">${DICE_FACES[diceResult - 1]}</span>`;
-                        document.getElementById("diceResult").classList.remove("spinning");
-                        document.getElementById("diceResult").style.borderColor = "#10b981";
-                        
-                        let win = false;
-                        let multiplier = 0;
-                        let profit = 0;
-                        let resultText = "";
-                        
-                        if (selectedDiceBet === "even" && diceResult % 2 === 0) {
-                            win = true;
-                            multiplier = 1.5;
-                        } else if (selectedDiceBet === "odd" && diceResult % 2 === 1) {
-                            win = true;
-                            multiplier = 1.5;
-                        } else if (selectedDiceBet === diceResult.toString()) {
-                            win = true;
-                            multiplier = 3;
-                        }
-                        
-                        if (win) {
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 برد! تاس ${diceResult} آمد. سود خالص: +${(profit - amount).toFixed(2)}$ (ضریب ${multiplier}x)`;
-                            document.getElementById("diceBetResult").className = "bet-result win";
-                            document.getElementById("diceBetResult").innerHTML = `✅ ${resultText}`;
-                            betHistory.push({ type: `تاس (${selectedDiceBet})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎲 برد تاس! عدد ${diceResult} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else {
-                            currentUser.balance -= amount;
-                            resultText = `😞 باخت! تاس ${diceResult} آمد. مبلغ ${amount}$ از دست رفت.`;
-                            document.getElementById("diceBetResult").className = "bet-result lose";
-                            document.getElementById("diceBetResult").innerHTML = `❌ ${resultText}`;
-                            betHistory.push({ type: `تاس (${selectedDiceBet})`, amount: amount, profit: -amount, result: "lose", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎲 باخت تاس! عدد ${diceResult} - ${amount}$ از دست رفت`, false);
-                        }
-                        
-                        saveCurrentUser();
-                        updateTopStats();
-                        isRolling = false;
-                        document.getElementById("rollDiceBtn").disabled = false;
-                        renderBetting();
-                    }
-                }, 100);
-            });
-            
-            // ماشین شانس با قوانین جدید
-            document.getElementById("spinSlotBtn")?.addEventListener("click", () => {
-                if (isSpinning) return;
-                
-                let amount = parseFloat(document.getElementById("slotBetAmount").value);
-                if (isNaN(amount) || amount <= 0) {
-                    document.getElementById("slotBetResult").className = "bet-result lose";
-                    document.getElementById("slotBetResult").innerText = "❌ مبلغ شرط نامعتبر است!";
-                    return;
-                }
-                
-                if (amount > currentUser.balance) {
-                    document.getElementById("slotBetResult").className = "bet-result lose";
-                    document.getElementById("slotBetResult").innerText = `❌ موجودی کافی نیست! (موجودی: ${currentUser.balance.toFixed(2)}$)`;
-                    return;
-                }
-                
-                isSpinning = true;
-                document.getElementById("spinSlotBtn").disabled = true;
-                
-                let spins = 0;
-                const maxSpins = 8 + Math.floor(Math.random() * 4);
-                let interval = setInterval(() => {
-                    const r1 = Math.floor(Math.random() * 6);
-                    const r2 = Math.floor(Math.random() * 6);
-                    const r3 = Math.floor(Math.random() * 6);
-                    document.getElementById("slot1").innerHTML = DICE_FACES[r1];
-                    document.getElementById("slot2").innerHTML = DICE_FACES[r2];
-                    document.getElementById("slot3").innerHTML = DICE_FACES[r3];
-                    document.getElementById("slot1").classList.add("spinning");
-                    document.getElementById("slot2").classList.add("spinning");
-                    document.getElementById("slot3").classList.add("spinning");
-                    
-                    spins++;
-                    if (spins >= maxSpins) {
-                        clearInterval(interval);
-                        
-                        const slot1 = Math.floor(Math.random() * 6) + 1;
-                        const slot2 = Math.floor(Math.random() * 6) + 1;
-                        const slot3 = Math.floor(Math.random() * 6) + 1;
-                        const sum = slot1 + slot2 + slot3;
-                        
-                        document.getElementById("slot1").innerHTML = DICE_FACES[slot1 - 1];
-                        document.getElementById("slot2").innerHTML = DICE_FACES[slot2 - 1];
-                        document.getElementById("slot3").innerHTML = DICE_FACES[slot3 - 1];
-                        document.getElementById("slot1").classList.remove("spinning");
-                        document.getElementById("slot2").classList.remove("spinning");
-                        document.getElementById("slot3").classList.remove("spinning");
-                        
-                        // نمایش جمع با انیمیشن برای 10 ثانیه
-                        const sumElement = document.getElementById("slotSum");
-                        sumElement.className = "slot-sum visible-sum";
-                        sumElement.innerHTML = `جمع اعداد: ${slot1} + ${slot2} + ${slot3} = ${sum}`;
-                        
-                        // پاک کردن تایمر قبلی
-                        if (slotSumTimeout) {
-                            clearTimeout(slotSumTimeout);
-                            slotSumTimeout = null;
-                        }
-                        
-                        // مخفی کردن بعد از 10 ثانیه
-                        slotSumTimeout = setTimeout(() => {
-                            sumElement.className = "slot-sum hidden-sum";
-                            slotSumTimeout = null;
-                        }, 10000);
-                        
-                        // محاسبه نتیجه بر اساس قوانین جدید
-                        let profit = 0;
-                        let multiplier = 0;
-                        let resultText = "";
-                        let resultClass = "";
-                        
-                        if (sum === 18) {
-                            // جک‌پات - ضریب 3
-                            multiplier = 3;
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 جک‌پات! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 3x! سود: +${(profit - amount).toFixed(2)}$`;
-                            resultClass = "win";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 جک‌پات ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else if (sum >= 16 && sum <= 17) {
-                            // ضریب 3
-                            multiplier = 3;
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 3x! سود: +${(profit - amount).toFixed(2)}$`;
-                            resultClass = "win";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else if (sum === 15) {
-                            // ضریب 2.5
-                            multiplier = 2.5;
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 2.5x! سود: +${(profit - amount).toFixed(2)}$`;
-                            resultClass = "win";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else if (sum === 14) {
-                            // ضریب 2
-                            multiplier = 2;
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 2x! سود: +${(profit - amount).toFixed(2)}$`;
-                            resultClass = "win";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else if (sum === 13) {
-                            // ضریب 1.5
-                            multiplier = 1.5;
-                            profit = amount * multiplier;
-                            currentUser.balance += profit - amount;
-                            resultText = `🎉 برد! ${slot1}${slot2}${slot3} جمع ${sum} - ضریب 1.5x! سود: +${(profit - amount).toFixed(2)}$`;
-                            resultClass = "win";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: profit - amount, result: "win", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 برد ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - سود: +${(profit - amount).toFixed(2)}$`, true);
-                        } else if (sum <= 12) {
-                            // باخت
-                            currentUser.balance -= amount;
-                            resultText = `😞 باخت! ${slot1}${slot2}${slot3} جمع ${sum} - مبلغ ${amount}$ از دست رفت.`;
-                            resultClass = "lose";
-                            betHistory.push({ type: `ماشین شانس (${slot1}${slot2}${slot3}=${sum})`, amount: amount, profit: -amount, result: "lose", time: new Date().toLocaleTimeString("fa-IR") });
-                            addLog(`🎰 باخت ماشین شانس! ${slot1}${slot2}${slot3} جمع=${sum} - ${amount}$ از دست رفت`, false);
-                        }
-                        
-                        document.getElementById("slotBetResult").className = `bet-result ${resultClass}`;
-                        document.getElementById("slotBetResult").innerHTML = resultText;
-                        
-                        saveCurrentUser();
-                        updateTopStats();
-                        isSpinning = false;
-                        document.getElementById("spinSlotBtn").disabled = false;
-                        setTimeout(() => renderBetting(), 300);
-                    }
-                }, 120);
-            });
+            }, 1000);
         }
 
+        // ========== توابع مدیریتی ==========
         function renderAdminPanel() {
             if (currentUser.role !== "admin") return;
             let div = document.getElementById("adminPanel");
@@ -2385,7 +2318,7 @@
         function saveUsers() { localStorage.setItem("arena_users", JSON.stringify(users)); }
 
         if (!users.find(u => u.role === "admin")) {
-            users.push({ id: Date.now(), name: "ادمین", email: "admin@arena.com", phone: "09123456789", password: "admin123", role: "admin", balance: 1000000, holdings: { USDT: 100000 }, monthlyVolume: 0, refCode: "ADMIN123", referredBy: null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: true, proPlan: "ادمین", proExpiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } } });
+            users.push({ id: Date.now(), name: "ادمین", email: "admin@arena.com", phone: "09123456789", password: "admin123", role: "admin", balance: 1000000, holdings: { USDT: 100000 }, monthlyVolume: 0, refCode: "ADMIN123", referredBy: null, referrals: [], completedTasks: {}, fundAmount: 0, leveragePositions: [], lastDaily: null, isPro: true, proPlan: "ادمین", proExpiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } }, clicker: { clicks: 60, maxClicks: 60, clickPower: 0.1, level: 1, powerLevel: 1, lastClickTime: Date.now(), totalClicks: 0 } });
             saveUsers();
         }
 
@@ -2437,7 +2370,8 @@
                 isPro: false, 
                 proPlan: null, 
                 proExpiry: null, 
-                funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } } 
+                funds: { normal: { amount: 0, upgradeLevel: 0, interest: 2 }, gold: { amount: 0, active: false, expiry: null }, legend: { amount: 0, active: false, expiry: null }, highVolume: { amount: 0, active: false, expiry: null } },
+                clicker: { clicks: 60, maxClicks: 60, clickPower: 0.1, level: 1, powerLevel: 1, lastClickTime: Date.now(), totalClicks: 0 }
             };
             users.push(newUser);
             if(referrer){ 
@@ -2491,6 +2425,7 @@
             if(!currentUser.funds) initUserFunds();
             if(currentUser.monthlyVolume === undefined) currentUser.monthlyVolume = 0;
             if(currentUser.isPro === undefined) currentUser.isPro = false;
+            initClicker();
             
             resetDailyTasks();
             checkFundExpiries();
@@ -2509,7 +2444,7 @@
                     <button class="nav-btn" data-tab="pro">⭐ حساب پرو</button>
                     <button class="nav-btn" data-tab="assets">دارایی‌ها</button>
                     <button class="nav-btn" data-tab="referral">دعوت</button>
-                    <button class="nav-btn" data-tab="betting">🎲 شرط‌بندی</button>
+                    <button class="nav-btn ${currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date() ? 'gold-active' : ''}" data-tab="clicker">🖱️ کلیک</button>
                     <button class="nav-btn" data-tab="settings">تنظیمات</button>
                     ${currentUser.role === "admin" ? '<button class="nav-btn" data-tab="admin">👑 مدیریت</button>' : ''}
                     ${currentUser.role === "admin" ? '<button class="nav-btn" data-tab="usersinfo">📋 اطلاعات کاربران</button>' : ''}
@@ -2527,7 +2462,7 @@
                 <div id="proPane" class="tab-pane"><div id="proPlansPanel"></div></div>
                 <div id="assetsPane" class="tab-pane"><div class="panel-card"><div id="assetsList"></div></div></div>
                 <div id="referralPane" class="tab-pane"><div class="panel-card"><h3>سیستم دعوت</h3><p>کد شما: <strong style="font-size:1.3rem">${currentUser.refCode}</strong></p><p>پاداش هر دعوت: ${(currentUser.isPro && currentUser.proExpiry && new Date(currentUser.proExpiry) > new Date()) ? referralRewardPro : referralReward}$</p><p>تعداد دعوت: ${currentUser.referrals?.length || 0}</p><button class="max-btn" id="copyRef">📋 کپی کد</button></div></div>
-                <div id="bettingPane" class="tab-pane"><div id="bettingPanel"></div></div>
+                <div id="clickerPane" class="tab-pane"><div id="clickerPanel"></div></div>
                 <div id="settingsPane" class="tab-pane"><div id="settingsPanel"></div></div>
                 <div id="adminPane" class="tab-pane"><div id="adminPanel"></div></div>
                 ${currentUser.role === "admin" ? '<div id="usersinfoPane" class="tab-pane"><div id="usersInfoPanel"></div></div>' : ''}
@@ -2548,7 +2483,7 @@
                     if(btn.dataset.tab==="usersinfo" && currentUser.role === "admin") renderUsersInfo(); 
                     if(btn.dataset.tab==="pro") renderProPlans(); 
                     if(btn.dataset.tab==="fund") renderFundPanel(); 
-                    if(btn.dataset.tab==="betting") renderBetting(); 
+                    if(btn.dataset.tab==="clicker") renderClicker(); 
                 }; 
             });
             document.getElementById("logoutBtn").onclick = () => { localStorage.removeItem("arena_current_user"); location.reload(); };
@@ -2557,7 +2492,7 @@
             document.getElementById("levShort")?.addEventListener("click", () => { let sym = document.getElementById("levCoin").value; let amt = parseFloat(document.getElementById("levAmount").value); let lev = parseInt(document.getElementById("levMult").value); openLeverage("short", sym, amt, lev); });
             document.getElementById("searchInput")?.addEventListener("input", () => renderMarket());
             
-            renderMarket(); renderAssets(); renderLeverage(); renderTasks(); renderSettings(); renderProPlans(); renderFundPanel(); renderBetting(); updateTopStats();
+            renderMarket(); renderAssets(); renderLeverage(); renderTasks(); renderSettings(); renderProPlans(); renderFundPanel(); renderClicker(); updateTopStats();
             if(currentUser.role === "admin") renderAdminPanel();
             if(currentUser.funds) renderFundPanel();
             
@@ -2584,6 +2519,9 @@
         window.activateLegendFund = activateLegendFund;
         window.upgradeNormalFund = upgradeNormalFund;
         window.activateHighVolumeFund = activateHighVolumeFund;
+        window.handleClick = handleClick;
+        window.upgradeClicker = upgradeClicker;
+        window.upgradePower = upgradePower;
     </script>
 </body>
 </html>
